@@ -1,0 +1,96 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+                DC User Management             
+             </h1>
+             <ol class="breadcrumb">
+              <li><a href="#"><i class="fa fa-dashboard"></i>  DC User Management</a></li>
+              <li class="active">Create Group Incharge</li>
+            </ol>
+           </section>
+           <section class="content">
+             <div class="row">
+               <div class="col-md-12">
+                 <div class="box box-warning">
+                   <div class="box-header with-border">
+                     <h3 class="box-title">Create Group Incharge</h3>
+       
+                     <!-- /.box-tools -->
+                   </div>
+                   <!-- /.box-header -->
+                   <div class="box-body">
+<form class="form-horizontal" #f="ngForm" novalidate>  
+    <div class="box-body">
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Groupincharge ID</label>
+      <div class="col-sm-8"> 
+        <input type="text" [(ngModel)]="groupinchid" name="groupinchidText" class="form-control" #groupinchidText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && groupinchidText.invalid }" required>
+        <div *ngIf="f.submitted && groupinchidText.invalid" class="invalid-feedback">
+          <div *ngIf="groupinchidText.errors.required">Groupincharge ID is Required</div>
+      </div>
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" >Groupincharge Name</label>
+        <div class="col-sm-8"> 
+          <input type="text" [(ngModel)]="groupinchname" name="groupinchnameText" class="form-control" #groupinchnameText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && groupinchnameText.invalid }" required>
+          <div *ngIf="f.submitted && groupinchnameText.invalid" class="invalid-feedback">
+            <div *ngIf="groupinchnameText.errors.required">Groupincharge Name is Required</div>
+        </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label class="control-label col-sm-2" >Employee No.</label>
+          <div class="col-sm-8"> 
+            <input type="text" [(ngModel)]="empno" name="empnoText" class="form-control" #empnoText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && empnoText.invalid }" required>
+            <div *ngIf="f.submitted && empnoText.invalid" class="invalid-feedback">
+              <div *ngIf="empnoText.errors.required">Employee No. is Required</div>
+          </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label col-sm-2" >Designation</label>
+            <div class="col-sm-8"> 
+              <input type="text" [(ngModel)]="desg" name="desgText" class="form-control" #desgText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && desgText.invalid }" required>
+              <div *ngIf="f.submitted && desgText.invalid" class="invalid-feedback">
+                <div *ngIf="desgText.errors.required">Designation is Required</div>
+            </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+              <label class="control-label col-sm-2" >Password</label>
+              <div class="col-sm-8"> 
+                <input type="text" [(ngModel)]="password" name="passwordText" class="form-control" #passwordText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && passwordText.invalid }" required>
+                <div *ngIf="f.submitted && passwordText.invalid" class="invalid-feedback">
+                  <div *ngIf="passwordText.errors.required">Password is Required</div>
+              </div>
+              </div>
+            </div>
+<!-- /.box-body -->
+<div class="box-footer">
+    <div class="row">
+      <div class="col-sm-10 col-md-offset-2 ">
+    <button type="submit" class="btn btn-success" [disabled]="!f.form.valid" (click)="creategroupinch()">Submit</button>
+  </div>
+  </div>
+  </div>
+  <!-- /.box-footer -->
+           </div>
+  </form>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a >NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>

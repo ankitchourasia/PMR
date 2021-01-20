@@ -1,0 +1,70 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+                           
+             </h1>
+             <ol class="breadcrumb">
+              <li><a href="#"><i class="fa fa-dashboard"></i>  </a></li>
+              <li class="active"></li>
+            </ol>
+           </section>
+           <section class="content">
+             <div class="row">
+               <div class="col-md-12">
+                 <div class="box box-warning">
+                   <div class="box-header with-border">
+                     <h3 class="box-title">Enter Remark to Delete Reading</h3>
+       
+                     <!-- /.box-tools -->
+                   </div>
+                   <!-- /.box-header -->
+                   <div class="box-body">
+<form class="form-horizontal" #f="ngForm" novalidate>  
+    <div class="box-body">
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Customer ID</label>
+      <div class="col-sm-8"> 
+        <input type="text" [(ngModel)]="custid" name="custidText" class="form-control" readonly value={{custid}}>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Bill Month</label>
+      <div class="col-sm-8"> 
+        <input type="text" [(ngModel)]="billmonth" name="billmonthText" class="form-control" value={{billmonth}} readonly>
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" >Remark</label>
+        <div class="col-sm-8"> 
+          <input type="textArea" [(ngModel)]="remark" name="remarkText" class="form-control" #remarkText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && remarkText.invalid }" required>
+          <div *ngIf="f.submitted && remarkText.invalid" class="invalid-feedback">
+            <div *ngIf="remarkText.errors.required">Remark is Required</div>
+        </div>
+        </div>
+      </div>
+
+<!-- /.box-body -->
+<div class="box-footer">
+    <div class="row">
+      <div class="col-sm-10 col-md-offset-2 ">
+    <button type="submit" class="btn btn-success" (click)="deleteReading()">Submit</button>
+  </div>
+  </div>
+  </div>
+  <!-- /.box-footer -->
+           </div>
+  </form>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a >NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>

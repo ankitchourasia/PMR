@@ -1,0 +1,14 @@
+.table-bordered>tbody>tr>td, .table-bordered .btn-sm{font-size:11px; padding: 2px }
+thead tr:nth-child(1) th {
+ 
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  thead tr:nth-child(2) th {  
+    position: sticky;
+    top: 55px;
+    z-index: 10;
+    font-size: 11px;
+  }
+  .custab thead tr th{background: #c2d8fe;}

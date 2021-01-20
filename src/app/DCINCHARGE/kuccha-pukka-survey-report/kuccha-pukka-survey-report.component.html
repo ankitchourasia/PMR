@@ -1,0 +1,140 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div  class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+   </div>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+              Remaining Reading List
+             </h1>
+             <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-list-alt"></i> Kuccha Makaan Pukka Makaan Survey Report</a></li>
+                <li class="active"></li>
+              </ol>
+           </section>
+           <section class="content">
+             <div class="row">
+               <div class="col-md-12">
+                 <div class="box box-warning">
+                   <div class="box-header with-border">
+                     <h3 class="box-title">Survey Report</h3>
+                     <!-- /.box-tools -->
+                   </div>
+                   <!-- /.box-header -->
+                   <div class="box-body">
+<form class="form-horizontal" #f="ngForm" novalidate>  
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-5">
+          
+      <div class="form-group">
+          <label class="control-label col-sm-4">Select Group</label>
+          <div class="col-sm-8">
+            <select class="form-control" [(ngModel)]="groupno" name="groupno1" #groupnoText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && groupnoText.invalid }" required>
+              <option value="{{groupno}}">{{groupno}}</option>
+              <option *ngFor="let data1 of resp" value="{{data1.groupno}}">{{data1.groupno}}--{{data1.groupname}}</option>
+            </select>
+            <div *ngIf="f.submitted && groupnoText.invalid" class="invalid-feedback">
+                <div *ngIf="groupnoText.errors.required" style="color:red">Select Group No.</div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-success" (click)="getSurveyData()">Submit</button>
+        </div>
+      </div>
+    
+
+  <!-- /.box-footer -->
+           </div>
+  </form>
+  
+</div>
+</div>
+</div>
+</div>
+<div class="alert alert-warning col-md-6" *ngIf="showData1">
+    <strong>Data Not Found !</strong> 
+  </div>
+<div class="row" *ngIf="showData">
+    <div class="col-md-12">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title"></h3>      
+          <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls()'><i class="fa fa-download"></i> Export</button>
+    
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive" style="max-height:340px">
+             
+        <table class="table table-bordered  custab">
+<thead> 
+<tr>
+<th>Sr. No.</th>
+<th>Image Id</th>
+<th>Customer Id</th>
+<th>Name</th>
+<th>Group No.</th>
+<th>RD No.</th>
+<th>Date Of Reading</th>
+<th>Bill Month</th>
+<th>Reading</th>
+<th>Reading Type</th>
+<th>Image</th>
+<th>House Type</th>
+<th>File</th>
+
+</tr></thead>
+<tbody *ngIf="resp2?.length > 0" >
+<tr *ngFor='let data of resp2; index as i'>
+<td>{{i+1}}</td>
+<td>{{data.imageid}}</td>
+<td>{{data.custid}}</td>
+<td>{{data.name}}</td>
+<td>{{data.gr}}</td>
+<td>{{data.rd}}</td>
+<td>{{data.datereading}}</td>
+<td>{{data.billmonth}}</td>
+<td>{{data.reading}}</td>
+<td>{{data.readingtype}}</td>
+<td>
+    <div>
+        <a href="{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data.imagepath}}" data-lightbox="image-1" data-title="{{data.imagepath}}">View</a>
+      </div>
+</td>
+<td>{{data.housetype}}</td>
+<td>
+    <div>
+        <a href="{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data.filelocation}}" data-lightbox="image-2" data-title="{{data.filelocation}}">View</a>
+      </div>
+</td>
+</tr></tbody>
+<tbody *ngIf="resp?.length == ''" >
+
+<tr> <td colspan="6" class="text-center"> <strong>No data Found.</strong></td></tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>
+<script>
+ 
+</script>

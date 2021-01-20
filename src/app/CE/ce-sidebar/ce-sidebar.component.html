@@ -1,0 +1,49 @@
+<aside class="main-sidebar" appNoRightClick>
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section style="height: auto;" class="sidebar">
+  
+  
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu tree" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+     
+         <li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >
+           <a href="#" >
+             <i class="fa fa-calendar" aria-hidden="true"></i> <span>Dashboard</span>
+             <span class="pull-right-container">
+               <i class="fa fa-angle-left pull-right"></i>
+             </span>
+           </a>
+           <ul class="treeview-menu">
+               <li class=""><a routerLink='/region-wise-dashboard'><i class="fa fa-angle-right"></i>Region Dashboard</a></li>
+           </ul>
+         </li>
+         
+         <li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a href="">
+            <i class="fa fa-qrcode"></i> <span>QR Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li class=""><a routerLink='/ce_qr_code_reports'><i class="fa fa-angle-right"></i>QR Reports</a></li>
+           </ul>
+        </li>
+         <!--<li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+           <a href="">
+               <i class="fa fa-upload" aria-hidden="true"></i> <span>Spot Bill Operations</span>
+             <span class="pull-right-container">
+               <i class="fa fa-angle-left pull-right"></i>
+             </span>
+           </a>
+           <ul style="" class="treeview-menu">
+               <li class=""><a routerLink='/spot-bill-downloader-ccnb'><i class="fa fa-circle-o"></i>Downloader For Spot Billing</a></li>
+            </ul>
+         </li>-->
+     </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  
+  

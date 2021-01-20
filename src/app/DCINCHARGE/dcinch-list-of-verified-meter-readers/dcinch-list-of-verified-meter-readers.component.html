@@ -1,0 +1,129 @@
+<div class="wrapper" appNoRightClick>
+    <app-dcinch-header></app-dcinch-header>
+    <app-dcinch-sidebar></app-dcinch-sidebar>
+    <div  class="loadr" *ngIf='loading'>
+        <img src="assets/imgs/loading.gif" class="loadimg">
+       </div>
+       <div class="content-wrapper">        
+             <section class="content-header">
+               <h1>
+                  DC User Management
+               </h1>
+               <ol class="breadcrumb">
+                 <li><a href="#"><i class="fa fa-dashboard"></i>  DC User Management</a></li>
+                 <li class="active">Verified Meter Readers</li>
+               </ol>
+             </section>
+             <section class="content">
+                   <div class="row">
+                         <div class="col-md-12">
+                           <div class="box box-warning">
+                             <div class="box-header with-border">
+                               <h3 class="box-title">List Of Verified Meter Readers</h3>          
+                               
+                               <!-- /.box-tools -->
+                             </div>
+                             <!-- /.box-header -->
+                             <div class="box-body">
+                               <div class="table-responsive" style="max-height:570px">
+ 
+                             <table class="table table-bordered  custab">
+ <thead> 
+  <tr>
+    <th>Sr. No.</th>
+    <th>Meter Reader ID</th>
+    <th>Name</th>
+    <th>Mobile No.</th>
+    <th>Address</th>
+    <th>Location Code</th>
+    <th>IMEI No.</th>
+    <th>Image Path</th>
+    <th>Applied By</th>
+    <th>Applied Date</th>
+    <th>Approved BY</th>
+    <th>Approved Date</th>
+    <th>Action</th>
+    
+  </tr></thead>
+  <tbody *ngIf="resp?.length > 0" >
+  <tr *ngFor='let data of resp ; index as i'>
+      <td>{{i+1}}</td>
+    <td>{{data.mtrdrid}}</td>
+    <td>{{data.name}}</td>
+    <td>{{data.mobno}}</td>
+    <td>{{data.address}}</td>
+    <td>{{data.loccode}}</td>
+    <td>{{data.imeino}}<br>
+      <button class="btn btn-info btn-xs" (click)="updateImei(data.mtrdrid)">Update IMEI</button>
+    </td>
+    <td>
+        <div>
+            <a href="api/mtr-reader/get-meter-reader-image?path={{data.imagepath}}" data-lightbox="image-1" data-title="{{data.name}}">View</a>
+          </div>
+    </td>
+    <td>{{data.appliedby}}</td>
+    <td>{{data.applydate}}</td>
+    <td>{{data.approvedby}}</td>
+    <td>{{data.approvedate}}</td>
+    <td>
+      <button type="button" class="btn btn-danger btn-sm" (click)="rejectMeterReader(data.mtrdrid)">Reject</button>
+    </td>
+    
+</tr></tbody>
+<tbody *ngIf="resp?.length == ''" >
+
+<tr> <td colspan="12" class="text-center"> <strong>No data Found.</strong></td></tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+
+<!-- Modal -->
+<div id="imei" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title txt-orange">Please Enter Updated IMEI No.</h4>
+      </div>
+      <div class="modal-body">
+          <form class="form-horizontal" [formGroup]="eneterImei" (ngSubmit)="updatedImei()">
+              <div class="form-group">
+                <label class="control-label col-sm-4">Enter IMEI</label>
+                <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="imeino" [ngClass]="{ 'is-invalid': submitted2 && f2.imeino.errors}">
+                <div *ngIf="submitted2 && f2.imeino.errors" class="invalid-feedback">
+                    <div *ngIf="f2.imeino.errors.required" class="text-danger">IMEI no. is required</div>
+                </div>
+                </div>
+              </div>	
+              <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                  <button type="submit" class="btn btn-warning">Submit</button>
+                </div>
+              </div>
+            </form> 
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</section>
+
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+<strong>Copyright &copy; 2019 <a >NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+reserved.
+</footer>
+</div>

@@ -1,0 +1,83 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+               User Settings</h1>
+             <ol class="breadcrumb">
+               <li><a href="#"><i class="fa fa-user"></i> User Settings</a></li>
+               <li class="active">Change Password</li>
+             </ol>
+           </section>
+           <section class="content">
+            <div class="row">
+                  <div class="col-md-12">
+                    <div class="box box-warning">
+                      <div class="box-header with-border">
+                        <h3 class="box-title">Change Password</h3>          
+                        
+                        <!-- /.box-tools -->
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                          <form class="form-horizontal" #f="ngForm" novalidate>
+        
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" >Login ID {{loginid}}</label>
+                                <div class="col-sm-8"> 
+                                  <input type="text" [(ngModel)]="loginid" name="loginidText" class="form-control" value="{{loginid}}" readonly>
+                                
+                                </div>
+                               
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" >Old Password</label>
+                                <div class="col-sm-8"> 
+                                  <input type="password" [(ngModel)]="password" name="oldpasswordText" class="form-control" #oldpasswordText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && oldpasswordText.invalid }" required>
+                                  <div *ngIf="f.submitted && oldpasswordText.invalid" class="invalid-feedback">
+                                    <div *ngIf="oldpasswordText.errors.required">Old Password is Required</div>
+                                </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" >New Password</label>
+                                <div class="col-sm-8"> 
+                                  <input type="password" [(ngModel)]="newpassword" name="newpasswordText" class="form-control" #newpasswordText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && newpasswordText.invalid }" required>
+                                  <div *ngIf="f.submitted && newpasswordText.invalid" class="invalid-feedback">
+                                    <div *ngIf="newpasswordText.errors.required">New Password is Required</div>
+                                </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" >Confirm New Password</label>
+                                <div class="col-sm-8"> 
+                                  <input type="password" [(ngModel)]="confirmnewpassword" name="confirmnewpassword" class="form-control" #passwordText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && passwordText.invalid }" required>
+                                  <div *ngIf="f.submitted && passwordText.invalid" class="invalid-feedback">
+                                    <div *ngIf="passwordText.errors.required">Old Password is Required</div>
+                                </div>
+                                </div>
+                              </div>
+                            
+                              <div class="form-group"> 
+                                <div class="col-sm-offset-2 col-sm-10">
+                                  <button type="submit" class="btn btn-success" (click)="changePassword()">Submit</button>
+                                </div>
+                              </div>
+                            </form>
+                        </div>
+                        <!-- /.box-body -->
+                      </div>
+                      <!-- /.box -->
+                    </div>
+                  </div>
+                  </section>
+                
+                  
+              </div>
+              <!-- /.content-wrapper -->
+              <footer class="main-footer">
+                 <strong>Copyright &copy; 2019 <a >NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+                reserved.
+              </footer>
+    </div>

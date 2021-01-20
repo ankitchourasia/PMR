@@ -1,0 +1,104 @@
+<div class="wrapper" appNoRightClick>
+  <app-de-header></app-de-header>
+  <app-de-sidebar></app-de-sidebar>
+  <div  class="loadr" *ngIf='loading'>
+      <img src="assets/imgs/loading.gif" class="loadimg">
+     </div>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+              Generate QR Code
+            </h1>
+            <ol class="breadcrumb">
+              <li><a href="#"><i class="fa fa-thumb-tack"></i>Generate QR Code</a></li>
+              <li class="active">Generate QR Code</li>
+            </ol>
+           </section>
+           <section class="content">
+             <div class="row" *ngIf="showIvrs">
+               <div class="col-md-12">
+                 <div class="box box-warning">
+                   <div class="box-header with-border">
+                     <h3 class="box-title">Enter IVRS No.</h3>
+                     <!-- /.box-tools -->
+                   </div>
+                   <!-- /.box-header -->
+                   <div class="box-body">
+<form class="form-horizontal" #f="ngForm" novalidate>  
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-7">
+            <div class="form-group">
+                <label class="control-label col-sm-4">Enter IVRS No.</label>
+                <div class="col-sm-8">
+                  <input class="form-control" [(ngModel)]="ivrs" name="ivrs" #ivrs1Text="ngModel" [ngClass]="{ 'is-invalid': f.submitted && ivrs1Text.invalid }" required>
+                  <div *ngIf="f.submitted && ivrs1Text.invalid" class="invalid-feedback">
+                      <div *ngIf="ivrs1Text.errors.required" style="color:red">IVRS is required</div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-5">
+            <button type="button" class="btn btn-success" (click)="getQrCode()">Submit</button>
+        </div>
+      </div>
+    
+
+  <!-- /.box-footer -->
+           </div>
+  </form>
+  
+</div>
+</div>
+</div>
+</div>
+
+<div class="row" *ngIf="showData">
+    <div class="col-md-12">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">Generated QR Code</h3>          
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive" style="max-height:500px;width:50%;margin:0 auto;" id="rec_wrap">
+             
+        <table class="table table-bordered  custab">
+<thead> 
+  <tr>
+      <td rowspan="3" style="width:50%;">
+        <div>
+          <img src="api/mtr-reader/get-meter-reader-image?path={{filepath}}" width="100%">
+        </div>
+      </td>
+      <td>{{ivrs}}</td>
+  </tr>
+    <tr>
+      <td>{{consumername}}</td>
+    </tr>
+    <tr>
+      <td>{{address}}</td>
+    </tr>
+</thead>
+<tbody>
+<tr>
+</tr>
+</tbody>
+
+</table>
+<input type="button" class="btn btn-info" (click)="printDiv('rec_wrap')" name="print_rec" id="print_rec" tabindex="4" value="Print QR Code">
+</div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>

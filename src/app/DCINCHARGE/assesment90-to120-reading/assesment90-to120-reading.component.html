@@ -1,0 +1,186 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div  class="loadr" *ngIf='loading==true'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+   </div>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+              Reading Data
+            </h1>
+            <ol class="breadcrumb">
+               <li><a href="#"><i class="fa fa-list-alt"></i> Reading Data</a></li>
+               <li class="active">Group & RD Wise Readings</li>
+             </ol>
+           </section>
+           <section class="content">
+            
+<div class="alert alert-warning col-md-6" *ngIf="showdata">
+    <strong>Data Not Found !</strong> 
+  </div>
+<div class="row" >
+    <div class="col-md-12">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">List Of Readings In Group for billmonth {{billmonth}} -- {{groupno}} --> Assesment Between 90% to 120% of Expected Consumption</h3> 
+          <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls()'><i class="fa fa-download"></i> Export</button>     
+
+          <!-- <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls()' *ngIf="showExport1"><i class="fa fa-download"></i> Export</button>
+          <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls1()' *ngIf="showExport"><i class="fa fa-download"></i> Export Data</button>  &nbsp;&nbsp;&nbsp; -->
+          <button type="button" class="btn btn-primary btn-sm pull-right"  (click)="verifySelectedReading()">Verify Selected Items</button>&nbsp;&nbsp;&nbsp;
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <button type="button" class="btn btn-sm btn-default" (click)="getGroupReadingsDatewise()">All</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" (click)="getGroupReadingBelow90()">Assesment < 90%</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-warning" (click)="getGroupReadingAbove120()">Assesment > 120%</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-success" (click)="getGroupReadingbetween90to120()">Assesement 90% - 120%</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-primary" (click)="getGroupReadingMeterDefective()">Meter Defective</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-info" (click)="getGroupReadingMeterNotFound()">Meter Not Found</button>&nbsp;&nbsp;
+            <br>
+           <!-- <h3>{{tabtype}}</h3> -->
+            <div class="table-responsive" style="max-height:500px">
+        <table class="table table-bordered custab">
+<thead> 
+<tr style="font-size:11px;">
+<th>Sr. No.</th>
+<th>Customer ID</th>
+<th>Name</th>
+<th>Group-RD</th>
+<th>Reading</th>
+<th>cmd</th>
+<th>md</th>
+<th>pf</th>
+<th>Date Of Reading</th>
+<th>Reading Type</th>
+<th>Reader's Assesment</th>
+<th>Prev Reading</th>
+<th>Prev Consmp1</th>
+<th>Prev Consmp2</th>
+<th>Prev Consmp3</th>
+<th>Expected Consmp</th>
+<th>Curr. Consmp</th>
+<th>Image 1</th>
+<th>Image 2</th>
+<th>Action <input type="checkbox" (click)="selectAll()"> Select All</th>
+</tr></thead>
+<tbody *ngIf="resp?.length > 0" id="above120">
+  <tr *ngFor='let data1 of resp; index as i'>
+  <td>{{i+1}}</td>
+  <td>{{data1.custid}}</td>
+  <td>{{data1.name}}</td>
+  <td>{{data1.gr}}-{{data1.rd}}</td>
+  <td>{{data1.reading}}</td>
+  <td>{{data1.cmd}}</td>
+  <td>{{data1.md}}</td>
+  <td>{{data1.pf}}</td>
+  <td>{{data1.datereading}}</td>
+  <td>{{data1.readingtype}}</td>
+  <td>{{data1.assesment}}</td>
+  <td>{{data1.prevreading}}</td>
+  <td>{{data1.consdata_prevcons1}}</td>
+  <td>{{data1.consdata_prevcons2}}</td>
+  <td>{{data1.consdata_prevcons3}}</td>
+  <td>{{data1.consdata_expected}}</td>
+  <td>{{data1.currentbilledunits}}</td>
+  <td>
+      <div>
+          <a href="api/mtr-reader/get-meter-reader-image?path={{data1.imagepath}}" data-lightbox="image-1" data-title="{{data1.custid}}">View</a>
+        </div>
+  </td>
+  <td>
+      <div>
+          <a href="api/mtr-reader/get-meter-reader-image?path={{data1.image2path}}" data-lightbox="image-2" data-title="{{data1.custid}}">View</a>
+        </div>
+  </td>
+  <td>
+      <div *ngIf="data1.status=='-1'">
+      <!-- <input type="checkbox" id="{{data1.imageid}}" value="{{data1.custid}}" (click)="VerifyClick(data1.custid,data1.imageid,i+1)"> -->
+      <br><br>
+      <button type="button" class="btn btn-primary btn-sm" (click)="verifyReading(data1.custid,data1.imageid)">Verify</button>
+      <br><br>
+    <button type="button" data-toggle="modal" data-target="#myModal11" id="{{i+1}}" *ngIf="data1.readingtype=='Meter Defective' || data1.readingtype=='Meter Not Found' || data1.readingtype=='Meter Theft' || data1.readingtype=='Temporary Disconnected'" class="btn btn-primary btn-sm" (click)='OnclickGetvalue(data1.imageid,data1.custid,data1.billmonth,data1.assesment)'>Edit ASU</button>
+    <button type="button" class="btn btn-danger btn-xs" (click)="deleteReading(data1.custid)">Delete</button>
+  </div>
+  
+    
+
+  </td>
+  </tr></tbody>
+</table>
+</div>
+<div id="myModal11" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-body">
+            <div class="box-body">
+              <form class="form-horizontal" #f="ngForm" novalidate>
+                  <div class="box-body">
+                    
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">Reading ID</label>
+                      <div class="col-sm-8">
+                        <input class="form-control" type="text" [(ngModel)]="imageid" value="{{imageid}}" name="imageid" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">IVRS No.</label>
+                      <div class="col-sm-8">
+                        <input class="form-control" type="text" [(ngModel)]="custid" value="{{custid}}" name="custid" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">Bill Month</label>
+                      <div class="col-sm-8">
+                        <input class="form-control" type="text"  value="{{bilmonthfor}}" name="billmonth" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">Assesment</label>
+                      <div class="col-sm-8">
+                        <input class="form-control" type="text" [(ngModel)]="assesment" value="{{assesment}}" name="assesment">
+                      </div>
+                    </div>
+                  
+                   
+              <!-- /.box-body -->
+              <div class="box-footer">
+                  <div class="row">
+                    <div class="col-sm-10 col-md-offset-2 ">
+                  <button type="button" class="btn btn-success" (click)="editAssesment()">Submit</button>
+                </div>
+                </div>
+                </div>
+                <!-- /.box-footer -->
+                         </div>
+                </form>
+                
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+      </div>  
+  </div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>
+
+
+
+
+
+

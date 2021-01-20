@@ -1,0 +1,71 @@
+<aside class="main-sidebar" appNoRightClick> 
+  <!-- sidebar: style can be found in sidebar.less -->
+     <section style="height: auto;" class="sidebar">
+        <ul class="sidebar-menu tree" data-widget="tree">
+          <li class="header">MAIN NAVIGATION</li>
+          <li class="treeview menu-open" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >
+            <a href="#" routerLink='/gi-active-groups'>
+              <i class="fa fa-dashboard"></i> <span>Group Incharge</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul style="" class="treeview-menu">
+              <li><a routerLink='/gi-active-groups'><i class="fa fa-circle-o"></i>Active Groups in Group <br>Incharge</a></li>
+              <li><a routerLink='/gi-non-verified-meter-readers'><i class="fa fa-circle-o"></i>Non Verified Meter Readers</a></li>
+              <li><a routerLink='/gi-list-of-verified-meter-readers'><i class="fa fa-circle-o"></i>Verified Meter Readers</a></li>
+              <li><a routerLink='/gi-list-of-rejected-meter-readers'><i class="fa fa-circle-o"></i>Rejected Meter Readers</a></li>
+           
+             </ul>
+          </li>
+          
+        <li class="treeview menu-open" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+           <a href="#" routerLink='/schedule-a-complete-group-GI'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <span>Scheduling & Assignment <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operations</span>
+            <span class="pull-right-container">
+               <i class="fa fa-angle-left pull-right"></i>
+             </span>
+           </a>
+           <ul style="" class="treeview-menu">
+              <li class="active"><a routerLink='/schedule-a-complete-group-GI'><i class="fa fa-circle-o"></i> Schedule a Complete Group</a></li>
+               <li class="active"><a routerLink='/schedule-a-single-rd-in-group-GI'><i class="fa fa-circle-o"></i> Schedule a Single RD in Group</a></li>
+               <li class="active"><a routerLink='/assign-scheduled-group-to-meter-reader-GI'><i class="fa fa-circle-o"></i> Assign Scheduled Group To <br>Meter Reader</a></li>
+              <li class="active"><a routerLink='/assign-scheduled-rd-to-meter-reader-GI'><i class="fa fa-circle-o"></i> Assign Scheduled RD To <br>Meter Reader</a></li>
+              <li class="active"><a routerLink='/all-assignments-to-reader-GI'><i class="fa fa-circle-o"></i> All Assignments to <br>Meter Reader</a></li>   
+           </ul>
+         </li>
+  
+         <li class="treeview menu-open" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a href="#" routerLink='/group-wise-consumer-GI'>
+            <i class="fa fa-users"></i> <span>Consumer Count</span>
+           <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul style="" class="treeview-menu">
+              <li class="active"><a routerLink='/group-wise-consumer-GI'><i class="fa fa-circle-o"></i>Group Wise Consumer</a></li>
+              <li class="active"><a routerLink='/group-rd-wise-consumer-GI'><i class="fa fa-circle-o"></i>RD Wise Consumer</a></li>
+                
+           </ul>
+        </li>
+  
+        <li class="treeview menu-open" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a href="#" routerLink='/readings-of-group-datewise-GI'>
+              <i class="fa fa-list-alt" aria-hidden="true"></i> <span>Reading Data</span>
+               <span class="pull-right-container">
+                 <i class="fa fa-angle-left pull-right"></i>
+               </span>
+             </a>
+             <ul style="" class="treeview-menu">
+                 <li class="active"><a routerLink='/readings-of-group-datewise-GI'><i class="fa fa-circle-o"></i>Group Readings Date Wise</a></li>
+                  <li class="active"><a routerLink='/readings-of-group-RD-datewise-GI'><i class="fa fa-circle-o"></i>RD Readings Date Wise</a></li>
+                  <li class="active"><a routerLink='/all-groups-reading-GI'><i class="fa fa-circle-o"></i>Readings Of All Groups</a></li>
+                  <li class="active"><a routerLink='/readings-gor-single-consumer-GI'><i class="fa fa-circle-o"></i>Reading For Single Consumer</a></li>
+                  
+               </ul>
+            </li>
+       </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+    

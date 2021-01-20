@@ -1,0 +1,120 @@
+<div class="wrapper" appNoRightClick>
+  <div  class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+   </div>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+              Reading Data
+            </h1>
+            <ol class="breadcrumb">
+               <li><a href="#"><i class="fa fa-list-alt"></i> Reading Data</a></li>
+               <li class="active">Reading For Single Consumer</li>
+             </ol>
+           </section>
+           <section class="content">
+             <div class="row">
+               <div class="col-md-12">
+                 <div class="box box-warning">
+                   <div class="box-header with-border">
+                     <h3 class="box-title">Reading For Single Consumer</h3>
+                     <!-- /.box-tools -->
+                   </div>
+                   <!-- /.box-header -->
+                   <div class="box-body">
+<form class="form-horizontal" #f="ngForm" novalidate>  
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label class="control-label col-sm-4">Bill Month</label>
+                <div class="col-sm-8">
+                  <select class="form-control" [(ngModel)]="billmonth" name="billmon1" #billmon1Text="ngModel" [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" required>
+                    <option value="{{billmonth}}">{{billmonth}}</option>  
+                    <option value="Sep-2020">Sep-2020</option>
+                    <option value="Oct-2020">Oct-2020</option>
+                    <option value="Nov-2020">Nov-2020</option>
+                    <option value="Dec-2020">Dec-2020</option>
+                    <option value="Jan-2021">Jan-2021</option>
+                    <option value="Feb-2021">Feb-2021</option>
+                    <option value="Mar-2021">Mar-2021</option>
+                    <option value="Apr-2021">Apr-2021</option>
+                    <option value="May-2021">May-2021</option>
+                    <option value="Jun-2021">Jun-2021</option>
+                    <option value="Jul-2021">Jul-2021</option>
+                    <option value="Aug-2021">Aug-2021</option>
+                    <option value="Sep-2021">Sep-2021</option>
+                    <option value="Oct-2021">Oct-2021</option>
+                    <option value="Nov-2021">Nov-2021</option>
+                    <option value="Dec-2021">Dec-2021</option>            
+                  </select>
+                  <div *ngIf="f.submitted && billmon1Text.invalid" class="invalid-feedback">
+                      <div *ngIf="billmon1Text.errors.required" style="color:red">Select Bill Month</div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label class="control-label col-sm-4">Consumer No.</label>
+                <div class="col-sm-8">
+                  <input type="text" [(ngModel)]="consumerno"  name="consumerno" class="form-control" #consumernoText="ngModel" [ngClass]="{'is-invalid': f.submitted && consumernoText.invalid}" required >
+                  <div *ngIf="f.submitted && consumernoText.invalid" class="invalid-feedback">
+                    <div *ngIf="consumernoText.errors.required" style="color:red;">Consumer No. is Required.</div>
+                </div>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-success" (click)="getReadingsDatewise()">Submit</button>
+        </div>
+      </div>
+
+  <!-- /.box-footer -->
+           </div>
+  </form>
+  
+</div>
+</div>
+</div>
+</div>
+<div class="alert alert-warning col-md-6" *ngIf="showData1">
+    <strong>Data Not Found !</strong> 
+  </div>
+<div class="row" *ngIf="showData">
+    <div class="col-md-12">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">List Of Readings for Consumer {{consumerno}} for billmonth {{billmonth}}</h3>          
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive" style="max-height:500px">             
+        <img height="100" width="80" (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal"  src='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{resp}}' />
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img class="showimage img-responsive" id="{{i+1}}" src="" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>  
+    </div>
+</div>
+</div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>

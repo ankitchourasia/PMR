@@ -1,0 +1,73 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+               Dashboard
+               <small>Control panel</small>
+             </h1>
+            
+           </section>
+           <section class="content">
+             <div class="row">
+               <div class="col-md-12">
+                 <div class="box box-warning">
+                   <div class="box-header with-border">
+                     <h3 class="box-title">Extend Schedule</h3>
+       
+                     <!-- /.box-tools -->
+                   </div>
+                   <!-- /.box-header -->
+                   <div class="box-body">
+<form class="form-horizontal" #f="ngForm" novalidate>  
+    <div class="box-body">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Bill Month</label>
+            <div class="col-sm-8">
+              <input type="text" name="date1"  id="from" class="form-control" value="{{billmon}}" readonly>
+            </div>
+          </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Group No.</label>
+      <div class="col-sm-8"> 
+        <input type="text" class="form-control" name="assgroup" value={{groupno}} readonly>
+      </div>
+    </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">Start Date</label>
+        <div class="col-sm-8">
+          <input type="text" name="date1"  id="from" class="form-control" value="{{startdate}}" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">End Date</label>
+        <div class="col-sm-8">
+          <input type="text" [(ngModel)]="enddate" name="date2" id="to" class="form-control" #dateto2="ngModel" [ngClass]="{'is-invalid': f.submitted && dateto2.invalid}" required >
+          <div *ngIf="f.submitted && dateto2.invalid" class="invalid-feedback">
+            <div *ngIf="dateto2.errors.required" style="color:red;" >End Date To is Required.</div>
+        </div>
+        </div>
+      </div>
+<!-- /.box-body -->
+<div class="box-footer">
+    <div class="row">
+      <div class="col-sm-10 col-md-offset-2 ">
+    <button type="submit" class="btn btn-success" (click)="extendSchedule()">Submit</button>
+  </div>
+  </div>
+  </div>
+  <!-- /.box-footer -->
+           </div>
+  </form>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a >NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>

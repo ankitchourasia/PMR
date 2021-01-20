@@ -1,0 +1,141 @@
+<div class="wrapper" appNoRightClick > 
+  <app-md-header></app-md-header>
+  <app-md-sidebar></app-md-sidebar>
+  <div  class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+   </div>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+              Survey Report
+             </h1>
+             <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-list-alt"></i> Kuccha Makaan Pukka Makaan Survey Report</a></li>
+                <li class="active"></li>
+              </ol>
+           </section>
+           <section class="content">
+             <div class="row">
+               <div class="col-md-12">
+                 <div class="box box-warning">
+                   <div class="box-header with-border">
+                     <h3 class="box-title">Survey Report</h3>
+                     <!-- /.box-tools -->
+                   </div>
+                   <!-- /.box-header -->
+                   <div class="box-body">
+<form class="form-horizontal" #f="ngForm" novalidate>  
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-5">
+          
+      <div class="form-group">
+          <label class="control-label col-sm-4">Select Circle</label>
+          <div class="col-sm-8">
+            <select class="form-control" [(ngModel)]="circle" name="circle1" #circleText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && circleText.invalid }" required>
+              <option value="{{circle}}">{{circle}}</option>
+              <option *ngFor="let data1 of resp" value="{{data1}}">{{data1}}</option>
+            </select>
+            <div *ngIf="f.submitted && circleText.invalid" class="invalid-feedback">
+                <div *ngIf="circleText.errors.required" style="color:red">Select Circle</div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-success" (click)="getSurveyData()">Submit</button>
+        </div>
+      </div>
+    
+
+  <!-- /.box-footer -->
+           </div>
+  </form>
+  
+</div>
+</div>
+</div>
+</div>
+<div class="alert alert-warning col-md-6" *ngIf="showData1">
+    <strong>Data Not Found !</strong> 
+  </div>
+<div class="row" *ngIf="showData">
+    <div class="col-md-12">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title"></h3>      
+          <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls()'><i class="fa fa-download"></i> Export</button>
+    
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive" style="max-height:340px">
+             
+        <table class="table table-bordered  custab">
+<thead> 
+<tr>
+<th rowspan="2">Sr. No.</th>
+<th rowspan="2">Circle</th>
+<th rowspan="2">Division</th>
+<th rowspan="2">DC</th>
+<th rowspan="2">DC Code</th>
+<th rowspan="2">House Type</th>
+<th colspan="9" class="text-center">Reading Type</th>
+</tr>
+<tr>
+<th class="thead">Meter Not Found</th>
+<th>Normal Malpractice</th>
+<th>Temporary Disconnected</th>
+<th>Premise Locked</th>
+<th>Meter Defective</th>
+<th>Meter Theft</th>
+<th>Normal</th>
+<th>Meter Change</th>
+<th>Meter Restart</th>
+
+
+</tr></thead>
+<tbody *ngIf="resp2?.length > 0" >
+<tr *ngFor='let data of resp2; index as i'>
+<td>{{i+1}}</td>
+<td>{{data.circle}}</td>
+<td>{{data.division}}</td>
+<td>{{data.dcname}}</td>
+<td>{{data.dccode}}</td>
+<td>{{data.housetype}}</td>
+<td>{{data.meter_Not_Found}}</td>
+<td>{{data.normal_Malpractice}}</td>
+<td>{{data.temporary_Disconnected}}</td>
+<td>{{data.premise_Locked}}</td>
+<td>{{data.meter_Defective}}</td>
+<td>{{data.meter_Theft}}</td>
+<td>{{data.normal}}</td>
+<td>{{data.meter_Change}}</td>
+<td>{{data.meter_Restart}}</td>
+
+</tr></tbody>
+<tbody *ngIf="resp?.length == ''" >
+
+<tr> <td colspan="6" class="text-center"> <strong>No data Found.</strong></td></tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>
+<script>
+ 
+</script>

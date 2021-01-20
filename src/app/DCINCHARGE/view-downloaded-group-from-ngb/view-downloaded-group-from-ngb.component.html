@@ -1,0 +1,66 @@
+<div class="wrapper" appNoRightClick>
+    <app-dcinch-header></app-dcinch-header>
+    <app-dcinch-sidebar></app-dcinch-sidebar>
+    <div  class="loadr" *ngIf='loading'>
+      <img src="assets/imgs/loading.gif" class="loadimg">
+     </div>
+       <div class="content-wrapper">        
+             <section class="content-header">
+               <h1>
+                 DC Group RD Master Management
+               </h1>
+               <ol class="breadcrumb">
+                  <li><a href="#"><i class="fa fa-dashboard"></i>  DC Group RD Master Management</a></li>
+                  <li class="active">Add Group To DC</li>
+                </ol>
+             </section>
+             <section class="content">
+<div class="row" *ngIf="showData">
+  <div class="col-md-12">
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <h3 class="box-title">List Of Downloaded Groups In DC</h3>          
+        
+        <!-- /.box-tools -->
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+
+      <table class="table table-bordered  custab">
+<thead> 
+<tr>
+<th>Sr. No.</th>
+<th>Group No.</th>
+<th>Group Name</th>
+<th>View RD of Group</th>
+
+</tr></thead>
+<tbody *ngIf="resp2?.length > 0" >
+<tr *ngFor='let data of resp2 ; index as i'>
+<td>{{i+1}}</td>
+<td>{{data.groupno}}</td>
+<td>{{data.groupname}}</td>
+<td> <button type="button" class="btn btn-warning btn-sm" (click)="viewRdofGroup(data.groupno)">View RD</button></td>
+</tr></tbody>
+<tbody *ngIf="resp?.length == ''" >
+
+<tr> <td colspan="12" class="text-center"> <strong>No data Found.</strong></td></tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a >NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>

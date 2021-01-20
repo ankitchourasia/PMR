@@ -1,0 +1,148 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div  class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+   </div>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+              Edit Reading Type
+             </h1>
+             <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-list-alt"></i>   Edit Reading Type</a></li>
+                <li class="active"> Edit Reading Type </li>
+              </ol>
+           </section>
+           <section class="content">
+             <div class="row">
+               <div class="col-md-12">
+                 <div class="box box-warning">
+                   <div class="box-header with-border">
+                     <h3 class="box-title">Edit Reading Type From Normal to Other</h3>
+                     <!-- /.box-tools -->
+                   </div>
+                   <!-- /.box-header -->
+                   <div class="box-body">
+<form class="form-horizontal" [formGroup]="editReadingType" (ngSubmit)="onSubmit()">  
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-4 control-label">Last Month Billed Unit</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" readonly value="{{lastmonthbilledunits}}">
+                </div>  
+              </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 control-label">Last Month Billed Unit 1</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" readonly value="{{lastmonthbilledunits1}}">
+              </div>  
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-4 control-label">Last Month Billed Unit 2</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" readonly value="{{lastmonthbilledunits2}}">
+                </div>  
+              </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 control-label">Expected Consumption</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" readonly value="{{expectedcons}}">
+              </div>  
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-4 control-label">MD</label>
+                <div class="col-sm-8">
+                  <input type="number" class="form-control" value="{{md}}" formControlName="md" [ngClass]="{ 'is-invalid': submitted && f.md.errors}">
+                  <div *ngIf="submitted && f.md.errors" class="invalid-feedback">
+                    <div *ngIf="f.md.errors.required" class="text-danger">md is required</div>
+                  </div>
+                </div>  
+              </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 control-label">PF</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" value="{{pf}}" formControlName="pf" [ngClass]="{ 'is-invalid': submitted && f.pf.errors}">
+                <div *ngIf="submitted && f.pf.errors" class="invalid-feedback">
+                  <div *ngIf="f.pf.errors.required" class="text-danger">PF is required</div>
+                  <div *ngIf="f.pf.errors.pattern" class="text-danger">PF Invali is required</div>
+                </div>
+              </div>  
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-4 control-label">New Reading Type</label>
+                <div class="col-sm-8">
+                  <select class="form-control" formControlName="readingtype" [ngClass]="{ 'is-invalid': submitted && f.readingtype.errors}">
+                    <option value="">Select New Reading Type</option>
+                    <option value="Normal(Malpractice)">Normal(Malpractice)</option>
+                    <option value="Meter Defective">Meter Defective</option>
+                    
+                  </select>
+                  <div *ngIf="submitted && f.readingtype.errors" class="invalid-feedback">
+                    <div *ngIf="f.readingtype.errors.required" class="text-danger">Reading Type is required</div>
+                  </div>
+                </div>  
+              </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group row">
+              <label class="col-sm-4 control-label">Assesment</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" formControlName="assesment" [ngClass]="{ 'is-invalid': submitted && f.assesment.errors}">
+                <div *ngIf="submitted && f.assesment.errors" class="invalid-feedback">
+                  <div *ngIf="f.assesment.errors.required" class="text-danger">Assesment is required</div>
+                </div>
+              </div>  
+            </div>
+      </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+        <button class="btn btn-primary">Submit</button>  
+        </div>  
+    </div>   
+    
+  
+  <!-- /.box-footer -->
+           </div>
+  </form>
+  
+</div>
+</div>
+</div>
+</div>
+
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>
+<script>
+ 
+</script>

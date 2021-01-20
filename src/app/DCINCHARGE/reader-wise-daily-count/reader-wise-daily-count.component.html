@@ -1,0 +1,106 @@
+<div id="app" class="app app-header-fixed app-sidebar-fixed">
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div  class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+   </div>
+   <div class="content-wrapper">        
+    <section class="content-header">
+      <h1>
+         Reader Wise Daily Count
+     </h1>
+     <ol class="breadcrumb">
+       <li><a href="#"><i class="fa fa-thumb-tack"></i> Reader Wise Daily Count</a></li>
+       <li class="active">Reader Wise Daily Count</li>
+     </ol>
+    </section>
+    <section class="content">
+      <div class="row" *ngIf="showForm">
+        <div class="col-md-12">
+          <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Select Date</h3>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+        <!-- <div class="row"> -->
+            <form class="form-horizontal" [formGroup]="dailyCount" (ngSubmit)="onSubmit()">
+              <div class="form-group row">
+                <label class="col-sm-2 control-label">Date</label>
+                <div class="col-sm-5">
+                  <input type="text" placeholder="Date From" id="from" class="form-control" formControlName="date1" [ngClass]="{ 'is-invalid': submitted && f.date1.errors}">
+                </div> 
+                <div *ngIf="submitted && f.date1.errors" class="invalid-feedback">
+                  <div *ngIf="f.date1.errors.required" class="text-danger">Date From is required</div>
+                </div>
+                <div class="col-sm-5">
+                    <input type="text" placeholder="Date To" id="to" class="form-control" formControlName="date2" [ngClass]="{ 'is-invalid': submitted && f.date2.errors}">
+                  </div> 
+                  <div *ngIf="submitted && f.date2.errors" class="invalid-feedback">
+                    <div *ngIf="f.date2.errors.required" class="text-danger">Date To is required</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 control-label"></label>
+                  <div class="col-sm-10">
+                  <button class="btn btn-primary">Submit</button>  
+                  </div>  
+              </div>
+            </form>                        
+        <!-- END card-body -->
+    </div>
+  </div>
+</div>
+</div>
+  
+    <div class="row" *ngIf="showDtl">
+      <div class="col-md-12">
+      <div class="card m-b-15">
+      <!-- BEGIN card-header -->
+      <div class="card-header card-header-inverse">
+      <h4 class="card-header-title">Reader Wise Daily Count&nbsp; &nbsp; <button class="btn btn-primary btn-xs" (click)="backToForm()">Back</button></h4>
+      <div class="">
+        
+      </div>
+      </div>
+    <div class="card-body" >
+      <!-- <div class="row"> -->
+        
+        <div class="col-md-12">
+      <div class="table-responsive" style="max-height:500px">  
+        <table class="table no-margin table-bordered custab">
+          <thead>
+            <tr class="thead">
+              <th>Sr. No.</th>
+              <th>Group No.</th>
+              <th>Bill Month</th>
+              <th>Meter Reader ID</th>
+              <th>Total Count</th>
+              <th>Uploaded By</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of resp; index as i">
+              <td>{{i+1}}</td>
+              <td>{{data.gr}}</td>
+              <td>{{data.billmonth}}</td>
+              <td>{{data.readerid}}</td>
+              <td>{{data.count}}</td>
+              <td>{{data.uploadby}}</td>
+            </tr>
+          </tbody>
+        </table>
+  <hr>
+</div>
+</div>
+</div>	
+</div>
+</div>
+</div>
+</section>
+
+      <!-- END card-body -->
+    </div>
+  </div>  
+  

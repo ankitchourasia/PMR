@@ -1,0 +1,93 @@
+<div class="wrapper" appNoRightClick > 
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        View Rejected List Of NGB
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Rejected List</a></li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-warning">
+            <div class="box-header with-border">
+                <form class="form-horizontal" #f="ngForm" novalidate>
+                  <div class="form-group row">
+                      <label class="col-sm-2 control-label">Date</label>
+                      <div class="col-sm-5">
+                        <input type="text" placeholder="Date From" class="form-control"  [(ngModel)]="datefrom"  name="date1"  id="from" class="form-control" #datefromText="ngModel" [ngClass]="{'is-invalid': f.submitted && datefromText.invalid}" required >
+                      </div>
+                      <div *ngIf="f.submitted && datefromText.invalid" class="invalid-feedback">
+                          <div *ngIf="datefromText.errors.required" style="color:red;">Date Of Reading is Required.</div>
+                      </div>
+                      <div class="col-sm-5 m-t-10">
+                          <input type="text" placeholder="Date To" class="form-control" [(ngModel)]="dateto"  name="date2"  id="to" class="form-control" #datetoText="ngModel" [ngClass]="{'is-invalid': f.submitted && datetoText.invalid}" required >
+                        </div>
+                        <div *ngIf="f.submitted && datetoText.invalid" class="invalid-feedback">
+                            <div *ngIf="datetoText.errors.required" style="color:red;">Date Of Reading is Required.</div>
+                        </div>
+                      </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                <button class="btn btn-primary" (click)="getCompanyWiseDashboard()">Submit</button>
+                </div>
+            </div>
+          </form>
+
+               <div class="box-tools pull-right">
+
+</div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+
+      </div>
+      <div class="alert alert-warning col-md-6" *ngIf="showData1">
+        <strong>Data Not Found !</strong>
+      </div>
+      <div class="row" *ngIf="showData">
+        <div class="col-md-12">
+            <div class="box box-warning">
+                <div class="box-body">
+          <div class="table-responsive">
+            <table class="table table-bordered  custab">
+              <thead>
+                <tr>
+                  <th>Reading Taken</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="resp">
+                <tr>
+                  <td>{{resp.readingcount}}</td>
+                </tr>
+              </tbody>
+              </table>
+          </div>
+</div>
+</div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of
+      MPPKVVCL, under SE IT ERP.</strong>
+    reserved.
+  </footer>
+</div>

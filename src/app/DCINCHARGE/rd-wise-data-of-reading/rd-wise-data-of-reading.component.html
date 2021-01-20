@@ -1,0 +1,634 @@
+<div class="wrapper" appNoRightClick>
+    <app-dcinch-header></app-dcinch-header>
+    <app-dcinch-sidebar></app-dcinch-sidebar>
+    <div  class="loadr" *ngIf='loading==true'>
+      <img src="assets/imgs/loading.gif" class="loadimg">
+     </div>
+       <div class="content-wrapper">        
+             <section class="content-header">
+               <h1>
+                Reading Data
+              </h1>
+              <ol class="breadcrumb">
+                 <li><a href="#"><i class="fa fa-list-alt"></i> Reading Data</a></li>
+                 <li class="active">Group & RD Wise Readings</li>
+               </ol>
+             </section>
+             <section class="content">
+               <div class="row">
+                 <div class="col-md-12">
+                   <div class="box box-warning">
+                     <div class="box-header with-border">
+                       <h3 class="box-title">Group & RD Wise Readings / Edit Assesment</h3>
+                       <!-- /.box-tools -->
+                     </div>
+                     <!-- /.box-header -->
+                     <div class="box-body">
+  <form class="form-horizontal" #f="ngForm" novalidate>  
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-4">
+              <div class="form-group">
+                  <label class="control-label col-sm-4">Bill Month</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" [(ngModel)]="billmonth" name="billmon1" #billmon1Text="ngModel" [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" required>
+                      <option value="{{billmonth}}">{{billmonth}}</option>
+                      <option value="Sep-2020">Sep-2020</option>
+                    <option value="Oct-2020">Oct-2020</option>
+                    <option value="Nov-2020">Nov-2020</option>
+                    <option value="Dec-2020">Dec-2020</option>
+                    <option value="Jan-2021">Jan-2021</option>
+                    <option value="Feb-2021">Feb-2021</option>
+                    <option value="Mar-2021">Mar-2021</option>
+                    <option value="Apr-2021">Apr-2021</option>
+                    <option value="May-2021">May-2021</option>
+                    <option value="Jun-2021">Jun-2021</option>
+                    <option value="Jul-2021">Jul-2021</option>
+                    <option value="Aug-2021">Aug-2021</option>
+                    <option value="Sep-2021">Sep-2021</option>
+                    <option value="Oct-2021">Oct-2021</option>
+                    <option value="Nov-2021">Nov-2021</option>
+                    <option value="Dec-2021">Dec-2021</option>
+                      
+                    </select>
+                    <div *ngIf="f.submitted && billmon1Text.invalid" class="invalid-feedback">
+                        <div *ngIf="billmon1Text.errors.required" style="color:red">Select Bill Month</div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="col-md-4">
+              <div class="form-group">
+                  <label class="control-label col-sm-4">Select Group</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" [(ngModel)]="groupno" name="groupno1" #groupnoText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && groupnoText.invalid }" required (change)="getRD($event.target.value)">
+                      <option value="{{groupno}}">{{groupno}}</option>
+                      <option *ngFor="let data1 of resp" value="{{data1.groupno}}">{{data1.groupno}}--{{data1.groupname}}</option>
+                    </select>
+                    <div *ngIf="f.submitted && groupnoText.invalid" class="invalid-feedback">
+                        <div *ngIf="groupnoText.errors.required" style="color:red">Select Group No.</div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="col-md-4">
+              <div class="form-group">
+                  <label class="control-label col-sm-4">Select RD</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" [(ngModel)]="rd" name="rd1" #rdText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && rdText.invalid }" required>
+                      <option value="{{rd}}">{{rd}}</option>
+                      <option *ngFor="let data1 of resp1" value="{{data1.rdno}}">{{data1.rdno}}</option>
+                    </select>
+                    <div *ngIf="f.submitted && rdText.invalid" class="invalid-feedback">
+                        <div *ngIf="rdText.errors.required" style="color:red">Select RD No.</div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>   
+        
+      
+       
+  <!-- /.box-body -->
+  <div class="box-footer" *ngIf="groupno!=='Select Group' && rd==='Select RD No.'">
+      <div class="row">
+        <div class="col-sm-12 text-center ">
+      <button type="button" class="btn btn-success" (click)="getGroupReadingsDatewise()">Submit Group</button>
+    </div>
+    </div>
+    </div>
+    <div class="box-footer" *ngIf="groupno!=='Select Group' && rd!=='Select RD No.'">
+      <div class="row">
+        <div class="col-sm-12 text-center ">
+      <button type="button" class="btn btn-success" (click)="getRDReadingsDatewise()">Submit RD</button>
+    </div>
+    </div>
+    </div>
+    <!-- /.box-footer -->
+             </div>
+    </form>
+    
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="alert alert-warning col-md-6" *ngIf="showData1">
+      <strong>Data Not Found !</strong> 
+    </div>
+  <div class="row" *ngIf="showData">
+      <div class="col-md-12">
+        <div class="box box-warning">
+          <div class="box-header with-border">
+            <h3 class="box-title">List Of Readings In RD {{rd}} for billmonth {{billmonth}}</h3> 
+            <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls()' *ngIf="showExport1"><i class="fa fa-download"></i> Export</button>
+            <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls1()' *ngIf="showExport"><i class="fa fa-download"></i> Export Data</button>  &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-primary btn-sm pull-right"  (click)="verifySelectedReading()" *ngIf="showdata2">Verify Selected Items</button>&nbsp;&nbsp;&nbsp;
+            <!-- <button type="button" class="btn btn-success" (click)="Onclick()">Submit RD</button>-->
+            <!-- /.box-tools -->
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+              <button type="button" class="btn btn-sm btn-default" (click)="getGroupReadingsDatewise()">All</button>&nbsp;&nbsp;
+              <button type="button" class="btn btn-sm btn-danger" (click)="getGroupReadingBelow90()">Assesment < 90%</button>&nbsp;&nbsp;
+              <button type="button" class="btn btn-sm btn-warning" (click)="getGroupReadingAbove120()">Assesment > 120%</button>&nbsp;&nbsp;
+              <button type="button" class="btn btn-sm btn-success" (click)="getGroupReadingbetween90to120()">Assesement 90% - 120%</button>&nbsp;&nbsp;
+              <button type="button" class="btn btn-sm btn-primary" (click)="getGroupReadingMeterDefective()">Meter Defective</button>&nbsp;&nbsp;
+              <button type="button" class="btn btn-sm btn-info" (click)="getGroupReadingMeterNotFound()">Meter Not Found</button>&nbsp;&nbsp;
+              <br>
+             <h3>{{tabtype}}</h3>
+              <div class="table-responsive" style="max-height:500px">
+          <table class="table table-bordered custab" *ngIf="!showSelectAll">
+  <thead> 
+  <tr style="font-size:11px;">
+  <th>Sr. No.</th>
+  <th>Customer ID</th>
+  <th>Name</th>
+  <th>Group / RD</th>
+  <th>Reading</th>
+  <th>cmd</th>
+  <th>md</th>
+  <th>pf</th>
+  <th>Date Of Reading</th>
+  <th>Reading Type</th>
+  <th>Reader's Assesment</th>
+  <th>Prev Reading</th>
+  <th>Prev Consmp1</th>
+  <th>Prev Consmp2</th>
+  <th>Prev Consmp3</th>
+  <th>Expected Consmp</th>
+  <th>Curr. Consmp</th>
+  <th>Image 1</th>
+  <th>Image 2</th>
+  <th>Action</th>
+  </tr></thead>
+  <tbody *ngIf="resp2?.length > 0 && showData11" id="alldata">
+  <tr *ngFor='let data of resp2; index as i'>
+  <td>{{i+1}}</td>
+  <td>{{data.custid}}</td>
+  <td>{{data.name}}</td>
+  <td>{{data.gr}} / {{data.rd}}</td>
+  <td>{{data.reading}}</td>
+  <td>{{data.cmd}}</td>
+  <td>{{data.md}}</td>
+  <td>{{data.pf}}</td>
+  <td>{{data.datereading}}</td>
+  <td>{{data.readingtype}}</td>
+  <td>{{data.assesment}}</td>
+  <td>{{data.prevreading}}</td>
+  <td>{{data.consdata_prevcons1}}</td>
+  <td>{{data.consdata_prevcons2}}</td>
+  <td>{{data.consdata_prevcons3}}</td>
+  <td>{{data.consdata_expected}}</td>
+  <td>{{data.currentbilledunits}}</td>
+  <td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data.imagepath}}'>View Image</a>
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body">
+                  <img class="showimage img-responsive" id="{{i+1}}" src="" />
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </div>  
+      </div>
+  </div>
+  </td>
+  <td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data.image2path}}'>View Image</a>
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body">
+                  <img class="showimage img-responsive" id="{{i+1}}" src="" />
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </div>  
+      </div>
+  </div>
+  </td>
+  <td>
+    <!-- <button type="button" class="btn btn-primary btn-sm" (click)="verifyReading(data.custid)">Verify</button>
+      <button type="button" class="btn btn-danger btn-sm" (click)="rejectReading(data.custid)">Reject</button>
+      <br><br>
+      <button type="button" *ngIf="data.readingtype=='Meter Defective' || data.readingtype=='Meter Not Found' || data.readingtype=='Meter Theft' || data.readingtype=='Temporary Disconnected'" class="btn btn-primary btn-sm" (click)="EditReading(data.imageid,data.custid,data.billmonth,data.assesment)">Edit Asses.</button> -->
+  </td>
+  </tr>
+</tbody>
+
+  <tbody *ngIf="resp11?.length > 0 && showData2" id="below90">
+    <tr *ngFor='let data1 of resp11; index as i'>
+    <td>{{i+1}}</td>
+    <td>{{data1.custid}}</td>
+    <td>{{data1.name}}</td>
+    <td>{{data1.gr}} / {{data1.rd}}</td>
+    <td>{{data1.reading}}</td>
+    <td>{{data1.cmd}}</td>
+    <td>{{data1.md}}</td>
+    <td>{{data1.pf}}</td>
+    <td>{{data1.datereading}}</td>
+    <td>{{data1.readingtype}}</td>
+    <td>{{data1.assesment}}</td>
+    <td>{{data1.prevreading}}</td>
+    <td>{{data1.consdata_prevcons1}}</td>
+    <td>{{data1.consdata_prevcons2}}</td>
+    <td>{{data1.consdata_prevcons3}}</td>
+    <td>{{data1.consdata_expected}}</td>
+    <td>{{data1.currentbilledunits}}</td>
+    <td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data1.imagepath}}'>View Image</a>
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img class="showimage img-responsive" id="{{i+1}}" src="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>  
+        </div>
+    </div>
+    </td>
+    <td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data1.image2path}}'>View Image</a>
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img class="showimage img-responsive" id="{{i+1}}" src="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>  
+        </div>
+    </div>
+    </td>
+    <td>
+        <input type="checkbox" id="{{data1.imageid}}" value="{{data1.custid}}" (click)="VerifyClickBelow90(data1.custid,data1.imageid,i+1)">
+        <br><br>
+        <button type="button" class="btn btn-primary btn-sm" (click)="verifyReadingBelow90(data1.custid,data1.imageid)">Verify</button>
+        <br><br>
+      <button type="button" data-toggle="modal" data-target="#myModal11" id="{{i+1}}" *ngIf="data1.readingtype=='Meter Defective' || data1.readingtype=='Meter Not Found' || data1.readingtype=='Meter Theft' || data1.readingtype=='Temporary Disconnected'" class="btn btn-primary btn-sm" (click)='OnclickGetvalue(data1.imageid,data1.custid,data1.billmonth,data1.assesment)'><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Assesment</button>
+      
+      
+  
+    </td>
+    </tr></tbody>
+
+
+
+    <tbody *ngIf="resp12?.length > 0 && showData3" id="above120">
+      <tr *ngFor='let data12 of resp12; index as i'>
+      <td>{{i+1}}</td>
+      <td>{{data12.custid}}</td>
+      <td>{{data12.name}}</td>
+      <td>{{data12.gr}} / {{data12.rd}}</td>
+      <td>{{data12.reading}}</td>
+      <td>{{data12.cmd}}</td>
+      <td>{{data12.md}}</td>
+      <td>{{data12.pf}}</td>
+      <td>{{data12.datereading}}</td>
+      <td>{{data12.readingtype}}</td>
+      <td>{{data12.assesment}}</td>
+      <td>{{data12.prevreading}}</td>
+      <td>{{data12.consdata_prevcons1}}</td>
+      <td>{{data12.consdata_prevcons2}}</td>
+      <td>{{data12.consdata_prevcons3}}</td>
+      <td>{{data12.consdata_expected}}</td>
+      <td>{{data12.currentbilledunits}}</td>
+      <td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data12.imagepath}}'>View Image</a>
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-body">
+                      <img class="showimage img-responsive" id="{{i+1}}" src="" />
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+              </div>  
+          </div>
+      </div>
+      </td>
+      <td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data12.image2path}}'>View Image</a>
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-body">
+                      <img class="showimage img-responsive" id="{{i+1}}" src="" />
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+              </div>  
+          </div>
+      </div>
+      </td>
+      <td>
+          <input type="checkbox" id="{{data12.imageid}}" value="{{data12.custid}}" (click)="VerifyClickAbove120(data12.custid,data12.imageid,i+1)">
+          <br><br>
+          <button type="button" class="btn btn-primary btn-sm"  (click)="verifyReadingAbove120(data12.custid,data12.imageid)">Verify</button>
+          <br><br>
+        <button type="button" data-toggle="modal" data-target="#myModal11" id="{{i+1}}" *ngIf="data12.readingtype=='Meter Defective' || data12.readingtype=='Meter Not Found' || data12.readingtype=='Meter Theft' || data12.readingtype=='Temporary Disconnected'" class="btn btn-primary btn-sm" (click)='OnclickGetvalue(data12.imageid,data12.custid,data12.billmonth,data12.assesment)'><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Assesment</button>
+        
+        
+    
+      </td>
+      </tr></tbody>
+
+
+
+      <tbody *ngIf="resp14?.length > 0 && showData4" id="meter-defective">
+        <tr *ngFor='let data14 of resp14; index as i'>
+        <td>{{i+1}}</td>
+        <td>{{data14.custid}}</td>
+        <td>{{data14.name}}</td>
+        <td>{{data14.gr}} / {{data14.rd}}</td>
+        <td>{{data14.reading}}</td>
+        <td>{{data14.cmd}}</td>
+        <td>{{data14.md}}</td>
+        <td>{{data14.pf}}</td>
+        <td>{{data14.datereading}}</td>
+        <td>{{data14.readingtype}}</td>
+        <td>{{data14.assesment}}</td>
+        <td>{{data14.prevreading}}</td>
+        <td>{{data14.consdata_prevcons1}}</td>
+        <td>{{data14.consdata_prevcons2}}</td>
+        <td>{{data14.consdata_prevcons3}}</td>
+        <td>{{data14.consdata_expected}}</td>
+        <td>{{data14.currentbilledunits}}</td>
+        <td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data14.imagepath}}'>View Image</a>
+          <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img class="showimage img-responsive" id="{{i+1}}" src="" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        </td>
+        <td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data14.image2path}}'>View Image</a>
+          <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img class="showimage img-responsive" id="{{i+1}}" src="" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        </td>
+        <td>
+            <input type="checkbox" id="{{data14.imageid}}" value="{{data14.custid}}" *ngIf="data14.status=='-1'" (click)="VerifyClickMeterDef(data14.custid,data14.imageid,i+1)">
+            <br><br>
+            <button type="button" class="btn btn-primary btn-sm" *ngIf="data14.status=='-1'" (click)="verifyReadingMeterDef(data14.custid,data14.imageid)">Verify</button>
+            <br><br>
+          <button type="button" data-toggle="modal" data-target="#myModal11" id="{{i+1}}" *ngIf="(data14.status=='-1') && (data14.readingtype=='Meter Defective' || data14.readingtype=='Meter Not Found' || data14.readingtype=='Meter Theft' || data14.readingtype=='Temporary Disconnected')" class="btn btn-primary btn-sm" (click)='OnclickGetvalue(data14.imageid,data14.custid,data14.billmonth,data14.assesment)'><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Assesment</button>
+          
+          
+      
+        </td>
+        </tr></tbody>
+
+
+
+
+        <tbody *ngIf="resp15?.length > 0 && showData5" id="meter-notfound">
+          <tr *ngFor='let data15 of resp15; index as i'>
+          <td>{{i+1}}</td>
+          <td>{{data15.custid}}</td>
+          <td>{{data15.name}}</td>
+          <td>{{data15.gr}} / {{data15.rd}}</td>
+          <td>{{data15.reading}}</td>
+          <td>{{data15.cmd}}</td>
+          <td>{{data15.md}}</td>
+          <td>{{data15.pf}}</td>
+          <td>{{data15.datereading}}</td>
+          <td>{{data15.readingtype}}</td>
+          <td>{{data15.assesment}}</td>
+          <td>{{data15.prevreading}}</td>
+          <td>{{data15.consdata_prevcons1}}</td>
+          <td>{{data15.consdata_prevcons2}}</td>
+          <td>{{data15.consdata_prevcons3}}</td>
+          <td>{{data15.consdata_expected}}</td>
+          <td>{{data15.currentbilledunits}}</td>
+          <td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data15.imagepath}}'>View Image</a>
+            <div id="myModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-body">
+                          <img class="showimage img-responsive" id="{{i+1}}" src="" />
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                  </div>  
+              </div>
+          </div>
+          </td>
+          <td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data15.image2path}}'>View Image</a>
+            <div id="myModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-body">
+                          <img class="showimage img-responsive" id="{{i+1}}" src="" />
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                  </div>  
+              </div>
+          </div>
+          </td>
+          <td>
+              <input type="checkbox" id="{{data15.imageid}}" value="{{data15.custid}}" *ngIf="data15.status=='-1'" (click)="VerifyClickMeterNotfound(data15.custid,data15.imageid,i+1)">
+              <br><br>
+              <button type="button" class="btn btn-primary btn-sm" *ngIf="data15.status=='-1'" (click)="verifyReadingMeterNotfound(data15.custid,data15.imageid)">Verify</button>
+              <br><br>
+            <button type="button" data-toggle="modal" data-target="#myModal11" id="{{i+1}}" *ngIf="(data15.status=='-1') && (data15.readingtype=='Meter Defective' || data15.readingtype=='Meter Not Found' || data15.readingtype=='Meter Theft' || data15.readingtype=='Temporary Disconnected')" class="btn btn-primary btn-sm" (click)='OnclickGetvalue(data15.imageid,data15.custid,data15.billmonth,data15.assesment)'><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Assesment</button>
+            
+            
+        
+          </td>
+          </tr></tbody>
+
+
+    
+  <tbody *ngIf="resp2?.length == ''" >
+  
+  <tr> <td colspan="12" class="text-center"> <strong>No data Found.</strong></td></tr>
+  
+  </tbody>
+  
+  </table>
+  </div>
+
+  <div class="table-responsive" style="max-height:500px" *ngIf="showSelectAll">
+      <table class="table table-bordered  custab">
+<thead> 
+<tr style="font-size:11px;">
+<th>Sr. No.</th>
+<th>Customer ID</th>
+<th>Name</th>
+<th>Group / RD</th>
+<th>Reading</th>
+<th>cmd</th>
+<th>md</th>
+<th>pf</th>
+<th>Date Of Reading</th>
+<th>Reading Type</th>
+<th>Reader's Assesment</th>
+<th>Prev Reading</th>
+<th>Prev Consmp1</th>
+<th>Prev Consmp2</th>
+<th>Prev Consmp3</th>
+<th>Expected Consmp</th>
+<th>Curr. Consmp</th>
+<th>Image 1</th>
+<th>Image 2</th>
+<th>Action <input type="checkbox" (click)="selectAll(data2)"> Select All</th>
+</tr></thead>
+
+<tbody>
+<tr *ngFor='let data13 of resp13; index as i' id="between90to120">
+<td>{{i+1}}</td>
+<td>{{data13.custid}}</td>
+<td>{{data13.name}}</td>
+<td>{{data13.gr}} / {{data13.rd}}</td>
+<td>{{data13.reading}}</td>
+<td>{{data13.cmd}}</td>
+<td>{{data13.md}}</td>
+<td>{{data13.pf}}</td>
+<td>{{data13.datereading}}</td>
+<td>{{data13.readingtype}}</td>
+<td>{{data13.assesment}}</td>
+<td>{{data13.prevreading}}</td>
+<td>{{data13.consdata_prevcons1}}</td>
+<td>{{data13.consdata_prevcons2}}</td>
+<td>{{data13.consdata_prevcons3}}</td>
+<td>{{data13.consdata_expected}}</td>
+<td>{{data13.currentbilledunits}}</td>
+<td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data13.imagepath}}'>View Image</a>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img class="showimage img-responsive" id="{{i+1}}" src="" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>  
+    </div>
+</div>
+</td>
+<td><a (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal" href='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{data13.image2path}}'>View Image</a>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img class="showimage img-responsive" id="{{i+1}}" src="" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>  
+    </div>
+</div>
+</td>
+<td>
+    <!-- <input type="checkbox" id="{{data1.imageid}}" value="{{data1.custid}}" (click)="VerifyClick(data1.custid,data1.imageid,i+1)"> -->
+    <br><br>
+    <button type="button" class="btn btn-primary btn-sm" (click)="verifyReadingBet90to120(data13.custid,data13.imageid)">Verify</button>
+    <br><br>
+  <button type="button" data-toggle="modal" data-target="#myModal11" id="{{i+1}}" *ngIf="data13.readingtype=='Meter Defective' || data13.readingtype=='Meter Not Found' || data13.readingtype=='Meter Theft' || data13.readingtype=='Temporary Disconnected'" class="btn btn-primary btn-sm" (click)='OnclickGetvalue(data1.imageid,data1.custid,data1.billmonth,data1.assesment)'><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Assesment</button>
+  
+  
+
+</td>
+</tr></tbody>
+
+<tbody *ngIf="resp2?.length == ''" >
+
+<tr> <td colspan="12" class="text-center"> <strong>No data Found.</strong></td></tr>
+
+</tbody>
+
+</table>
+</div>
+  <div id="myModal11" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+              <div class="box-body">
+                <form class="form-horizontal" #f="ngForm" novalidate>
+                    <div class="box-body">
+                      
+                      <div class="form-group">
+                        <label class="control-label col-sm-2">Reading ID</label>
+                        <div class="col-sm-8">
+                          <input class="form-control" type="text" [(ngModel)]="imageid" value="{{imageid}}" name="imageid" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2">IVRS No.</label>
+                        <div class="col-sm-8">
+                          <input class="form-control" type="text" [(ngModel)]="custid" value="{{custid}}" name="custid" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2">Bill Month</label>
+                        <div class="col-sm-8">
+                          <input class="form-control" type="text"  value="{{bilmonthfor}}" name="billmonth" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2">Assesment</label>
+                        <div class="col-sm-8">
+                          <input class="form-control" type="text" [(ngModel)]="assesment" value="{{assesment}}" name="assesment">
+                        </div>
+                      </div>
+                    
+                     
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                      <div class="col-sm-10 col-md-offset-2 ">
+                    <button type="button" class="btn btn-success" (click)="editAssesment()">Submit</button>
+                  </div>
+                  </div>
+                  </div>
+                  <!-- /.box-footer -->
+                           </div>
+                  </form>
+                  
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>  
+    </div>
+</div>
+  </div>
+
+  <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+  </div>
+  </div>
+  </section>
+  </div>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+   reserved.
+  </footer>
+  </div>

@@ -1,0 +1,112 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div  class="loadr" *ngIf='loading==true'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+   </div>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+              Reading Data
+            </h1>
+            <ol class="breadcrumb">
+               <li><a href="#"><i class="fa fa-list-alt"></i> Reading Data</a></li>
+               <li class="active">Group & RD Wise Readings</li>
+             </ol>
+           </section>
+           <section class="content">
+            
+<div class="alert alert-warning col-md-6" *ngIf="showdata">
+    <strong>Data Not Found !</strong> 
+  </div>
+<div class="row" >
+    <div class="col-md-12">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">List Of Readings In Group for billmonth {{billmonth}}</h3> 
+        
+           <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls()' ><i class="fa fa-download"></i> Export</button>
+       <!--   <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls1()' *ngIf="showExport"><i class="fa fa-download"></i> Export Data</button>  &nbsp;&nbsp;&nbsp;
+          <button type="button" class="btn btn-primary btn-sm pull-right"  (click)="verifySelectedReading()" *ngIf="showdata2">Verify Selected Items</button>&nbsp;&nbsp;&nbsp;
+          <button type="button" class="btn btn-success" (click)="Onclick()">Submit RD</button> -->
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <button type="button" class="btn btn-sm btn-default" (click)="getGroupReadingsDatewise()">All</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" (click)="getGroupReadingBelow90()">Assesment < 90%</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-warning" (click)="getGroupReadingAbove120()">Assesment > 120%</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-success" (click)="getGroupReadingbetween90to120()">Assesement 90% - 120%</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-primary" (click)="getGroupReadingMeterDefective()">Meter Defective</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-info" (click)="getGroupReadingMeterNotFound()">Meter Not Found</button>&nbsp;&nbsp;
+            <br>
+            <div class="table-responsive" style="max-height:445px">
+        <table class="table table-bordered custab">
+<thead> 
+<tr style="font-size:11px;">
+<th>Sr. No.</th>
+<th>Customer ID</th>
+<th>Name</th>
+<th>Group-RD</th>
+<th>Date Of Reading</th>
+<th>Reading Type</th>
+<th>md</th>
+<th>pf</th>
+<th>Reading</th>
+<th>Reader's Assesment</th>
+<th>Curr. Consmp</th>
+<th>Expected Consmp</th>
+<th>Prev Reading</th>
+<th>Prev Consmp1</th>
+<th>Prev Consmp2</th>
+<th>Prev Consmp3</th>
+<th>Image 1</th>
+<th>Image 2</th>
+</tr></thead>
+<tbody *ngIf="resp?.length > 0" id="alldata">
+<tr *ngFor='let data of resp; index as i'>
+<td>{{i+1}}</td>
+<td>{{data.custid}}</td>
+<td>{{data.name}}</td>
+<td>{{data.gr}}-{{data.rd}}</td>
+<td>{{dateofreading}}</td>
+<td>{{data.readingtype}}</td>
+<td>{{data.md}}</td>
+<td>{{data.pf}}</td>
+<td>{{data.reading}}</td>
+<td>{{data.assesment}}</td>
+<td>{{data.currentbilledunits}}</td>
+<td>{{data.consdata_expected}}</td>
+<td>{{data.prevreading}}</td>
+<td>{{data.consdata_prevcons1}}</td>
+<td>{{data.consdata_prevcons2}}</td>
+<td>{{data.consdata_prevcons3}}</td>
+<td>
+<div>
+        <a href="api/mtr-reader/get-meter-reader-image?path={{data.imagepath}}" data-lightbox="image-1" data-title="{{data.custid}}">View</a>
+      </div>
+</td>
+<td>
+    <div>
+        <a href="api/mtr-reader/get-meter-reader-image?path={{data.image2path}}" data-lightbox="image-2" data-title="{{data.custid}}">View</a>
+      </div>
+</td>
+
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>

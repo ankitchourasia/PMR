@@ -1,0 +1,116 @@
+<div class="wrapper" appNoRightClick>
+   <app-dcinch-header></app-dcinch-header>
+   <app-dcinch-sidebar></app-dcinch-sidebar>
+      <div class="content-wrapper">        
+            <section class="content-header">
+              <h1>
+                  DC User Management</h1>
+              <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>  DC User Management</a></li>
+                <li class="active">Active Group Incharge</li>
+              </ol>
+            </section>
+            <section class="content">
+                  <div class="row">
+                        <div class="col-md-12">
+                          <div class="box box-warning">
+                            <div class="box-header with-border">
+                              <h3 class="box-title">List Of Active Group Incharge</h3>          
+                              
+                              <!-- /.box-tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                              <div class="table-responsive" style="max-height:570px">
+
+                            <table class="table table-bordered  custab">
+                                <thead> 
+                                 <tr>
+                                   <th>Sr. No.</th>
+                                   <th>Group Incharge ID</th>
+                                   <th>Group Incharge Name</th>
+                                   <th>Employee No.</th>
+                                   <th>Designation</th>
+                                   <th>Action</th>
+                                 </tr></thead>
+                                 <tbody *ngIf="resp?.length > 0" >
+                                 <tr *ngFor='let data of resp ; index as i'>
+                                     <td>{{i+1}}</td>
+                                   <td>{{data.groupinchid}}</td>
+                                   <td>{{data.groupinchname}}</td>
+                                   <td>{{data.empno}}</td>
+                                   <td>{{data.desg}}</td>
+                                   <td>
+                                      <div class="btn-group">
+                                          <button (click)="assignGroupToInch(data.groupinchid)" class="btn btn-sm bg-green">Assign Group</button>
+                                          <button (click)="removeGroupInch(data.groupinchid)" class="btn btn-sm btn-danger">Remove</button>
+                                        </div>
+                                        </td>
+                                         
+                             </tr></tbody>
+                             <tbody *ngIf="resp?.length == ''" >
+                             
+                             <tr> <td colspan="12" class="text-center"> <strong>No data Found.</strong></td></tr>
+                             
+                             </tbody>
+                             
+                               </table> 
+                              </div>
+                              </div>
+                              <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="showGroups">
+                        <div class="col-md-12">
+                          <div class="box box-warning">
+                            <div class="box-header with-border">
+                              <h3 class="box-title">Add Group To The Groupincharge</h3>
+                
+                              <!-- /.box-tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+
+<form class="form-horizontal" #f="ngForm" novalidate>  
+  <div class="box-body">
+  <div class="form-group">
+    <label class="control-label col-sm-2" >Group incharge ID</label>
+    <div class="col-sm-8"> 
+      <input type="text"  [(ngModel)]="groupinchid" name="groupnoText" value="{{groupinchid}}" class="form-control" readonly>
+      
+    </div>
+  </div>
+  <div class="form-group">
+      <label class="control-label col-sm-2" >Group No.</label>
+      <div class="col-sm-8"> 
+        <select class="form-control" [(ngModel)]="groupno" name="groupno">
+          <option selected>Select group</option>
+          <option *ngFor='let data2 of resp3' value="{{data2.groupno}}">{{data2.groupno}}</option>
+        </select>
+      </div>
+    </div>
+
+        <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-success" (click)="AssignedgroupToInch()">Submit</button>
+    </div>
+  </div>
+</div>
+</form>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+                    </section>
+                  
+                  </div>
+                  <!-- /.content-wrapper -->
+                  <footer class="main-footer">
+                     <strong>Copyright &copy; 2019 <a >NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+                    reserved.
+                  </footer>
+        </div>

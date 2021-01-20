@@ -1,0 +1,189 @@
+<div class="wrapper" appNoRightClick>
+    <app-dcinch-header></app-dcinch-header>
+    <app-dcinch-sidebar></app-dcinch-sidebar>
+    <div  class="loadr" *ngIf='loading'>
+      <img src="assets/imgs/loading.gif" class="loadimg">
+     </div>
+       <div class="content-wrapper">        
+             <section class="content-header">
+               <h1>
+                Reading Data
+              </h1>
+              <ol class="breadcrumb">
+                 <li><a href="#"><i class="fa fa-list-alt"></i>Get Reading Data</a></li>
+                 <li class="active">Group Readings</li>
+               </ol>
+             </section>
+             <section class="content">
+               <div class="row">
+                 <div class="col-md-12">
+                   <div class="box box-warning">
+                     <div class="box-header with-border">
+                       <h3 class="box-title">Group Readings</h3>
+                       <!-- /.box-tools -->
+                     </div>
+                     <!-- /.box-header -->
+                     <div class="box-body">
+  <form class="form-horizontal" #f="ngForm" novalidate>  
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-5">
+              <div class="form-group">
+                  <label class="control-label col-sm-4">Bill Month</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" [(ngModel)]="billmonth" name="billmon1" #billmon1Text="ngModel" [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" required>
+                        <option value="{{billmonth}}">{{billmonth}}</option>
+                        <option value="Sep-2020">Sep-2020</option>
+                        <option value="Oct-2020">Oct-2020</option>
+                        <option value="Nov-2020">Nov-2020</option>
+                        <option value="Dec-2020">Dec-2020</option>
+                        <option value="Jan-2021">Jan-2021</option>
+                        <option value="Feb-2021">Feb-2021</option>
+                        <option value="Mar-2021">Mar-2021</option>
+                        <option value="Apr-2021">Apr-2021</option>
+                        <option value="May-2021">May-2021</option>
+                        <option value="Jun-2021">Jun-2021</option>
+                        <option value="Jul-2021">Jul-2021</option>
+                        <option value="Aug-2021">Aug-2021</option>
+                        <option value="Sep-2021">Sep-2021</option>
+                        <option value="Oct-2021">Oct-2021</option>
+                        <option value="Nov-2021">Nov-2021</option>
+                        <option value="Dec-2021">Dec-2021</option>
+                      
+                    </select>
+                    <div *ngIf="f.submitted && billmon1Text.invalid" class="invalid-feedback">
+                        <div *ngIf="billmon1Text.errors.required" style="color:red">Select Bill Month</div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="col-md-5">
+              <div class="form-group">
+                  <label class="control-label col-sm-4">Select Group</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" [(ngModel)]="groupno" name="groupno1" #groupnoText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && groupnoText.invalid }" required >
+                      <option value="{{groupno}}">{{groupno}}</option>
+                      <option *ngFor="let data1 of resp" value="{{data1.groupno}}">{{data1.groupno}}--{{data1.groupname}}</option>
+                    </select>
+                    <div *ngIf="f.submitted && groupnoText.invalid" class="invalid-feedback">
+                        <div *ngIf="groupnoText.errors.required" style="color:red">Select Group No.</div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="col-md-2">
+              <button type="button" class="btn btn-success" (click)="getReadingsData()">Submit</button>
+          </div>
+        </div>
+
+    <!-- /.box-footer -->
+             </div>
+    </form>
+    
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="alert alert-warning col-md-6" *ngIf="showData1">
+      <strong>Data Not Found !</strong> 
+    </div>
+  <div class="row" *ngIf="showData">
+      <div class="col-md-12">
+        <div class="box box-warning">
+          <div class="box-header with-border">
+            <h3 class="box-title">List Of Readings In RD {{rd}} for billmonth {{billmonth}}</h3>          
+            <!-- /.box-tools -->
+            <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls()'><i class="fa fa-download"></i> Export</button>
+            <button class="btn btn-info btn-sm pull-right" (click)='imageDownload()'><i class="fa fa-download"></i> Prepare Image Downloader</button>
+            <button class="btn btn-info btn-sm pull-right" (click)='downloadZip(resp4.path)' *ngIf="showbutton"><i class="fa fa-download"></i> Download</button>
+          </div>
+  
+          
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="table-responsive" style="max-height:500px">
+               
+          <table class="table table-bordered  custab">
+  <thead> 
+  <tr>
+  <th>Sr. No.</th>
+  <th>Account Id</th>
+  <th>Current Reading Date</th>
+  <th>Reader Rem CD</th>
+  <th>KWH Reading</th>
+  <th>KW Reading</th>
+  <th>KVA Reading</th>
+  <th>KVAH Reading</th>
+  <th>LF Reading</th>
+  <th>PF Reading</th>
+  <th>Meter Reader Name</th>
+  <th>Assessed Units</th>
+  <th>Division</th>
+  <th>Group No.</th>
+  <th>Diary No.</th>
+  <th>old Consumer No.</th>
+  </tr>
+  <tr>
+      <th>ACCT_ID</th>
+    <th>CURRENT_READ_DTTM</th>
+    <th>READER_REM_CD</th>
+    <th>KWH_READING</th>
+    <th>KW_READING</th>
+    <th>KVA_READING</th>
+    <th>KVAH_READING</th>
+    <th>LF_READING</th>
+    <th>PF_READING</th>
+    <th>MTR_READER_NAME</th>
+    <th>ASSESSED_UNITS</th>
+    <th>DIVISION</th>
+    <th>GROUP_NO</th>
+    <th>DIARY_NO</th>
+    <th>OLD_CONS_NO</th>
+    </tr>
+    
+</thead>
+  
+
+
+
+  <tbody *ngIf="resp2?.length > 0" >
+  <tr *ngFor='let data of resp2; index as i'>
+  <td>{{i+1}}</td>
+  <td>{{data.acct_id}}</td>
+  <td>{{data.current_read_dttm}}</td>
+  <td>{{data.reader_rem_cd}}</td>
+  <td>{{data.kwh_reading}}</td>
+  <td>{{data.kw_reading}}</td>
+  <td>{{data.kva_reading}}</td>
+  <td>{{data.kvah_reading}}</td>
+  <td>{{data.lf_reading}}</td>
+  <td>{{data.pf_reading}}</td>
+  <td>{{data.mtr_reader_name}}</td>
+  <td>{{data.assessed_units}}</td>
+  <td>{{data.division}}</td>
+  <td>{{data.group_no}}</td>
+  <td>{{data.diary_no}}</td>
+  <td>{{data.old_cons_no}}</td>
+  
+  </tr></tbody>
+  <tbody *ngIf="resp2?.length == ''" >
+  
+  <tr> <td colspan="12" class="text-center"> <strong>No data Found.</strong></td></tr>
+  
+  </tbody>
+  
+  </table>
+  </div>
+  </div>
+  <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+  </div>
+  </div>
+  </section>
+  </div>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+   reserved.
+  </footer>
+  </div>

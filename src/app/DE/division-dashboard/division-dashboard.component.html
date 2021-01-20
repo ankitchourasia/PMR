@@ -1,0 +1,169 @@
+<div class="wrapper" appNoRightClick>
+  <app-de-header></app-de-header>
+  <app-de-sidebar></app-de-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Dashboard
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-warning">
+            <div class="box-header with-border">
+                <form class="form-horizontal" #f="ngForm" novalidate>
+              <label class="col-md-4">Select Bill Month</label>
+                <div class="col-sm-5">
+                  <select class="form-control" [(ngModel)]="billmonth" name="billmon1" #billmon1Text="ngModel" [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" required>
+                    <option value="{{billmonth}}">{{billmonth}}</option>
+                    <option value="Sep-2020">Sep-2020</option>
+                    <option value="Oct-2020">Oct-2020</option>
+                    <option value="Nov-2020">Nov-2020</option>
+                    <option value="Dec-2020">Dec-2020</option>
+                    <option value="Jan-2021">Jan-2021</option>
+                    <option value="Feb-2021">Feb-2021</option>
+                    <option value="Mar-2021">Mar-2021</option>
+                    <option value="Apr-2021">Apr-2021</option>
+                    <option value="May-2021">May-2021</option>
+                    <option value="Jun-2021">Jun-2021</option>
+                    <option value="Jul-2021">Jul-2021</option>
+                    <option value="Aug-2021">Aug-2021</option>
+                    <option value="Sep-2021">Sep-2021</option>
+                    <option value="Oct-2021">Oct-2021</option>
+                    <option value="Nov-2021">Nov-2021</option>
+                    <option value="Dec-2021">Dec-2021</option>
+
+                  </select>
+                  <div *ngIf="f.submitted && billmon1Text.invalid" class="invalid-feedback">
+                      <div *ngIf="billmon1Text.errors.required" style="color:red">Select Bill Month</div>
+                  </div>
+                </div>
+             <div class="col-md-3">
+              <button type="button" class="btn btn-success m-t-10" (click)="getDivisionDashboard()">View DashBoard</button>
+             </div>
+            </form>
+
+               <div class="box-tools pull-right">
+
+</div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+
+      </div>
+      <div class="alert alert-warning col-md-6" *ngIf="showData1">
+        <strong>Data Not Found !</strong>
+      </div>
+      <div class="row" *ngIf="showData">
+        <div class="col-md-12">
+            <div class="box box-warning">
+                <div class="box-body">
+          <div class="table-responsive">
+            <table class="table table-bordered  custab">
+              <thead>
+                <tr>
+                  <th>Total Available Consumer</th>
+                  <th>Reading Taken</th>
+                  <th>Normal</th>
+                  <th>Normal Malpractice</th>
+                  <th>Meter Change</th>
+                  <th>Meter Defective</th>
+                  <th>Premise Locked</th>
+                  <th>Temporary Disconnected</th>
+                  <th>Meter Not Found</th>
+                  <th>Theft Cases</th>
+                  <th>Meter Restart</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="resp">
+                <tr>
+                  <td>{{resp.totalavailableconsumer}}</td>
+                  <td>{{resp.readings}}</td>
+                  <td>{{resp.normal}}</td>
+                  <td>{{resp.normal_male_practice}}</td>
+                  <td>{{resp.meterChange}}</td>
+                  <td>{{resp.meterDefective}}</td>
+                  <td>{{resp.premiseLocked}}</td>
+                  <td>{{resp.temporaryDisconnected}}</td>
+                  <td>{{resp.meterNotFound}}</td>
+                  <td>{{resp.meterTheft}}</td>
+                  <td>{{resp.meterRestart}}</td>
+                  <td><button type="button" class="btn btn-warning btn-sm" (click)="getDCDashboard()">Get DC Wise Dashboard</button></td>
+                </tr>
+              </tbody>
+              </table>
+          </div>
+</div>
+</div>
+          <!-- /.box -->
+        </div>
+      </div>
+
+
+      <div class="row" *ngIf="showData2">
+        <div class="col-md-12">
+            <div class="box box-warning">
+                <div class="box-body">
+          <div class="table-responsive">
+            <table class="table table-bordered  custab">
+              <thead>
+                <tr>
+                  <th>DC Code</th>
+                  <th>Total Available Consumer</th>
+                  <th>Reading Taken</th>
+                  <th>Normal</th>
+                  <th>Normal Malpractice</th>
+                  <th>Meter Change</th>
+                  <th>Meter Defective</th>
+                  <th>Premise Locked</th>
+                  <th>Temporary Disconnected</th>
+                  <th>Meter Not Found</th>
+                  <th>Theft Cases</th>
+                  <th>Meter Restart</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="resp2?.length > 0">
+                <tr *ngFor='let data1 of resp2; index as i'>
+                  <td>{{data1.office}}</td>
+                  <td>{{data1.totalavailableconsumer}}</td>
+                  <td>{{data1.readings}}</td>
+                  <td>{{data1.normal}}</td>
+                  <td>{{data1.normal_male_practice}}</td>
+                  <td>{{data1.meterChange}}</td>
+                  <td>{{data1.meterDefective}}</td>
+                  <td>{{data1.premiseLocked}}</td>
+                  <td>{{data1.temporaryDisconnected}}</td>
+                  <td>{{data1.meterNotFound}}</td>
+                  <td>{{data1.meterTheft}}</td>
+                  <td>{{data1.meterRestart}}</td>
+                </tr>
+              </tbody>
+              </table>
+          </div>
+</div>
+</div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of
+      MPPKVVCL, under SE IT ERP.</strong>
+    reserved.
+  </footer>
+</div>

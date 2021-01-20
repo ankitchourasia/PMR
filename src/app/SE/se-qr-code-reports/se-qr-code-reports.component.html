@@ -1,0 +1,197 @@
+<div class="wrapper" appNoRightClick>
+  <app-circle-header></app-circle-header>
+    <app-circle-sidebar></app-circle-sidebar>
+    <div  class="loadr" *ngIf='loading'>
+      <img src="assets/imgs/loading.gif" class="loadimg">
+     </div>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+              QR Code Reports
+            </h1>
+            <ol class="breadcrumb">
+              <li><a href="#"><i class="fa fa-thumb-tack"></i>QR Code Reports</a></li>
+              <li class="active">QR Code Reports</li>
+            </ol>
+           </section>
+           <section class="content">
+             <div class="row">
+               <div class="col-md-12">
+                 <div class="box box-warning">
+                   <div class="box-header with-border">
+                     <h3 class="box-title">Select Bill Month</h3>
+                     <!-- /.box-tools -->
+                   </div>
+                   <!-- /.box-header -->
+                   <div class="box-body">
+<form class="form-horizontal" #f="ngForm" novalidate>  
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-7">
+            <div class="form-group">
+                <label class="control-label col-sm-4">Bill Month</label>
+                <div class="col-sm-8">
+                  <select class="form-control" [(ngModel)]="billmon" name="billmon1" #billmon1Text="ngModel" [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" required>
+                    <option value="{{billmon}}">{{billmon}}</option>
+                    <option value="Sep-2020">Sep-2020</option>
+                    <option value="Oct-2020">Oct-2020</option>
+                    <option value="Nov-2020">Nov-2020</option>
+                    <option value="Dec-2020">Dec-2020</option>
+                    <option value="Jan-2021">Jan-2021</option>
+                    <option value="Feb-2021">Feb-2021</option>
+                    <option value="Mar-2021">Mar-2021</option>
+                    <option value="Apr-2021">Apr-2021</option>
+                    <option value="May-2021">May-2021</option>
+                    <option value="Jun-2021">Jun-2021</option>
+                    <option value="Jul-2021">Jul-2021</option>
+                    <option value="Aug-2021">Aug-2021</option>
+                    <option value="Sep-2021">Sep-2021</option>
+                    <option value="Oct-2021">Oct-2021</option>
+                    <option value="Nov-2021">Nov-2021</option>
+                    <option value="Dec-2021">Dec-2021</option>
+                  </select>
+                  <div *ngIf="f.submitted && billmon1Text.invalid" class="invalid-feedback">
+                      <div *ngIf="billmon1Text.errors.required" style="color:red">Select Bill Month</div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-5">
+            <button type="button" class="btn btn-success" (click)="getQrReports()">Submit</button>
+        </div>
+      </div>
+    
+
+  <!-- /.box-footer -->
+           </div>
+  </form>
+  
+</div>
+</div>
+</div>
+</div>
+<div class="alert alert-warning col-md-6" *ngIf="showData1">
+    <strong>Data Not Found !</strong> 
+  </div>
+<div class="row" *ngIf="showData">
+    <div class="col-md-12">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">QR Code Reports</h3>          
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive" style="max-height:500px">
+             
+        <table class="table table-bordered  custab">
+<thead> 
+<tr>
+<th>Sr. No.</th>
+<th>Office Type</th>
+<th>Office Name</th>
+<th>Location Code</th>
+<th>Total Readings</th>
+<th>Readings With QR</th>
+<th>Readings Without QR</th>
+<th>Action</th>
+</tr></thead>
+<tbody *ngFor='let data of resp; index as i'>
+<tr>
+<td>{{i+1}}</td>
+<td>{{data.officetype}}</td>
+<td>{{data.officename}}</td>
+<td>{{data.loccode}}</td>
+<td>{{data.totalreadings}}</td>
+<td>{{data.withqr}}</td>
+<td>{{data.withourqr}}</td>
+<td>
+  <button *ngIf="data.officetype=='Division'" data-toggle="collapse" [attr.data-target]="'#demo'+i" type="submit" class="btn-xs btn-info" (click)="getDivisionQrReports(data.officename)"><i class="fa fa-angle-down fa-2x"></i></button>
+</td>
+</tr>
+<tr>
+  <td></td>
+  <td colspan="14">
+    <div id="demo{{i}}" class="dc collapse">
+      <table class="table table-striped table-bordered table-condensed custab">
+        <thead>
+          <!-- <tr>
+            <td colspan="14"><button class="btn btn-info btn-sm pull-right" (click)='exportAsXslsFeeder()'><i class="fa fa-download"></i>Export</button></td>
+          </tr> -->
+          <th>Sr. No.</th>
+          <th>Office Type</th>
+          <th>Office Name</th>
+          <th>Total Readings</th>
+          <th>Readings With QR</th>
+          <th>Readings Without QR</th>
+          <th>Action</th>
+        </thead>
+        <tbody *ngFor="let data1 of resp1 ; index as i1 ;">
+          <tr>
+            <td>{{i1+1}}</td>
+            <td>{{data1.officetype}}</td>
+            <td>{{data1.officename}}</td>
+            <td>{{data1.totalreadings}}</td>
+            <td>{{data1.withqr}}</td>
+            <td>{{data1.withourqr}}</td>
+            <td>
+              <button *ngIf="data1.officetype=='DC'" data-toggle="collapse" [attr.data-target]="'#demo'+i+i1" type="submit" class="btn-xs btn-info" (click)="getDcWiseData(data1.loccode)"><i class="fa fa-angle-down fa-2x"></i></button>
+            </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td colspan="14">
+            <div id="demo{{i}}{{i1}}" class="dc collapse">
+              <table class="table table-striped table-bordered table-condensed custab">
+                <thead>
+                  <!-- <tr>
+                    <td colspan="14"><button class="btn btn-info btn-sm pull-right" (click)='exportAsXslsFeeder()'><i class="fa fa-download"></i>Export</button></td>
+                  </tr> -->
+                  <th>Sr. No.</th>
+                  <th>Office Type</th>
+                  <th>Office Name</th>
+                  <th>Total Readings</th>
+                  <th>Readings With QR</th>
+                  <th>Readings Without QR</th>
+                </thead>
+                <tbody *ngFor="let data2 of resp2 ; index as i2 ;">
+                  <tr>
+                    <td>{{i2+1}}</td>
+                    <td>{{data2.officetype}}</td>
+                    <td>{{data2.officename}}</td>
+                    <td>{{data2.totalreadings}}</td>
+                    <td>{{data2.withqr}}</td>
+                    <td>{{data2.withourqr}}</td>
+                </tr>
+              </tbody>
+              </table>  
+            </div>
+            </td>
+        </tr>
+      </tbody>
+      </table>  
+    </div>
+    </td>
+</tr>
+</tbody>
+<tbody *ngIf="resp?.length == ''" >
+
+<tr> <td colspan="12" class="text-center"> <strong>No data Found.</strong></td></tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>

@@ -1,0 +1,262 @@
+<div class="wrapper" appNoRightClick >
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Dashboard
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-warning">
+            <div class="box-header with-border">
+                <form class="form-horizontal" #f="ngForm" novalidate>
+              <label class="col-md-4">Dashboard For Bill Month {{jstoday}} / Select Bill Month</label>
+                <div class="col-sm-5">
+                  <select class="form-control" [(ngModel)]="billmonth" name="billmon1" #billmon1Text="ngModel" [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" required>
+                    <option value="{{billmonth}}">{{billmonth}}</option>
+                    <option value="Sep-2020">Sep-2020</option>
+                    <option value="Oct-2020">Oct-2020</option>
+                    <option value="Nov-2020">Nov-2020</option>
+                    <option value="Dec-2020">Dec-2020</option>
+                    <option value="Jan-2021">Jan-2021</option>
+                    <option value="Feb-2021">Feb-2021</option>
+                    <option value="Mar-2021">Mar-2021</option>
+                    <option value="Apr-2021">Apr-2021</option>
+                    <option value="May-2021">May-2021</option>
+                    <option value="Jun-2021">Jun-2021</option>
+                    <option value="Jul-2021">Jul-2021</option>
+                    <option value="Aug-2021">Aug-2021</option>
+                    <option value="Sep-2021">Sep-2021</option>
+                    <option value="Oct-2021">Oct-2021</option>
+                    <option value="Nov-2021">Nov-2021</option>
+                    <option value="Dec-2021">Dec-2021</option>
+
+                  </select>
+                  <div *ngIf="f.submitted && billmon1Text.invalid" class="invalid-feedback">
+                      <div *ngIf="billmon1Text.errors.required" style="color:red">Select Bill Month</div>
+                  </div>
+                </div>
+             <div class="col-md-3">
+              <button type="button" class="btn btn-success m-t-10" (click)="getPreviousbillMonthDashboard()">View DashBoard</button>
+             </div>
+            </form>
+
+               <div class="box-tools pull-right">
+
+</div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-7">
+                  <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+                </div>
+                <div class="col-md-5">
+                  <p><b>Total Consumers :</b>&nbsp;&nbsp; {{pieChartData.consumer}}</p>
+                  <p><b>Uploaded Readings :</b>&nbsp;&nbsp; {{pieChartData.uploadedreadings}}</p>
+                  <p><b>Reading Percentage:</b>&nbsp;&nbsp;
+                    {{((pieChartData.uploadedreadings/pieChartData.consumer)*100) | number : '.2-2'}} %</p>
+                  <div class="table-responsive">
+                    <table class="table table-bordered custab">
+                      <thead>
+                        <tr>
+                          <th>Reading Type</th>
+                          <th>Total</th>
+                          <th>None Action</th>
+                          <th>Image Verified</th>
+                          <th>Rejected</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Normal</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,'ALL',5]"><span class="fa fa-list-alt"></span></a> &nbsp;{{pieChartData.normal}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,0,5]"><span class="fa fa-list-alt"></span></a> &nbsp;{{pieChartData.normal_nonactioned}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,1,5]"><span class="fa fa-list-alt"></span></a> &nbsp;{{pieChartData.normal_approved}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,3,5]"><span class="fa fa-list-alt"></span></a> &nbsp;{{pieChartData.normal_rejected}} &nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>Normal (Malpractice)</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,'ALL',9]"><span class="fa fa-list-alt"></span></a> &nbsp;{{pieChartData.normal_male_practice}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,0,9]"><span class="fa fa-list-alt"></span></a> &nbsp;{{pieChartData.normal_male_practice_nonactioned}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,1,9]"><span class="fa fa-list-alt"></span></a> &nbsp;{{pieChartData.normal_male_practice_approved}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,3,9]"><span class="fa fa-list-alt"></span></a> &nbsp;{{pieChartData.normal_male_practice_rejected}} &nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>Meter Defective</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,'ALL',1]"><span class="fa fa-list-alt"></span></a> &nbsp;{{pieChartData.meterDefective}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,0,1]"><span class="fa fa-list-alt"></span></a> &nbsp;{{pieChartData.meterDefective_nonactioned}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,1,1]"><span class="fa fa-list-alt"></span></a> &nbsp;{{pieChartData.meterDefective_approved}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,3,1]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterDefective_rejected}} &nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>Meter Change</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,'ALL',2]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterChange}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,0,2]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterDefective_nonactioned}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,1,2]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterDefective_approved}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,3,2]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterDefective_rejected}} &nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>Premise Locked</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,'ALL',3]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.premiseLocked}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,0,3]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.premiseLocked_nonactined}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,1,3]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.premiseLocked_approved}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,3,3]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.premiseLocked_rejected}} &nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>Temperory Disconnected</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,'ALL',7]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.tamporaryDisconnected}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,0,7]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.tamporaryDisconnected_nonactioned}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,1,7]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.tamporaryDisconnected_approved}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,3,7]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.tamporaryDisconnected_rejected}} &nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>Meter Not Found</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,'ALL',4]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterNotFound}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,0,4]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterNotFound_nonactioned}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,1,4]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterNotFound_approved}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,3,4]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterNotFound_rejected}} &nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>Theft Cases</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,'ALL',6]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterTheft}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,0,6]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterTheft_nonactioned}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,1,6]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterTheft_approved}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,3,6]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterTheft_rejected}} &nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>Meter Restart</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,'ALL',8]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterRestart}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,0,8]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterRestart_nonactioned}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,1,8]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterRestart_approved}} &nbsp;</td>
+                          <td><a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,3,8]"><span class="fa fa-list-alt"></span></a>&nbsp;{{pieChartData.meterRestart_rejected}} &nbsp;</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="clearfix"></div><br>
+                <div class="text-center">
+                  <button type="button" class="btn btn-success btn-sm" (click)="remainingCount(jstoday)">Group Wise
+                    Remaining Count</button>
+                  &nbsp;&nbsp;&nbsp;
+                  <button type="button" class="btn btn-success m-t-10" (click)="moreDetailedCount()">More Detailed
+                    Status Count</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+
+      </div>
+      <div class="row" *ngIf="showData">
+
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-bordered  custab">
+              <thead>
+                <tr>
+                  <th>Sr. No.</th>
+                  <th>Group No.</th>
+                  <th>Uploaded Readings</th>
+                  <th>Remaining Readings</th>
+                  <th>Total Consumers</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="resp2?.length > 0">
+                <tr *ngFor='let data of resp2; index as i'>
+                  <td>{{i+1}}</td>
+                  <td>{{data.groupno}}</td>
+                  <td>{{data.uploadedreadings}}</td>
+                  <td>{{data.remainingreadings}}</td>
+                  <td>{{data.totalconsumers}}</td>
+                  <td><button type="button" class="btn btn-warning btn-sm" (click)="viewList(data.groupno)">View List OF Remaining Consumer</button></td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="resp2?.length == ''">
+                <tr>
+                  <td colspan="6" class="text-center"> <strong>No data Found.</strong></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+
+          <!-- /.box -->
+        </div>
+      </div>
+
+      <div class="row" *ngIf="showData1">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-bordered custab">
+              <thead>
+                <tr>
+                  <th>Sr. No.</th>
+                  <th>Total Reading</th>
+                  <th>accepted Readings</th>
+                  <th>Non Actioned</th>
+                  <th>Rejected Readings</th>
+                  <th>Fault meter but zero assessment</th>
+                  <th>Fault meterbut not zero assessment</th>
+                  <th>Meter defective </th>
+                  <th>Meter change</th>
+                  <th>Meter not found</th>
+                  <th>Normal</th>
+                  <th>Premise locked</th>
+                  <th>Meter restart</th>
+
+                </tr>
+              </thead>
+              <tbody *ngIf="resp3?.length > 0">
+                <tr *ngFor='let data of resp3; index as i'>
+                  <td>{{i+1}}</td>
+                  <td>{{data.totalreadings}}</td>
+                  <td>{{data.accepted}}</td>
+                  <td>{{data.notactioned}}</td>
+                  <td>{{data.rejected}}</td>
+                  <td>{{data.metrfaultbutassiszero}}</td>
+                  <td>{{data.meterfaultbutassementisnotzero}}</td>
+                  <td>{{data.meterDefective}}</td>
+                  <td>{{data.meterChange}}</td>
+                  <td>{{data.meterNotFound}}</td>
+                  <td>{{data.normal}}</td>
+                  <td>{{data.premiseLocked}}</td>
+                  <td>{{data.meterRestart}}</td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="resp2?.length == ''">
+                <tr>
+                  <td colspan="6" class="text-center"> <strong>No data Found.</strong></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of
+      MPPKVVCL, under SE IT ERP.</strong>
+    reserved.
+  </footer>
+</div>

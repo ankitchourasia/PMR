@@ -1,0 +1,141 @@
+<aside class="main-sidebar" appNoRightClick>
+   <!-- sidebar: style can be found in sidebar.less -->
+   <section style="height: auto;" class="sidebar">
+
+
+     <!-- sidebar menu: : style can be found in sidebar.less -->
+     <ul class="sidebar-menu tree" data-widget="tree">
+       <li class="header">MAIN NAVIGATION</li>
+    
+        <li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >
+          <a href="#" >
+            <i class="fa fa-calendar" aria-hidden="true"></i> <span>Scheduling & Assignment</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li class=""><a routerLink='/schedule-a-complete-group'><i class="fa fa-angle-right"></i>Download Consumer Data</a></li>
+              <li class=""><a routerLink='/list-of-created-schedule'><i class="fa fa-angle-right"></i> List Of Schedule</a></li>
+              <li class=""><a routerLink='/extend-schedule-date'><i class="fa fa-angle-right"></i>Extend Schedule Date</a></li>
+              <li class=""><a routerLink='/extend-schedule-group-wise'><i class="fa fa-angle-right"></i>Extend Schedule Group Wise</a></li>
+              <!-- <li class=""><a routerLink='/assign-scheduled-complete-group-to-meter-reader'><i class="fa fa-angle-right"></i> Assign Group To Meter Reader</a></li> -->
+              <!-- <li class=""><a routerLink='/assign-scheduled-group-to-meter-reader'><i class="fa fa-angle-right"></i> Assign RD's To Meter Reader</a></li> -->
+              <li class=""><a routerLink='/assign-rds-to-meter-reader'><i class="fa fa-angle-right"></i> Assign RD's To Meter Reader</a></li>
+              <li class=""><a routerLink='/all-assignments-to-reader'><i class="fa fa-angle-right"></i>All Assignments</a></li>
+              <li class=""><a routerLink='/assignments-of-meter-reader'><i class="fa fa-angle-right"></i>Meter Reader Wise Assignment</a></li>
+              <li class=""><a routerLink='/remove-assignments-of-meter-reader'><i class="fa fa-angle-right"></i>Remove an Assignment from Meter Reader</a></li>
+              <!--
+              <li class=""><a routerLink='/group-wise-assignment-status'><i class="fa fa-circle-o"></i>Group Wise Assignment / Remaining Status <br> Diary Wise</a></li>
+              -->
+           </ul>
+        </li>
+        <li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a href="">
+            <i class="fa fa-users"></i> <span>Consumer Count Report</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li class=""><a routerLink='/group-wise-consumer'><i class="fa fa-angle-right"></i> Group Wise Consumer</a></li>
+              <li class=""><a routerLink='/group-rd-wise-consumer'><i class="fa fa-angle-right"></i> RD Wise Consumer</a></li>
+           </ul>
+        </li>
+
+        <li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a href="">
+              <i class="fa fa-list-alt" aria-hidden="true"></i> <span>Reading Data</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li class=""><a routerLink='/reading-status-group-wise'><i class="fa fa-angle-right"></i>Reading Status Group Wise</a></li>
+              <li class=""><a routerLink='/reading-status-rd-wise'><i class="fa fa-angle-right"></i>Reading Status RD Wise</a></li>
+              <li class=""><a routerLink='/remaining-list-consumers'><i class="fa fa-angle-right"></i>Remaining Reading List</a></li>
+              <li class=""><a routerLink='/reading-for-verification'><i class="fa fa-angle-right"></i>Reading Image Verification</a></li>
+              <li class=""><a routerLink='/reading-assesment-data'><i class="fa fa-angle-right"></i><b>Monthly Readings / Assesment</b></a></li>
+              <li class=""><a routerLink='/edit-normal-reading-type-to-other'><i class="fa fa-angle-right"></i>Edit Normal Reading Type to Other</a></li>
+              <li class=""><a routerLink='/get-reading-file'><i class="fa fa-angle-right"></i>Export Meter Images</a></li>
+              <li class=""><a routerLink='/update-reading-to-ngb'><i class="fa fa-angle-right"></i>Directly Upload Readings to NGB</a></li>
+              <li class=""><a routerLink='/check-status-of-uploaded-files-to-ngb'><i class="fa fa-angle-right"></i>Check Status Of Uploaded Files to NGB</a></li>
+              <!-- <li class=""><a routerLink='/view-rejected-files-from-ngb'><i class="fa fa-angle-right"></i>View Rejected Files From NGB</a></li> -->
+              <li class=""><a routerLink='/get-meter-change-file'><i class="fa fa-angle-right"></i>Export Meter Change cases</a></li>
+              <li class=""><a routerLink='/readings-of-group-RD-datewise'><i class="fa fa-angle-right"></i> Date Wise Readings</a></li>
+              <li class=""><a routerLink='/readings-for-single-consumer'><i class="fa fa-angle-right"></i>Reading For Single Consumer</a></li>
+              <li class=""><a routerLink='/verified-readings'><i class="fa fa-angle-right"></i>List Of Verified Readings</a></li>
+              <li class=""><a routerLink='/rejected-readings'><i class="fa fa-angle-right"></i>List Of Rejected Readings</a></li>
+              <!--<li class=""><a routerLink='/readings-of-group-datewise'><i class="fa fa-circle-o"></i>Group Readings Date Wise</a></li>-->
+              <!--<li class=""><a routerLink='/group-wise-data-of-reading'><i class="fa fa-circle-o"></i>Group Wise Readings For Bill Month</a></li>-->
+              <!--<li class=""><a routerLink='/all-dc-readings'><i class="fa fa-circle-o"></i>Whole DC Readings</a></li>-->
+              <!--<li class=""><a routerLink='/reading-file-group-wise'><i class="fa fa-circle-o"></i>Get reading File Group Wise</a></li>-->
+              <!--<li class=""><a routerLink='/verified-list'><i class="fa fa-circle-o"></i>Get List For Verifications of Reading</a></li>-->
+           </ul>
+        </li>
+        
+        <li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a href="">
+            <i class="fa fa-users"></i> <span>Kuccha Makaan Pukka Makaan Report </span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li class=""><a routerLink='/kuccha-pukka-survey-report'><i class="fa fa-angle-right"></i> Survey Report</a></li>
+           </ul>
+        </li>
+        <li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a href="">
+            <i class="fa fa-file-o"></i> <span>Consumption Report</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li class=""><a routerLink='/high-low-consumption-report'><i class="fa fa-angle-right"></i>High / Low Consumption Report</a></li>
+           </ul>
+        </li>
+
+        <li class="treeview menu-open" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a href="">
+            <i class="fa fa-clock-o"></i> <span>Reader Wise Analysis</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li class=""><a routerLink='/readerwise-reading'><i class="fa fa-angle-right"></i>Reader-Wise Reading Report</a></li>
+              <li class=""><a routerLink='/readers-performance-report'><i class="fa fa-angle-right"></i>Reader's Performance Report</a></li>
+              <li class=""><a routerLink='/timestamp-reader-wise-reading'><i class="fa fa-angle-right"></i>Timestamp Wise Reading</a></li>
+              <li class=""><a routerLink='/reader-wise-daily-count'><i class="fa fa-angle-right"></i>Reader Wise Daily Count</a></li>
+           </ul>
+        </li>
+
+        <li class="treeview menu-open" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a href="">
+            <i class="fa fa-qrcode"></i> <span>QR Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li class=""><a routerLink='/qr-reports-readerwise'><i class="fa fa-angle-right"></i>QR Reports</a></li>
+           </ul>
+        </li>
+        <!--<li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a href="">
+              <i class="fa fa-upload" aria-hidden="true"></i> <span>Spot Bill Operations</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul style="" class="treeview-menu">
+              <li class=""><a routerLink='/spot-bill-downloader-ccnb'><i class="fa fa-circle-o"></i>Downloader For Spot Billing</a></li>
+           </ul>
+        </li>-->
+    </ul>
+   </section>
+   <!-- /.sidebar -->
+ </aside>
+

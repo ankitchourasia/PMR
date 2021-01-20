@@ -1,0 +1,84 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div  class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+   </div>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+              Remaining Reading List
+             </h1>
+             <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-list-alt"></i> Remaining Reading List</a></li>
+                <li class="active">Group Readings Date Wise</li>
+              </ol>
+           </section>
+           <section class="content">
+             
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">List Of Readings In Group {{grno}} for billmonth {{billmonth}}</h3>      
+          <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls()'><i class="fa fa-download"></i> Export</button>
+    
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive">
+             
+        <table class="table table-bordered  custab">
+<thead> 
+<tr>
+<th>Sr. No.</th>
+<th>IVRS</th>
+<th>Consumer No.</th>
+<th>Name Of Consumer</th>
+<th>Group No.</th>
+<th>RD No.</th>
+<th>Address</th>
+<th>Assigned to Reader</th>
+<th>Meter No</th>
+<th>Old Reading</th>
+
+</tr></thead>
+<tbody *ngIf="resp2?.length > 0" >
+<tr *ngFor='let data of resp2; index as i'>
+<td>{{i+1}}</td>
+<td>{{data.ivrs}}</td>
+<td>{{data.consumerno}}</td>
+<td>{{data.consumername}}</td>
+<td>{{data.grno}}</td>
+<td>{{data.rdno}}</td>
+<td>{{data.address}}</td>
+<td>{{data.readers}}</td>
+<td>{{data.meterno}}</td>
+<td>{{data.oldconsumption}}</td>
+</tr></tbody>
+<tbody *ngIf="resp2?.length == ''" >
+
+<tr> <td colspan="6" class="text-center"> <strong>No data Found.</strong></td></tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>
+<script>
+ 
+</script>

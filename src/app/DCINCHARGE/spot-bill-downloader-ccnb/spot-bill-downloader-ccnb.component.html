@@ -1,0 +1,257 @@
+
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div  class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+   </div>
+     <div class="content-wrapper">        
+           <section class="content-header">
+             <h1>
+              Spot Bill Data
+             </h1>
+             <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-list-alt"></i>Spot Bill Data</a></li>
+                <li class="active">Spot Bill For Complete Bill Month</li>
+              </ol>
+           </section>
+           <section class="content">
+             <div class="row">
+               <div class="col-md-12">
+                 <div class="box box-warning">
+                   <div class="box-header with-border">
+                     <h3 class="box-title">Spot Bill</h3>
+                     <!-- /.box-tools -->
+                   </div>
+                   <!-- /.box-header -->
+                   <div class="box-body">
+<form class="form-horizontal" #f="ngForm" novalidate>  
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label class="control-label col-sm-4">Bill Month</label>
+                <div class="col-sm-8">
+                  <select class="form-control" [(ngModel)]="billmonth" name="billmon1" #billmon1Text="ngModel" [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" required>
+                    <option value="Sep-2020">Sep-2020</option>
+                    <option value="Oct-2020">Oct-2020</option>
+                    <option value="Nov-2020">Nov-2020</option>
+                    <option value="Dec-2020">Dec-2020</option>
+                    <option value="Jan-2021">Jan-2021</option>
+                    <option value="Feb-2021">Feb-2021</option>
+                    <option value="Mar-2021">Mar-2021</option>
+                    <option value="Apr-2021">Apr-2021</option>
+                    <option value="May-2021">May-2021</option>
+                    <option value="Jun-2021">Jun-2021</option>
+                    <option value="Jul-2021">Jul-2021</option>
+                    <option value="Aug-2021">Aug-2021</option>
+                    <option value="Sep-2021">Sep-2021</option>
+                    <option value="Oct-2021">Oct-2021</option>
+                    <option value="Nov-2021">Nov-2021</option>
+                    <option value="Dec-2021">Dec-2021</option>
+                    
+                  </select>
+                  <div *ngIf="f.submitted && billmon1Text.invalid" class="invalid-feedback">
+                      <div *ngIf="billmon1Text.errors.required" style="color:red">Select Bill Month</div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label class="control-label col-sm-4">Select Group</label>
+                <div class="col-sm-8">
+                  <select class="form-control" [(ngModel)]="groupno" name="groupno1" #groupnoText="ngModel" [ngClass]="{ 'is-invalid': f.submitted && groupnoText.invalid }" required>
+                    <option value="{{groupno}}">{{groupno}}</option>
+                    <option *ngFor="let data1 of resp" value="{{data1.groupno}}">{{data1.groupno}}--{{data1.groupname}}</option>
+                  </select>
+                  <div *ngIf="f.submitted && groupnoText.invalid" class="invalid-feedback">
+                      <div *ngIf="groupnoText.errors.required" style="color:red">Select Group No.</div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-2"> <button type="button" class="btn btn-success" (click)="getDownloaderData()">Submit</button></div>
+      </div>
+     
+
+  <!-- /.box-footer -->
+           </div>
+  </form>  
+</div>
+</div>
+</div>
+</div>
+
+<div class="alert alert-warning col-md-6" *ngIf="showData1">
+    <strong>Data Not Found !</strong> 
+  </div>
+<div class="row" *ngIf="showData">
+    <div class="col-md-12">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">Spot Bill</h3>     
+          <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls()'><i class="fa fa-download"></i> Export</button>     
+          <button class="btn btn-info btn-sm pull-right" (click)='prepareDownload()'><i class="fa fa-download"></i> Prepare File Downloader</button>
+            <button class="btn btn-info btn-sm pull-right" (click)='downloadFile(resp3.path)' *ngIf="showbutton"><i class="fa fa-download"></i> Download File</button>
+          <!-- /.box-tools -->
+        </div> 
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive" style="max-height:500px">
+             
+        <table class="table table-bordered  custab">
+<thead> 
+<tr>
+<th>Sr. No.</th>
+<th>Location Code</th>
+<th>consumer No.</th>
+<th>Bill Month</th>
+<th>RDG_TYP_CD</th>
+<th>MTR_STAT_CD</th>
+<th>MTR_STAT_TYP</th>
+<th>MTR_READ_TAKEN_BY</th>
+<th>BILL_NO</th>
+<th>BILL_PRD</th>
+<th>BILL_TYP_CD</th>
+<th>MACHINE_NO</th>
+<th>RDG_DT</th>
+<th>METER_DEF_FLAG</th>
+<th>CURR_RDG</th>
+<th>CURR_RDG_TOD</th>
+<th>ASS_CONSMP</th>
+<th>ASS_CONSMP_TOD</th>
+<th>PF</th>
+<th>MD</th>
+<th>MD_UNIT_CD</th>
+<th>MTR_CONSMP</th>
+<th>MTR_CONSMP_TOD</th>
+<th>ACC_MTR_UNITS</th>
+<th>ACC_MIN_UNITS</th>
+<th>BILLED_UNITS</th>
+<th>ACC_BILLED_UNITS</th>
+<th>CAPACITOR_CHRG</th>
+<th>ENERGY_CHRG</th>
+<th>FIXED_CHARGE</th>
+<th>FIXED_CHARGE_RBTE</th>
+<th>PENAL_FIXED_CHARGE</th>
+<th>MIN_CHRG</th>
+<th>DUTY</th>
+<th>CESS</th>
+<th>MTR_RENT</th>
+<th>OTH_CHRG_1</th>
+<th>OTH_CHRG_2</th>
+<th>OTH_CHRG_3</th>
+<th>BILL_NET_ROUND_OFF</th>
+<th>WELDING_CHRGE</th>
+<th>SURCHRG_DUE</th>
+<th>XRAY_ADD_CHRG</th>
+<th>SUBSIDY_AMT</th>
+<th>UNITS_GOVT_AMT_25</th>
+<th>XMER_RENT</th>
+<th>LOCK_CR_AMT</th>
+<th>LAST_MONTH_AV</th>
+<th>TOD_SURCHRG</th>
+<th>PWR_SVNG_RBTE_AMT</th>
+<th>LF_RBTE_AMT</th>
+<th>ADJ_GOVT</th>
+<th>IND_ENERGY_BAL</th>
+<th>IND_DUTY_BAL</th>
+<th>SEAS_FLG</th>
+<th>EMP_FREE_AMT</th>
+<th>EMP_FREE_UNIT</th>
+<th>ADV_INTST_DAYS</th>
+<th>ADV_INSTT_AMT</th>
+<th>ADV_INST_BILL_NET</th>
+<th>BILL_NET</th>
+<th>TARIFF_RATE_APPLD</th>
+</tr></thead>
+<tbody *ngIf="resp2?.length > 0" >
+<tr *ngFor='let data of resp2; index as i'>
+<td>{{i+1}}</td>
+<td>{{data.loc_CD}}</td>
+<td>{{data.cons_NO}}</td>
+<td>{{data.bill_MON}}</td>
+<td>{{data.rdg_TYP_CD}}</td>
+<td>{{data.mtr_STAT_CD}}</td>
+<td>{{data.mtr_STAT_TYP}}</td>
+<td>{{data.mtr_READ_TAKEN_BY}}</td>
+<td>{{data.bill_NO}}</td>
+<td>{{data.bill_PRD}}</td>
+<td>{{data.bill_TYP_CD}}</td>
+<td>{{data.machine_NO}}</td>
+<td>{{data.rdg_DT}}</td>
+<td>{{data.meter_DEF_FLAG}}</td>
+<td>{{data.curr_RDG}}</td>
+<td>{{data.curr_RDG_TOD}}</td>
+<td>{{data.ass_CONSMP}}</td>
+<td>{{data.ass_CONSMP_TOD}}</td>
+<td>{{data.pf}}</td>
+<td>{{data.md}}</td>
+<td>{{data.md_UNIT_CD}}</td>
+<td>{{data.mtr_CONSMP}}</td>
+<td>{{data.mtr_CONSMP_TOD}}</td>
+<td>{{data.acc_MTR_UNITS}}</td>
+<td>{{data.acc_MIN_UNITS}}</td>
+<td>{{data.billed_UNITS}}</td>
+<td>{{data.acc_BILLED_UNITS}}</td>
+<td>{{data.capacitor_CHRG}}</td>
+<td>{{data.energy_CHRG}}</td>
+<td>{{data.fixed_CHARGE}}</td>
+<td>{{data.fixed_CHARGE_RBTE}}</td>
+<td>{{data.penal_FIXED_CHARGE}}</td>
+<td>{{data.min_CHRG}}</td>
+<td>{{data.duty}}</td>
+<td>{{data.cess}}</td>
+<td>{{data.mtr_RENT}}</td>
+<td>{{data.oth_CHRG_1}}</td>
+<td>{{data.oth_CHRG_2}}</td>
+<td>{{data.oth_CHRG_3}}</td>
+<td>{{data.bill_NET_ROUND_OFF}}</td>
+<td>{{data.welding_CHRGE}}</td>
+<td>{{data.surchrg_DUE}}</td>
+<td>{{data.xray_ADD_CHRG}}</td>
+<td>{{data.subsidy_AMT}}</td>
+<td>{{data.units_GOVT_AMT_25}}</td>
+<td>{{data.xmer_RENT}}</td>
+<td>{{data.lock_CR_AMT}}</td>
+<td>{{data.last_MONTH_AV}}</td>
+<td>{{data.tod_SURCHRG}}</td>
+<td>{{data.pwr_SVNG_RBTE_AMT}}</td>
+<td>{{data.lf_RBTE_AMT}}</td>
+<td>{{data.adj_GOVT}}</td>
+<td>{{data.ind_ENERGY_BAL}}</td>
+<td>{{data.ind_DUTY_BAL}}</td>
+<td>{{data.seas_FLG}}</td>
+<td>{{data.emp_FREE_AMT}}</td>
+<td>{{data.emp_FREE_UNIT}}</td>
+<td>{{data.adv_INTST_DAYS}}</td>
+<td>{{data.adv_INSTT_AMT}}</td>
+<td>{{data.adv_INST_BILL_NET}}</td>
+<td>{{data.bill_NET}}</td>
+<td>{{data.tariff_RATE_APPLD}}</td>
+</tr></tbody>
+<tbody *ngIf="resp?.length == ''" >
+
+<tr> <td colspan="12" class="text-center"> <strong>No data Found.</strong></td></tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>
+</div>
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell of MPPKVVCL, under SE IT ERP.</strong> 
+ reserved.
+</footer>
+</div>
+<script>
+ 
+</script>
