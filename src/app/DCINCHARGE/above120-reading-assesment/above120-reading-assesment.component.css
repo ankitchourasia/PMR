@@ -6,3 +6,14 @@ thead tr:nth-child(1) th{
     z-index: 10;
   }
   .custab thead tr th{background: #c2d8fe;}
+
+  .align-center{
+    display : flex;
+    align-items: center;
+  }
+
+  .align-content-space-around{
+    display : flex;
+    align-items : center;
+    align-content: space-around;
+  }

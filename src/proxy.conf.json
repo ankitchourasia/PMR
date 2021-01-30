@@ -1,12 +1,13 @@
 {
     "/api/": {
-      "target": "http://10.98.4.75:8045",
+      "target": "http://pmr.mpwin.co.in:9001/NGB_PMR_NEW",
       "secure": false,
       "pathRewrite": {
         "^/api/": ""
       },
       "changeOrigin": true
     }
+
   }
 
   
