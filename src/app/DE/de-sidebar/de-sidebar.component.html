@@ -31,6 +31,18 @@
             <li class=""><a routerLink='/de_qr_reports'><i class="fa fa-angle-right"></i>QR Reports</a></li>
          </ul>
       </li>
+      <li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a href="">
+          <i class="fa fa-qrcode"></i> <span>Reading</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class=""><a routerLink='/de-read-verification-dashboard'><i class="fa fa-angle-right"></i>Verification Dashboard</a></li>
+          <li class=""><a routerLink='/de-read-image-verification'><i class="fa fa-angle-right"></i>Image Verification</a></li>
+         </ul>
+      </li>
        <!--<li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
          <a href="">
              <i class="fa fa-upload" aria-hidden="true"></i> <span>Spot Bill Operations</span>

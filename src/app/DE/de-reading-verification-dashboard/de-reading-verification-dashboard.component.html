@@ -1,0 +1,70 @@
+<div class="wrapper" appNoRightClick>
+  <app-de-header></app-de-header>
+  <app-de-sidebar></app-de-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Verification Dashboard
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box box-warning">
+        <div class="box-body">
+          <div class="flex-sapce-around form-group">
+            <div>
+              <label class="control-label">Bill Month</label>
+              <select class="form-control" [(ngModel)]="billMonth" name="billmon1" required>
+                <option value=undefined>Select</option>
+                <option value="Jan-2021">Jan-2021</option>
+                <option value="Feb-2021">Feb-2021</option>
+                <option value="Mar-2021">Mar-2021</option>
+                <option value="Apr-2021">Apr-2021</option>
+                <option value="May-2021">May-2021</option>
+                <option value="Jun-2021">Jun-2021</option>
+                <option value="Jul-2021">Jul-2021</option>
+                <option value="Aug-2021">Aug-2021</option>
+                <option value="Sep-2021">Sep-2021</option>
+                <option value="Oct-2021">Oct-2021</option>
+                <option value="Nov-2021">Nov-2021</option>
+                <option value="Dec-2021">Dec-2021</option>
+              </select>
+            </div>
+            <div>
+              <label class="control-label not-required text-white">*</label>
+              <button class="btn btn-sm btn-primary form-control" (click)="searchButtonClicked()">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive-sm">
+        <table class="table table-bordered custab">
+          <thead>
+            <tr>
+              <th>SNo.</th>
+              <th>LOCATION NAME</th>
+              <th>LOCATION CODE</th>
+              <th>TOTAL RECORDs</th>
+              <th>VERIFIED RECORDS</th>
+              <th>REJECTED RECORDS</th>
+              <th>REMAINING RECORDS</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="readings?.length > 0" id="above120">
+            <tr *ngFor='let read of readings; index as i'>
+              <td>{{i+1}}</td>
+              <td>{{read.dcname}}</td>
+              <td>{{read.dccode}}</td>
+              <td><a href="javascript:void(0);" (click)="totalCountLinkClicked(read)">{{read.totalcount}}</a></td>
+              <td><a href="javascript:void(0);" (click)="verifiedLinkClicked(read)">{{read.verified}}</a></td>
+              <td><a href="javascript:void(0);" (click)="rejectedLinkClicked(read)">{{read.rejected}}</a></td>
+              <td>{{read.nonverified}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>

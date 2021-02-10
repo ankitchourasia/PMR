@@ -1,4 +1,11 @@
 @media print {
     #print_rec,.main-footer,.box-header{display: none !important;}
     .box-warning{border-top: none !important;}
+    #rec_wrap{
+        width:100% !important;
+        margin-top:-30px !important;
+    }
+    #rec_wrap table tr td{
+        font-size:11px !important;
+    }
 }

@@ -1,0 +1,7 @@
+.flex-sapce-around{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.custab thead tr th{background: #c2d8fe;}

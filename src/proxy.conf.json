@@ -1,6 +1,6 @@
 {
     "/api/": {
-      "target": "http://pmr.mpwin.co.in:9001/NGB_PMR_NEW",
+      "target": "http://pmr.mpwin.co.in:9000/NGB_PMR_NEW",
       "secure": false,
       "pathRewrite": {
         "^/api/": ""

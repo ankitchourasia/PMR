@@ -1,0 +1,189 @@
+<div class="wrapper" appNoRightClick>
+  <app-de-header></app-de-header>
+  <app-de-sidebar></app-de-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Reading Image verification
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box box-warning">
+        <div class="box-body">
+          <div class="form-group">
+            <div class="flex-sapce-around">
+              <div>
+                <label class="control-label">Bill Month</label>
+                <select class="form-control" [(ngModel)]="billMonth" name="billmon1" (change)="billMonthChanged()"required>
+                  <option value=undefined>Select</option>
+                  <option value="Jan-2021">Jan-2021</option>
+                  <option value="Feb-2021">Feb-2021</option>
+                  <option value="Mar-2021">Mar-2021</option>
+                  <option value="Apr-2021">Apr-2021</option>
+                  <option value="May-2021">May-2021</option>
+                  <option value="Jun-2021">Jun-2021</option>
+                  <option value="Jul-2021">Jul-2021</option>
+                  <option value="Aug-2021">Aug-2021</option>
+                  <option value="Sep-2021">Sep-2021</option>
+                  <option value="Oct-2021">Oct-2021</option>
+                  <option value="Nov-2021">Nov-2021</option>
+                  <option value="Dec-2021">Dec-2021</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">Location</label>
+                <div> 
+                  <select class="form-control" [(ngModel)]="locationCode" name="location" (change)="locationChanged()" required>
+                  <option value=undefined>Select</option>
+                  <option [value]="location" *ngFor="let location of locations">{{location}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" >Group No.</label>
+                <div> 
+                  <select class="form-control" [(ngModel)]="groupNo" name="group" required>
+                  <option value=undefined>Select</option>
+                  <option [value]="group" *ngFor="let group of groups">{{group}}</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <button type="button" class="btn btn-sm btn-success" [disabled]="!groupNo" (click)="searchButtonClicked()">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive-sm">
+        <table class="table table-bordered custab">
+          <thead>
+            <tr>
+              <th>Sr. No.</th>
+              <th>Customer ID</th>
+              <th>Name</th>
+              <th>Group-RD</th>
+              <th>Date Of Reading</th>
+              <th>Reading Type</th>
+              <th>md</th>
+              <th>pf</th>
+              <th>Reading</th>
+              <th>Assessment</th>
+              <th>Image 1</th>
+              <th>Image 2</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="above120">
+            <tr *ngFor='let read of readings; index as i'>
+              <td>{{i+1}}</td>
+              <td>{{read.custid}}</td>
+              <td>{{read.name}}</td>
+              <td>{{read.gr}}-{{read.rd}}</td>
+              <td>{{read.datereading}}</td>
+              <td>{{read.readingtype}}</td>
+              <td>{{read.md}}</td>
+              <td>{{read.pf}}</td>
+              <td>{{read.reading}}</td>
+              <td>{{read.assesment}}</td>
+              <td>
+                <div>
+                  <a href="api/mtr-reader/get-meter-reader-image?path={{read.imagepath}}"
+                    data-lightbox="image-1" data-title="{{read.custid}}">View</a>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <a href="api/mtr-reader/get-meter-reader-image?path={{read.image2path}}"
+                    data-lightbox="image-2" data-title="{{read.custid}}">View</a>
+                </div>
+              </td>
+    
+              <td>
+                <div>
+                  <button type="button" data-toggle="modal" data-target="#myModal11" id="{{i+1}}" class="btn btn-primary btn-sm" (click)='actionButtonClicked(read)'>ACTION</button>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="!loading && readings && readings.length === 0">
+              <td colspan="13">
+                No Records Found.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell
+      of MPPKVVCL, under SE IT ERP.</strong>
+    reserved.
+  </footer>
+</div>
+
+<div id="myModal11" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+              <div class="flex-sapce-around">
+                <img [src]="image1" width="250px">
+                <img [src]="image2" width="250px">
+              </div>
+            </div>
+          </div>
+          
+            <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" (click)="previousButtonClicked()">
+            <span class="fa fa-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next" (click)="nextButtonClicked()">
+            <span class="fa fa-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <table class="table">
+          <tr>
+            <td><strong>IVRS NO.</strong></td>
+            <td>{{selectedData?.custid}}</td>
+            <td><strong>BILL MONTH</strong></td>
+            <td>{{billMonth}}</td>
+          </tr>
+          <tr>
+            <td><strong>CURRENT READING</strong></td>
+            <td>{{selectedData?.reading}}</td>
+            <td><strong>ASSESSMENT</strong></td>
+            <td>{{selectedData?.assesment}}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Remark</strong>
+            </td>
+            <td colspan="3">
+              <textarea class="form-control" rows="2" [(ngModel)]="remark"></textarea>
+            </td>
+          </tr>
+          <tr align="middle">
+            <td colspan="2">
+              <button class="btn btn-danger" (click)="rejectButtonClicked(selectedData)" [disabled]="!remark || actionclicked">REJECT</button>
+            </td>
+            <td colspan="2">
+              <button class="btn btn-primary" (click)="approveButtonClicked(selectedData)" [disabled]="!remark || actionclicked">APPROVE</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -132,6 +132,8 @@ import { MeterReaderConsTypeAssignmentComponent } from './DCINCHARGE/meter-reade
 import { RemoveAssignmentsOfMeterReaderComponent } from './DCINCHARGE/remove-assignments-of-meter-reader/remove-assignments-of-meter-reader.component';
 import { EditNormalReadingTypeToOtherComponent } from './DCINCHARGE/edit-normal-reading-type-to-other/edit-normal-reading-type-to-other.component';
 import { EditNormalReadingTypeComponent } from './DCINCHARGE/edit-normal-reading-type/edit-normal-reading-type.component';
+import { DeReadingImageVerificationComponent } from './DE/de-reading-image-verification/de-reading-image-verification.component';
+import { DeReadingVerificationDashboardComponent } from './DE/de-reading-verification-dashboard/de-reading-verification-dashboard.component';
 
 
 const routes: Routes = [
@@ -253,6 +255,8 @@ const routes: Routes = [
 {path:'division-dashboard',component:DivisionDashboardComponent},
 {path:'de_qr_reports', component:DeQrReportsComponent},
 {path:'generate-qr-code',component:GenerateQrCodeComponent},
+{path:'de-read-image-verification',component:DeReadingImageVerificationComponent},
+{path:'de-read-verification-dashboard',component:DeReadingVerificationDashboardComponent},
 // circle USER
 
 {path:'circle_dashboard', component:CircleDashboardComponent},
