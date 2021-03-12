@@ -117,6 +117,14 @@
                         </tr>
 
                         <tr>
+                          <td>Meter Not In Circuit</td>
+                          <td>{{pieChartData.meter_not_in_circuit}} &nbsp;<a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,'ALL',10]"><span class="fa fa-list-alt"></span></a></td>
+                          <td>{{pieChartData.meter_not_in_circuit_nonactioned}} &nbsp;<a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,0,10]"><span class="fa fa-list-alt"></span></a></td>
+                          <td>{{pieChartData.meter_not_in_circuit_approved}} &nbsp;<a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,1,10]"><span class="fa fa-list-alt"></span></a></td>
+                          <td>{{pieChartData.meter_not_in_circuit_rejected}} &nbsp;<a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,3,10]"><span class="fa fa-list-alt"></span></a></td>
+                        </tr>
+
+                        <tr>
                           <td>Meter Theft</td>
                           <td>{{pieChartData.meterTheft}} &nbsp;<a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,'ALL',6]"><span class="fa fa-list-alt"></span></a></td>
                           <td>{{pieChartData.meterTheft_nonactioned}} &nbsp;<a [routerLink]="['/view-detailed-dashboard-list', billmonth,loccode,0,6]"><span class="fa fa-list-alt"></span></a></td>

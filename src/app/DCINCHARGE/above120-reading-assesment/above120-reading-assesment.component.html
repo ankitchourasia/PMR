@@ -112,7 +112,7 @@
                               <!-- <button type="button" class="btn btn-primary btn-sm" (click)="verifyReading(data1.custid,data1.imageid)">Verify</button> -->
                               <!-- <br><br> -->
                               <button type="button" data-toggle="modal" data-target="#myModal11" id="{{i+1}}"
-                                *ngIf="data1.readingtype=='Meter Defective' || data1.readingtype=='Meter Not Found' || data1.readingtype=='Meter Theft' || data1.readingtype=='Temporary Disconnected'"
+                                *ngIf="data1.readingtype=='Meter Defective' || data1.readingtype=='Meter Not Found' || data1.readingtype=='Meter Theft' || data1.readingtype=='Temporary Disconnected' ||  data1.readingtype=='Meter Not In Circuit'"
                                 class="btn btn-primary btn-sm" (click)='OnclickGetvalue(data1)'>ACTION</button>
                               <!-- <button type="button" class="btn btn-danger btn-xs" (click)="deleteReading(data1.custid)">Delete</button> -->
                             </div>

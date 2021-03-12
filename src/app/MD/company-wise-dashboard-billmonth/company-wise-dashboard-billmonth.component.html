@@ -83,6 +83,7 @@
                   <th>Premise Locked</th>
                   <th>Temporary Disconnected</th>
                   <th>Meter Not Found</th>
+                  <th>Meter Not In Circuit</th>
                   <th>Theft Cases</th>
                   <th>Meter Reastart</th>
                   <th>Action</th>
@@ -99,6 +100,7 @@
                   <td>{{resp.premiseLocked}}</td>
                   <td>{{resp.temporaryDisconnected}}</td>
                   <td>{{resp.meterNotFound}}</td>
+                  <td>{{resp.meternotincircuit}}</td>
                   <td>{{resp.meterTheft}}</td>
                   <td>{{resp.meterRestart}}</td>
                   <td><button type="button" class="btn btn-warning btn-sm" (click)="getCircleDashboard()">Get Circle Wise Dashboard</button></td>
@@ -131,6 +133,7 @@
                   <th>Premise Locked</th>
                   <th>Temporary Disconnected</th>
                   <th>Meter Not Found</th>
+                  <th>Meter Not In Circuit</th>
                   <th>Theft Cases</th>
                   <th>Meter Reastart</th>
                   <th>Action</th>
@@ -148,6 +151,7 @@
                   <td>{{data1.premiseLocked}}</td>
                   <td>{{data1.temporaryDisconnected}}</td>
                   <td>{{data1.meterNotFound}}</td>
+                  <td>{{resp.meternotincircuit}}</td>
                   <td>{{data1.meterTheft}}</td>
                   <td>{{data1.meterRestart}}</td>
                   <td><button type="button" class="btn btn-warning btn-sm" (click)="getDivisionDashboard(data1.office)">Get Division Wise Dashboard</button></td>
@@ -179,6 +183,7 @@
                   <th>Premise Locked</th>
                   <th>Temporary Disconnected</th>
                   <th>Meter Not Found</th>
+                  <th>Meter Not In Circuit</th>
                   <th>Theft Cases</th>
                   <th>Meter Reastart</th>
                   <th>Action</th>
@@ -196,6 +201,7 @@
                   <td>{{data2.premiseLocked}}</td>
                   <td>{{data2.temporaryDisconnected}}</td>
                   <td>{{data2.meterNotFound}}</td>
+                  <td>{{data2.meternotincircuit}}</td>
                   <td>{{data2.meterTheft}}</td>
                   <td>{{data2.meterRestart}}</td>
                   <td><button type="button" class="btn btn-warning btn-sm" (click)="getDCDashboard(data2.office)">Get DC Wise Dashboard</button></td>
@@ -227,6 +233,7 @@
                   <th>Premise Locked</th>
                   <th>Temporary Disconnected</th>
                   <th>Meter Not Found</th>
+                  <th>Meter Not In Circuit</th>
                   <th>Theft Cases</th>
                   <th>Meter Reastart</th>
                 </tr>
@@ -243,6 +250,7 @@
                   <td>{{data3.premiseLocked}}</td>
                   <td>{{data3.temporaryDisconnected}}</td>
                   <td>{{data3.meterNotFound}}</td>
+                  <td>{{resp.meternotincircuit}}</td>
                   <td>{{data3.meterTheft}}</td>
                   <td>{{data3.meterRestart}}</td>
                 </tr>
