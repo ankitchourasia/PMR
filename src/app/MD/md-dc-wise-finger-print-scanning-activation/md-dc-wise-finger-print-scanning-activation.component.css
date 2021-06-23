@@ -1,0 +1,5 @@
+.space-around{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+}

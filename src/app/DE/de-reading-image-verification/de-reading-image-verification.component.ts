@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -11,8 +12,13 @@ import { EncreptiondecreptionService } from 'src/app/Util-services/encreptiondec
 })
 export class DeReadingImageVerificationComponent implements OnInit {
 
-  billMonth : any;
-  groupNo : any;
+  // billMonth : any;
+  // groupNo : any;
+  date1 : any;
+  formattedDate1 : string;
+  formattedDate2 : string;
+  date2 : any;
+  currentDate = new Date();
   locationCode : any;
   remark : any;
   locations : any;
@@ -24,17 +30,28 @@ export class DeReadingImageVerificationComponent implements OnInit {
 
   ngOnInit() {
   }
+  
+  date1Changed(){
+    this.readings = undefined;
+    this.formattedDate1 = formatDate(this.date1, "dd-MMM-yy", "en-US");
+    if(this.date1 && this.date2){
+      this.getLocationByDivisionId();
+    }
+  }
 
-  billMonthChanged(){
-    this.locationCode = undefined;
-    this.locations = undefined;
-    this.getLocationByDivisionId();
+  date2Changed(){
+    this.readings = undefined;
+    this.formattedDate2 = formatDate(this.date2, "dd-MMM-yy", "en-US");
+    if(this.date1 && this.date2){
+      this.getLocationByDivisionId();
+    }
   }
 
   getLocationByDivisionId(){
     let formdata : FormData = new FormData();
     formdata.append("division",this.enc.encrypt(this.divisionName));
-    formdata.append("billmon",this.enc.encrypt(this.billMonth));
+    formdata.append("date1",this.enc.encrypt(this.formattedDate1));
+    formdata.append("date2",this.enc.encrypt(this.formattedDate2));
     return this.http.post("api/division-validation/get-distinct-location-is-division", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
       this.locations = success;
     }, error=>{
@@ -43,24 +60,25 @@ export class DeReadingImageVerificationComponent implements OnInit {
     });
   }
 
-  locationChanged(){
-    this.groupNo = undefined;
-    this.groups = undefined;
-    this.getGroupsByLocationCode();
-  }
+  // locationChanged(){
+  //   // this.groupNo = undefined;
+  //   this.groups = undefined;
+  //   // this.getGroupsByLocationCode();
+  // }
 
-  getGroupsByLocationCode(){
-    let formdata : FormData = new FormData();
-    formdata.append("division",this.enc.encrypt(this.divisionName));
-    formdata.append("billmon",this.enc.encrypt(this.billMonth));
-    formdata.append("loccode",this.enc.encrypt(this.locationCode));
-    return this.http.post("api/division-validation/get-dc-available-group-to-verify", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
-      this.groups = success;
-    }, error=>{
-    console.log(error);
-     alert(error.msg);
-    });
-  }
+  // getGroupsByLocationCode(){
+  //   let formdata : FormData = new FormData();
+  //   formdata.append("division",this.enc.encrypt(this.divisionName));
+  //   formdata.append("date1",this.enc.encrypt(this.formattedDate1));
+  //   formdata.append("date2",this.enc.encrypt(this.formattedDate2));
+  //   formdata.append("loccode",this.enc.encrypt(this.locationCode));
+  //   return this.http.post("api/division-validation/get-dc-available-group-to-verify", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
+  //     this.groups = success;
+  //   }, error=>{
+  //   console.log(error);
+  //    alert(error.msg);
+  //   });
+  // }
 
   searchButtonClicked(){
     this.getReadingsToVerify();
@@ -71,9 +89,10 @@ export class DeReadingImageVerificationComponent implements OnInit {
     this.loading = true;
     let formdata : FormData = new FormData();
     formdata.append("division",this.enc.encrypt(this.divisionName));
-    formdata.append("billmon",this.enc.encrypt(this.billMonth));
+    formdata.append("date1",this.enc.encrypt(this.formattedDate1));
+    formdata.append("date2",this.enc.encrypt(this.formattedDate2));
     formdata.append("loccode",this.enc.encrypt(this.locationCode));
-    formdata.append("grno",this.enc.encrypt(this.groupNo));
+    // formdata.append("grno",this.enc.encrypt(this.groupNo));
     return this.http.post("api/division-validation/get-dc-non-verified-by-group", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
       // console.log(success);
       this.readings = success;
@@ -94,7 +113,7 @@ export class DeReadingImageVerificationComponent implements OnInit {
     this.actionclicked = true;
     let formData : FormData = new FormData();
     formData.append("consno",this.enc.encrypt(read.custid));
-    formData.append("billmon",this.enc.encrypt(this.billMonth));
+    formData.append("billmon",this.enc.encrypt(read.billmonth));
     formData.append("loginid",this.enc.encrypt(this.loginId));
     formData.append("verifytype",this.enc.encrypt(verifyType));
     formData.append("verifyremark",this.enc.encrypt(remark));
@@ -123,7 +142,8 @@ export class DeReadingImageVerificationComponent implements OnInit {
     this.actionclicked = true;
     let formData : FormData = new FormData();
     formData.append("consno",this.enc.encrypt(read.custid));
-    formData.append("billmon",this.enc.encrypt(this.billMonth));
+    formData.append("billmon",this.enc.encrypt(read.billmonth));
+    formData.append("loccode",this.enc.encrypt(read.loccode));
     formData.append("loginid",this.enc.encrypt(this.loginId));
     formData.append("verifytype",this.enc.encrypt(verifyType));
     formData.append("verifyremark",this.enc.encrypt(remark));
@@ -208,5 +228,9 @@ export class DeReadingImageVerificationComponent implements OnInit {
     if (image) {
       reader.readAsDataURL(image);
     }
+  }
+
+  closeClicked(){
+    this.getReadingsToVerify();
   }
 }

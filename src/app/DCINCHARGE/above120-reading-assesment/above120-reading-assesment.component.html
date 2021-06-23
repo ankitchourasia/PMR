@@ -71,7 +71,9 @@
                           <th>Prev Consmp3</th>
                           <th>Image 1</th>
                           <th>Image 2</th>
-                          <th>Action</th>
+                          <th>Action <br>
+                            Select All <input type="checkbox" id="selectAll" [(ngModel)]="allSelected" (change)="selectAllClicked()" [disabled]="verifyMultipleReadClicked">
+                          </th>
                         </tr>
                       </thead>
                       <tbody *ngIf="resp?.length > 0" id="above120">
@@ -107,16 +109,20 @@
 
                           <td>
                             <div *ngIf="data1.status=='-1'">
-                              <!-- <input type="checkbox" id="{{data1.imageid}}" value="{{data1.custid}}" (click)="VerifyClick(data1.custid,data1.imageid,i+1)"> -->
-                              <!-- <br><br> -->
+                              <input type="checkbox" id="{{data1.imageid}}" [(ngModel)]="data1.selected" [disabled]="verifyMultipleReadClicked" (change)="checkBoxClicked(data1)">
                               <!-- <button type="button" class="btn btn-primary btn-sm" (click)="verifyReading(data1.custid,data1.imageid)">Verify</button> -->
                               <!-- <br><br> -->
                               <button type="button" data-toggle="modal" data-target="#myModal11" id="{{i+1}}"
                                 *ngIf="data1.readingtype=='Meter Defective' || data1.readingtype=='Meter Not Found' || data1.readingtype=='Meter Theft' || data1.readingtype=='Temporary Disconnected' ||  data1.readingtype=='Meter Not In Circuit'"
-                                class="btn btn-primary btn-sm" (click)='OnclickGetvalue(data1)'>ACTION</button>
+                                class="btn btn-primary btn-sm" (click)='OnclickGetvalue(data1)' [disabled]="verifyMultipleReadClicked">ACTION</button>
                               <!-- <button type="button" class="btn btn-danger btn-xs" (click)="deleteReading(data1.custid)">Delete</button> -->
                             </div>
                             <div *ngIf="data1.status !=='-1'">NA</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="19" align="right">
+                            <button type="button" class="btn btn-sm btn-primary" (click)="verifyMultipleRead()" [disabled]="verifyMultipleReadClicked || readingsToVerify.length < 1">Verify Selected</button>
                           </td>
                         </tr>
                       </tbody>

@@ -134,6 +134,7 @@ import { EditNormalReadingTypeToOtherComponent } from './DCINCHARGE/edit-normal-
 import { EditNormalReadingTypeComponent } from './DCINCHARGE/edit-normal-reading-type/edit-normal-reading-type.component';
 import { DeReadingImageVerificationComponent } from './DE/de-reading-image-verification/de-reading-image-verification.component';
 import { DeReadingVerificationDashboardComponent } from './DE/de-reading-verification-dashboard/de-reading-verification-dashboard.component';
+import { MdDcWiseFingerPrintScanningActivationComponent } from './MD/md-dc-wise-finger-print-scanning-activation/md-dc-wise-finger-print-scanning-activation.component';
 
 
 const routes: Routes = [
@@ -284,6 +285,7 @@ const routes: Routes = [
 {path: 'md-kuccha-pukka-survey-report', component:MdKucchaPukkaSurveyReportComponent},
 {path: 'survey-report-overall-company', component:SurveyReportOverallCompanyComponent},
 {path: 'md_qr_code_reports', component:MdQrCodeReportsComponent},
+{path: 'md_dc_wise_finger_print_scanning_activation', component:MdDcWiseFingerPrintScanningActivationComponent},
 //redirect
 
 {path:'redirect/:uid/:pass', component:RedirectComponent},

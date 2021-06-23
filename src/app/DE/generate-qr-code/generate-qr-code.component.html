@@ -67,15 +67,18 @@
         <table class="table table-bordered  custab">
 <thead> 
   <tr>
-      <td rowspan="3" style="width:52%;">
+      <td rowspan="4" style="width:52%;">
         <div>
-          <img src="api/mtr-reader/get-meter-reader-image?path={{filepath}}" style="width:100%;height:100%;">
+          <img src="api/mtr-reader/get-meter-reader-image?path={{filepath}}" style="width:90%;height:90%;">
         </div>
       </td>
       <td>{{ivrs}}</td>
   </tr>
     <tr>
       <td>{{consumername}}</td>
+    </tr>
+    <tr>
+      <td>{{resp.gr}} - {{resp.rd}}</td>
     </tr>
     <tr>
       <td>{{address}}</td>

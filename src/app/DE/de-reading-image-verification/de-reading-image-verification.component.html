@@ -16,43 +16,25 @@
           <div class="form-group">
             <div class="flex-sapce-around">
               <div>
-                <label class="control-label">Bill Month</label>
-                <select class="form-control" [(ngModel)]="billMonth" name="billmon1" (change)="billMonthChanged()"required>
-                  <option value=undefined>Select</option>
-                  <option value="Jan-2021">Jan-2021</option>
-                  <option value="Feb-2021">Feb-2021</option>
-                  <option value="Mar-2021">Mar-2021</option>
-                  <option value="Apr-2021">Apr-2021</option>
-                  <option value="May-2021">May-2021</option>
-                  <option value="Jun-2021">Jun-2021</option>
-                  <option value="Jul-2021">Jul-2021</option>
-                  <option value="Aug-2021">Aug-2021</option>
-                  <option value="Sep-2021">Sep-2021</option>
-                  <option value="Oct-2021">Oct-2021</option>
-                  <option value="Nov-2021">Nov-2021</option>
-                  <option value="Dec-2021">Dec-2021</option>
-                </select>
+                <label class="control-label">Start Date</label>
+                <input type="date" class="form-control" max="{{date2 | date:'yyyy-MM-dd'}}" [(ngModel)]="date1" id="date1" name="date1" required (change)="date1Changed()">
+              </div>
+              <div>
+                <label class="control-label">End Date</label>
+                <input type="date" class="form-control" min="{{date1 | date:'yyyy-MM-dd'}}" max="{{currentDate | date:'yyyy-MM-dd'}}" [(ngModel)]="date2" id="date2" name="date2" required (change)="date2Changed()">
               </div>
               <div class="form-group">
                 <label class="control-label">Location</label>
                 <div> 
-                  <select class="form-control" [(ngModel)]="locationCode" name="location" (change)="locationChanged()" required>
+                  <select class="form-control" [(ngModel)]="locationCode" name="location" required>
                   <option value=undefined>Select</option>
                   <option [value]="location" *ngFor="let location of locations">{{location}}</option>
                   </select>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label" >Group No.</label>
-                <div> 
-                  <select class="form-control" [(ngModel)]="groupNo" name="group" required>
-                  <option value=undefined>Select</option>
-                  <option [value]="group" *ngFor="let group of groups">{{group}}</option>
-                  </select>
-                </div>
-              </div>
               <div>
-                <button type="button" class="btn btn-sm btn-success" [disabled]="!groupNo" (click)="searchButtonClicked()">Search</button>
+                <label class="control-label not-required text-white">*</label>
+                <button type="button" class="btn btn-sm btn-success" [disabled]="!locationCode" (click)="searchButtonClicked()">Search</button>
               </div>
             </div>
           </div>
@@ -65,7 +47,7 @@
               <th>Sr. No.</th>
               <th>Customer ID</th>
               <th>Name</th>
-              <th>Group-RD</th>
+              <th>Bill Month</th>
               <th>Date Of Reading</th>
               <th>Reading Type</th>
               <th>md</th>
@@ -82,7 +64,7 @@
               <td>{{i+1}}</td>
               <td>{{read.custid}}</td>
               <td>{{read.name}}</td>
-              <td>{{read.gr}}-{{read.rd}}</td>
+              <td>{{read.billmonth}}</td>
               <td>{{read.datereading}}</td>
               <td>{{read.readingtype}}</td>
               <td>{{read.md}}</td>
@@ -125,7 +107,7 @@
   </footer>
 </div>
 
-<div id="myModal11" class="modal fade" role="dialog">
+<div id="myModal11" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
@@ -182,7 +164,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="closeClicked()">Close</button>
       </div>
     </div>
   </div>

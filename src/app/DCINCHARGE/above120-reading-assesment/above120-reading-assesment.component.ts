@@ -7,6 +7,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { read } from 'xlsx/types';
 
 declare var $: any;
 @Component({
@@ -156,6 +157,7 @@ export class Above120ReadingAssesmentComponent implements OnInit {
   }
 
   getReading() {
+    this.readingsToVerify = [];
     let formData: FormData = new FormData();
     formData.append("billmonth", this.enc.encrypt(this.billmonth));
     formData.append("groupno", this.enc.encrypt(this.groupno));
@@ -547,6 +549,54 @@ export class Above120ReadingAssesmentComponent implements OnInit {
   exportAsXsls(): void {
     this.exportService.exportAsExcelFile(this.resp, this.activeTab + '_' + this.groupno + "_" + this.billmonth);
 
+  }
+
+  readingsToVerify : any = [];
+  checkBoxClicked(readToVerify){
+    console.log(readToVerify);
+    if(readToVerify.selected){
+      this.readingsToVerify.push(readToVerify);
+    } else {
+      this.readingsToVerify.splice(this.readingsToVerify.indexOf(readToVerify), 1);
+    }
+    console.log(this.readingsToVerify);
+  }
+
+  allSelected : boolean;
+  selectAllClicked(){
+    this.readingsToVerify = [];
+    this.resp.forEach(element => {
+      if(element.status=='-1'){
+        if(this.allSelected){
+          this.readingsToVerify.push(element);
+        }
+        element.selected = this.allSelected;
+      }
+      
+    });
+    console.log(this.readingsToVerify);
+  }
+
+  verifyMultipleReadClicked : boolean;
+  verifyMultipleRead(){
+    this.verifyMultipleReadClicked = true;
+    if(this.readingsToVerify.length > 0){
+      this.readingsToVerify.forEach(element => {
+        let formdata: FormData = new FormData();
+        formdata.append("custid", this.enc.encrypt(element.custid));
+        formdata.append("billmonth", this.enc.encrypt(this.billmonth));
+        formdata.append("readingid", this.enc.encrypt(element.imageid));
+        formdata.append("userid", this.enc.encrypt(this.loccode));
+        return this.http.post("api/assesment-records/update-reading-to-approve", formdata, { headers: new HttpHeaders().set('Authorization', this.session.get('token')) }).subscribe(response => {
+          console.log(response);
+        },error => {
+          console.log(error);
+        });
+      });
+      alert("Readings Verified successfully");
+      this.verifyMultipleReadClicked = false;
+      this.getReading();
+    }
   }
 
   nextClicked() {

@@ -15,26 +15,16 @@
         <div class="box-body">
           <div class="flex-sapce-around form-group">
             <div>
-              <label class="control-label">Bill Month</label>
-              <select class="form-control" [(ngModel)]="billMonth" name="billmon1" required>
-                <option value=undefined>Select</option>
-                <option value="Jan-2021">Jan-2021</option>
-                <option value="Feb-2021">Feb-2021</option>
-                <option value="Mar-2021">Mar-2021</option>
-                <option value="Apr-2021">Apr-2021</option>
-                <option value="May-2021">May-2021</option>
-                <option value="Jun-2021">Jun-2021</option>
-                <option value="Jul-2021">Jul-2021</option>
-                <option value="Aug-2021">Aug-2021</option>
-                <option value="Sep-2021">Sep-2021</option>
-                <option value="Oct-2021">Oct-2021</option>
-                <option value="Nov-2021">Nov-2021</option>
-                <option value="Dec-2021">Dec-2021</option>
-              </select>
+              <label class="control-label">Start Date</label>
+              <input type="date" class="form-control" [(ngModel)]="date1" id="date1" name="date1" required (change)="dateChanged()">
+            </div>
+            <div>
+              <label class="control-label">End Date</label>
+              <input type="date" class="form-control" max="{{currentDate | date:'yyyy-MM-dd'}}" [(ngModel)]="date2" id="date2" name="date2" required (change)="dateChanged()">
             </div>
             <div>
               <label class="control-label not-required text-white">*</label>
-              <button class="btn btn-sm btn-primary form-control" (click)="searchButtonClicked()">Search</button>
+              <button type="button" class="btn btn-sm btn-primary" (click)="searchButtonClicked()" [disabled]="loading">Search</button>
             </div>
           </div>
         </div>
@@ -57,14 +47,60 @@
               <td>{{i+1}}</td>
               <td>{{read.dcname}}</td>
               <td>{{read.dccode}}</td>
-              <td><a href="javascript:void(0);" (click)="totalCountLinkClicked(read)">{{read.totalcount}}</a></td>
-              <td><a href="javascript:void(0);" (click)="verifiedLinkClicked(read)">{{read.verified}}</a></td>
-              <td><a href="javascript:void(0);" (click)="rejectedLinkClicked(read)">{{read.rejected}}</a></td>
+              <td><a href="javascript:void(0);" (click)="totalCountLinkClicked(read)" data-toggle="modal" data-target="#myModal11">{{read.totalcount}}</a></td>
+              <td><a href="javascript:void(0);" (click)="verifiedLinkClicked(read)" data-toggle="modal" data-target="#myModal11">{{read.verified}}</a></td>
+              <td><a href="javascript:void(0);" (click)="rejectedLinkClicked(read)" data-toggle="modal" data-target="#myModal11">{{read.rejected}}</a></td>
               <td>{{read.nonverified}}</td>
             </tr>
+            <!-- <tr *ngIf="loading">
+              <td colspan="7"> loading data...</td>
+            </tr> -->
           </tbody>
         </table>
       </div>
     </section>
+  </div>
+</div>
+
+<div id="myModal11" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="flex-sapce-around form-group">
+          <button class="button btn-sm btn-primary" (click)="exportClicked(dataToExport)" [disabled]="loadingTable">Export</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        <table class="table table-sm table-bordered custab">
+          <thead>
+            <tr>
+              <th>SNo</th>
+              <th>Consumer Name</th>
+              <th>Location Code</th>
+              <th>Group-RD</th>
+              <th>Bill Month</th>
+              <th>Status</th>
+              <th>Remark</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let data of dataToExport; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.loccode}}</td>
+            <td>{{data.gr}} - {{data.rd}}</td>
+            <td>{{data.billmonth}}</td>
+            <td *ngIf="data.status === '0'">NA</td>
+            <td *ngIf="data.status === '1'">APPROVED</td>
+            <td *ngIf="data.status === '2'">REJECTED</td>
+            <td>{{data.remark}}</td>
+          </tr>
+          <tr *ngIf="loadingTable" class="text-center">
+            <td colspan="7">loading...</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
