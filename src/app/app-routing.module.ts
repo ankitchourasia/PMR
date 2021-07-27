@@ -135,6 +135,8 @@ import { EditNormalReadingTypeComponent } from './DCINCHARGE/edit-normal-reading
 import { DeReadingImageVerificationComponent } from './DE/de-reading-image-verification/de-reading-image-verification.component';
 import { DeReadingVerificationDashboardComponent } from './DE/de-reading-verification-dashboard/de-reading-verification-dashboard.component';
 import { MdDcWiseFingerPrintScanningActivationComponent } from './MD/md-dc-wise-finger-print-scanning-activation/md-dc-wise-finger-print-scanning-activation.component';
+import { DcReadVerificationDataComponent } from './DCINCHARGE/dc-read-verification-data/dc-read-verification-data.component';
+import { DeChangePasswordComponent } from './DE/de-change-password/de-change-password.component';
 
 
 const routes: Routes = [
@@ -222,6 +224,7 @@ const routes: Routes = [
 {path:'remove-assignments-of-meter-reader',component:RemoveAssignmentsOfMeterReaderComponent},
 {path:'edit-normal-reading-type-to-other',component:EditNormalReadingTypeToOtherComponent},
 {path:'edit-normal-reading-type/:consno/:md/:pf/:readingtype/:billmonth',component:EditNormalReadingTypeComponent},
+{path:'dc-read-verification-data',component:DcReadVerificationDataComponent},
 // GrouIncharge
 
 {path:'gi-dashboard',component:GiDashboardComponent},
@@ -252,6 +255,7 @@ const routes: Routes = [
 
 {path:'de_dashboard', component:DeDashboardComponent},
 {path:'de-header', component:DeHeaderComponent},
+{path:'de-change-password',component:DeChangePasswordComponent},
 {path:'de-sidebar', component:DeSidebarComponent},
 {path:'division-dashboard',component:DivisionDashboardComponent},
 {path:'de_qr_reports', component:DeQrReportsComponent},

@@ -1,0 +1,74 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Verification Dashboard
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box box-warning">
+        <div class="box-body">
+          <div class="flex-sapce-around form-group">
+            <div>
+              <label class="control-label">Start Date</label>
+              <input type="date" class="form-control" [(ngModel)]="date1" id="date1" name="date1" required>
+            </div>
+            <div>
+              <label class="control-label">End Date</label>
+              <input type="date" class="form-control" max="{{currentDate | date:'yyyy-MM-dd'}}" [(ngModel)]="date2" id="date2" name="date2" required>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Type</label>
+              <div> 
+                <select class="form-control" [(ngModel)]="dataType" name="dataType" required>
+                <option value=undefined>Select</option>
+                <option [value]="type" *ngFor="let type of dataTypes">{{type}}</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <button type="button" class="btn btn-sm btn-primary" (click)="searchButtonClicked()" [disabled]="loading">Search</button>
+            </div>
+          </div>
+          <div class="flex-content-end">
+            <button class="btn btn-sm btn-success" *ngIf="dataToExport && dataToExport.length > 0" (click)="exportClicked(dataToExport)">Export</button>
+          </div>
+          <div>
+            <table class="table table-sm table-bordered custab">
+              <thead>
+                <tr>
+                  <th>SNo</th>
+                  <th>Consumer Name</th>
+                  <th>Location Code</th>
+                  <th>Group-RD</th>
+                  <th>Bill Month</th>
+                  <th>Status</th>
+                  <th>Remark</th>
+                </tr>
+              </thead>
+              <tr *ngFor="let data of dataToExport; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.loccode}}</td>
+                <td>{{data.gr}} - {{data.rd}}</td>
+                <td>{{data.billmonth}}</td>
+                <td *ngIf="data.status === '0'">NA</td>
+                <td *ngIf="data.status === '1'">APPROVED</td>
+                <td *ngIf="data.status === '2'">REJECTED</td>
+                <td>{{data.remark}}</td>
+              </tr>
+              <tr *ngIf="loadingTable" class="text-center">
+                <td colspan="7">loading...</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

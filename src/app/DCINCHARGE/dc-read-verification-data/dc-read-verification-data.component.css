@@ -1,0 +1,11 @@
+.flex-sapce-around{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.flex-content-end{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

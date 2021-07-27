@@ -167,6 +167,8 @@ import { EditNormalReadingTypeComponent } from './DCINCHARGE/edit-normal-reading
 import { DeReadingImageVerificationComponent } from './DE/de-reading-image-verification/de-reading-image-verification.component';
 import { DeReadingVerificationDashboardComponent } from './DE/de-reading-verification-dashboard/de-reading-verification-dashboard.component';
 import { MdDcWiseFingerPrintScanningActivationComponent } from './MD/md-dc-wise-finger-print-scanning-activation/md-dc-wise-finger-print-scanning-activation.component';
+import { DcReadVerificationDataComponent } from './DCINCHARGE/dc-read-verification-data/dc-read-verification-data.component';
+import { DeChangePasswordComponent } from './DE/de-change-password/de-change-password.component';
 
 
 @NgModule({
@@ -324,7 +326,9 @@ import { MdDcWiseFingerPrintScanningActivationComponent } from './MD/md-dc-wise-
     EditNormalReadingTypeComponent,
     DeReadingImageVerificationComponent,
     DeReadingVerificationDashboardComponent,
-    MdDcWiseFingerPrintScanningActivationComponent
+    MdDcWiseFingerPrintScanningActivationComponent,
+    DcReadVerificationDataComponent,
+    DeChangePasswordComponent
   ],
   imports: [
     NgbModule,

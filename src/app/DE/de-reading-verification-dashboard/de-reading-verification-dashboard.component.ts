@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { SessionStorageService } from 'angular-web-storage';
 import { EncreptiondecreptionService } from 'src/app/Util-services/encreptiondecreption.service';
-import { saveAs } from 'file-saver';
 import { formatDate } from '@angular/common';
 import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 declare var $ :any;
@@ -64,7 +63,6 @@ export class DeReadingVerificationDashboardComponent implements OnInit {
       this.loadingTable = false;
       console.log(success);
       this.dataToExport = success;
-      // this.downloadFile(success);
     }, error=>{
       this.loadingTable = false;
       console.log(error);
@@ -84,7 +82,6 @@ export class DeReadingVerificationDashboardComponent implements OnInit {
       this.loadingTable = false;
       console.log(success);
       this.dataToExport = success;
-      // this.downloadFile(success);
     }, error=>{
       this.loadingTable = false;
       console.log(error);
@@ -104,20 +101,11 @@ export class DeReadingVerificationDashboardComponent implements OnInit {
       this.loadingTable = false;
       console.log(success);
       this.dataToExport = success;
-      // this.downloadFile(success);
     }, error=>{
       this.loadingTable = false;
       console.log(error);
       alert(error.msg);
     });
-  }
-
-  downloadFile(data: any) {
-    const blob = new Blob([JSON.stringify(data)]);
-    // const blob = new Blob([byteArray], { type: 'text/javascript' });
-    const url= window.URL.createObjectURL(blob);
-    saveAs(blob,"file_name.pdf");
-    // window.open(url);
   }
 
   exportClicked(data){
