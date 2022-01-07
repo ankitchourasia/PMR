@@ -1,0 +1,118 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Group Wise Pending Self PMR
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-list-alt"></i> Self PMR (URJAS App)</a></li>
+        <li class="active">Group Wise Pending Self PMR</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-warning">
+            <div class="box-body">
+              <table class="table table-sm">
+                <thead>
+                  <th>SNo.</th>
+                  <th>Location Code</th>
+                  <th>Group No</th>
+                  <th>Date</th>
+                  <th>Pending Consumer</th>
+                  <th></th>
+                </thead>
+                <ng-container *ngFor="let c of count; let i = index">
+                  <!-- <tr data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" role="button" 
+                  (click)="c.collapsed = !c.collapsed; c.collapsed && rowClicked(c)"> -->
+                  <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{c.loccode}}</td>
+                    <td>{{c.groupno}}</td>
+                    <td>{{c.date | date : 'dd-MM-yyyy'}}</td>
+                    <td>{{c.pandingcount}}</td>
+                    <td><button class="btn btn-sm" (click)="viewConsumerClicked(c)">View Consumer</button></td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" *ngIf="c.records">
+
+                      <div class="panel">
+                        <div class="panel-body">
+                          <table class="table table-sm">
+                            <tr class="info">
+                              <th>SNo.</th>
+                              <th>RD NO</th>
+                              <th>Consumer No</th>
+                              <th>Name</th>
+                              <th>Bill Month</th>
+                              <th>Reading</th>
+                              <th>Upload Date</th>
+                              <th></th>
+                            </tr>
+                            <tr *ngFor="let record of c.records; let i = index" class="active">
+                              <td>{{i+1}}</td>
+                              <td>{{record.rdno}}</td>
+                              <td>{{record.consno}}</td>
+                              <td>{{record.consname}}</td>
+                              <td>{{record.billmonth}}</td>
+                              <td>{{record.readingvalue}}</td>
+                              <td>{{record.dateuploaded | date : 'dd-MM-yyyy'}}</td>
+                              <td><button class="btn btn-sm btn-primary" (click)="viewImageClicked(record)" data-toggle="modal" data-target="#myModal11">View Image</button></td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div id="myModal11" class="modal fade" role="dialog">
+  <div class="modal-dialog" [class.modal-lg]="showPMRReading">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="d-flex justify-content-around">
+          <div>
+            <h4>Self PMR Image</h4>
+            <img [src]="image1" width="400px">
+            <p>Consumer No :{{selectedRecord?.consno}}</p>
+            <p>Consumer Name: {{selectedRecord?.consname}}</p>
+            <p>Upload Date :{{selectedRecord?.dateuploaded | date : 'dd-MM-yyyy'}}</p>
+            <p>Reading: {{selectedRecord?.readingvalue}}</p>
+            <div>
+              <textarea class="form-control form-control-sm form-group" placeholder="Rejection Remark" id="remark" name="remark" maxlength="100" rows="2" cols="20" [(ngModel)]="remark"></textarea>
+            </div>
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-sm btn-primary" (click)="approveButtonClicked(selectedRecord, modalCloseButtonRef)">Approve</button>
+              <button class="btn btn-sm btn-danger" (click)="rejectButtonClicked(selectedRecord, modalCloseButtonRef)">Reject</button>
+            </div>
+          </div>
+          <div *ngIf="showPMRReading">
+            <h4>Reader's PMR Image</h4>
+            <img [src]="image2" width="400px">
+            <p>Reading Date :{{pmrData?.datereading | date : 'dd-MM-yyyy'}}</p>
+            <p>Reading Type : {{pmrData?.readingtype}}</p>
+            <p>Reading :{{pmrData?.reading}}</p>
+            <p>MD: {{pmrData?.md}}      PF: {{pmrData?.pf}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" #modalCloseButtonRef>Close</button>
+      </div>
+    </div>
+  </div>
+</div>

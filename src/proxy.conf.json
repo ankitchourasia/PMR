@@ -1,6 +1,8 @@
 {
     "/api/": {
-      "target": "http://10.98.4.75:8045",
+     
+
+     "target": "http://10.98.4.75:8045",
       "secure": false,
       "pathRewrite": {
         "^/api/": ""
@@ -9,5 +11,3 @@
     }
 
   }
-
-  

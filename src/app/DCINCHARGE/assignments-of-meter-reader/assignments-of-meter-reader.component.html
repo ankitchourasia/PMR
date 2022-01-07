@@ -33,10 +33,10 @@
                 <div class="col-sm-8">
                   <select class="form-control" [(ngModel)]="billmon" name="billmon1" #billmon1Text="ngModel" [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" required>
                     <option value="{{billmon}}">{{billmon}}</option>
-                    <option value="Sep-2020">Sep-2020</option>
+                    <!-- <option value="Sep-2020">Sep-2020</option>
                     <option value="Oct-2020">Oct-2020</option>
                     <option value="Nov-2020">Nov-2020</option>
-                    <option value="Dec-2020">Dec-2020</option>
+                    <option value="Dec-2020">Dec-2020</option> -->
                     <option value="Jan-2021">Jan-2021</option>
                     <option value="Feb-2021">Feb-2021</option>
                     <option value="Mar-2021">Mar-2021</option>
@@ -49,6 +49,10 @@
                     <option value="Oct-2021">Oct-2021</option>
                     <option value="Nov-2021">Nov-2021</option>
                     <option value="Dec-2021">Dec-2021</option>
+                    <option value="Jan-2022">Jan-2022</option>
+                    <option value="Feb-2022">Feb-2022</option>
+                    <option value="Mar-2022">Mar-2022</option>
+                    <option value="Apr-2022">Apr-2022</option>
                     
                   </select>
                   <div *ngIf="f.submitted && billmon1Text.invalid" class="invalid-feedback">

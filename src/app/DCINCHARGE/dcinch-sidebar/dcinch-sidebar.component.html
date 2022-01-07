@@ -74,6 +74,20 @@
               <li class=""><a routerLink='/dc-read-verification-data'><i class="fa fa-circle-o"></i>Read Verification Data</a></li>
            </ul>
         </li>
+
+        <li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a href="">
+            <i class="fa fa-users"></i> <span>Self PMR (URJAS App)</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li class=""><a routerLink='/date-wise-self-pmr-by-consumer'><i class="fa fa-angle-right"></i>Date wise Pending Self PMR</a></li>
+              <li class=""><a routerLink='/group-wise-self-pmr-by-consumer'><i class="fa fa-angle-right"></i>Group wise Pending Self PMR</a></li>
+              <li class=""><a routerLink='/date-between-self-pmr'><i class="fa fa-angle-right"></i>View My Date wise Self PMR</a></li>
+           </ul>
+        </li>
         
         <li class="treeview menu-open"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <a href="">

@@ -169,6 +169,9 @@ import { DeReadingVerificationDashboardComponent } from './DE/de-reading-verific
 import { MdDcWiseFingerPrintScanningActivationComponent } from './MD/md-dc-wise-finger-print-scanning-activation/md-dc-wise-finger-print-scanning-activation.component';
 import { DcReadVerificationDataComponent } from './DCINCHARGE/dc-read-verification-data/dc-read-verification-data.component';
 import { DeChangePasswordComponent } from './DE/de-change-password/de-change-password.component';
+import { DcinchDateWiseSelfPmrComponent } from './DCINCHARGE/dcinch-date-wise-self-pmr/dcinch-date-wise-self-pmr.component';
+import { DcinchGroupWiseSelfPmrComponent } from './DCINCHARGE/dcinch-group-wise-self-pmr/dcinch-group-wise-self-pmr.component';
+import { DcinchDateBetweenSelfPmrComponent } from './DCINCHARGE/dcinch-date-between-self-pmr/dcinch-date-between-self-pmr.component';
 
 
 @NgModule({
@@ -328,7 +331,10 @@ import { DeChangePasswordComponent } from './DE/de-change-password/de-change-pas
     DeReadingVerificationDashboardComponent,
     MdDcWiseFingerPrintScanningActivationComponent,
     DcReadVerificationDataComponent,
-    DeChangePasswordComponent
+    DeChangePasswordComponent,
+    DcinchDateWiseSelfPmrComponent,
+    DcinchGroupWiseSelfPmrComponent,
+    DcinchDateBetweenSelfPmrComponent
   ],
   imports: [
     NgbModule,

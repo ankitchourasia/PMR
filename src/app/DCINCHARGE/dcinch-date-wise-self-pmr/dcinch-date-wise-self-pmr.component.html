@@ -1,0 +1,42 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Date Wise Self PMR By Consumer
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-list-alt"></i> Self PMR (URJAS App)</a></li>
+        <li class="active">Date Wise Self PMR By Consumer</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-warning">
+            <div class="box-body">
+              <table class="table table-sm">
+                <thead>
+                  <th>SNo.</th>
+                  <th>Location Code</th>
+                  <th>Date</th>
+                  <th>Pending Consumer</th>
+                </thead>
+                <tr *ngFor="let c of count; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{c.loccode}}</td>
+                  <td>{{c.date | date : 'dd-MM-yyyy'}}</td>
+                  <td>{{c.pandingcount}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

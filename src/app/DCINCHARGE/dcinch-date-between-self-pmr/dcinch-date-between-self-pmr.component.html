@@ -1,0 +1,68 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        View My Date Wise Self PMR
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-list-alt"></i> Self PMR (URJAS App)</a></li>
+        <li class="active">Date Wise Self PMR By Consumer</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-warning">
+            <div class="box-body">
+              <div class="flex-sapce-around form-group">
+                <div>
+                  <label class="control-label">Start Date</label>
+                  <input type="date" class="form-control form-control-sm" [(ngModel)]="date1" id="date1" name="date1" required>
+                </div>
+                <div>
+                  <label class="control-label">End Date</label>
+                  <input type="date" class="form-control form-control-sm" max="{{currentDate | date:'yyyy-MM-dd'}}" [(ngModel)]="date2" id="date2" name="date2" required>
+                </div>
+                <div>
+                  <label class="text-white">*</label>
+                  <button class="btn btn-sm btn-primary" (click)="getDateBetweenPMRByConsumer()">Get Data </button>
+                </div>
+              </div>
+              <table class="table table-sm" *ngIf="data && !loading">
+                <thead>
+                  <th>SNo.</th>
+                  <th>RD NO</th>
+                  <th>Consumer No</th>
+                  <th>Name</th>
+                  <th>Bill Month</th>
+                  <th>Reading</th>
+                  <th>MD</th>
+                  <th>PF</th>
+                  <th>Upload Date</th>
+                  <th>Status</th>
+                </thead>
+                <tr *ngFor="let c of data; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{c.rdno}}</td>
+                  <td>{{c.ivrs}}</td>
+                  <td>{{c.consname}}</td>
+                  <td>{{c.billmonth}}</td>
+                  <td>{{c.readingvalue}}</td>
+                  <td>{{c.md}}</td>
+                  <td>{{c.pf}}</td>
+                  <td>{{c.dateuploaded | date : 'dd-MM-yyyy'}}</td>
+                  <td>{{c.status}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

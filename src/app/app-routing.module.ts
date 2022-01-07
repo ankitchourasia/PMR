@@ -137,6 +137,9 @@ import { DeReadingVerificationDashboardComponent } from './DE/de-reading-verific
 import { MdDcWiseFingerPrintScanningActivationComponent } from './MD/md-dc-wise-finger-print-scanning-activation/md-dc-wise-finger-print-scanning-activation.component';
 import { DcReadVerificationDataComponent } from './DCINCHARGE/dc-read-verification-data/dc-read-verification-data.component';
 import { DeChangePasswordComponent } from './DE/de-change-password/de-change-password.component';
+import { DcinchDateWiseSelfPmrComponent } from './DCINCHARGE/dcinch-date-wise-self-pmr/dcinch-date-wise-self-pmr.component';
+import { DcinchGroupWiseSelfPmrComponent } from './DCINCHARGE/dcinch-group-wise-self-pmr/dcinch-group-wise-self-pmr.component';
+import { DcinchDateBetweenSelfPmrComponent } from './DCINCHARGE/dcinch-date-between-self-pmr/dcinch-date-between-self-pmr.component';
 
 
 const routes: Routes = [
@@ -225,6 +228,9 @@ const routes: Routes = [
 {path:'edit-normal-reading-type-to-other',component:EditNormalReadingTypeToOtherComponent},
 {path:'edit-normal-reading-type/:consno/:md/:pf/:readingtype/:billmonth',component:EditNormalReadingTypeComponent},
 {path:'dc-read-verification-data',component:DcReadVerificationDataComponent},
+{path:'date-wise-self-pmr-by-consumer',component:DcinchDateWiseSelfPmrComponent},
+{path:'group-wise-self-pmr-by-consumer',component:DcinchGroupWiseSelfPmrComponent},
+{path:'date-between-self-pmr',component:DcinchDateBetweenSelfPmrComponent},
 // GrouIncharge
 
 {path:'gi-dashboard',component:GiDashboardComponent},
