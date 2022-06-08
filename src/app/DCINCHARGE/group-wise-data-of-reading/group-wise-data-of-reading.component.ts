@@ -6,6 +6,7 @@ import { SessionStorageService } from 'angular-web-storage';
 import { Router } from '@angular/router';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 declare var jquery:any;
 declare var $ :any;
@@ -23,6 +24,7 @@ export class GroupWiseDataOfReadingComponent implements OnInit {
   error:any;
   loccode = this.session.get('userlocation');
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   groupno:string="Select Group";
   dateofreading:string;
   loading=false;

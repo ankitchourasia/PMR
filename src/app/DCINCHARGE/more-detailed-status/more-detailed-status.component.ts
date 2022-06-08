@@ -10,6 +10,7 @@
   import { DOCUMENT } from '@angular/common';
   import { TokengenratorService } from '../../Util-services/tokengenerator-service';
   import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
   declare var $ :any;
   
@@ -31,6 +32,7 @@ export class MoreDetailedStatusComponent implements OnInit {
     error:any;
     loccode = this.session.get('userlocation');
     billmonth:string;
+    billMonths = GlobalConstants.billMonths;
     billmonth1:string;
     groupno:string="Select Group";
     rd:string="Select RD No.";

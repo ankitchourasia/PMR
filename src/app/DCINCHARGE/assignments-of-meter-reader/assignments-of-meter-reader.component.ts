@@ -7,6 +7,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-assignments-of-meter-reader',
@@ -17,6 +18,7 @@ export class AssignmentsOfMeterReaderComponent implements OnInit {
   baseurl:BaseUrl= new BaseUrl();
   dccode = this.session.get('userlocation');
   billmon:string="Select Bill Month";
+billMonths = GlobalConstants.billMonths;
   meterreaderid:string="Select Meter Reader";
   resp:any;
   resp2:any;

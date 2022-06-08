@@ -172,6 +172,7 @@ import { DeChangePasswordComponent } from './DE/de-change-password/de-change-pas
 import { DcinchDateWiseSelfPmrComponent } from './DCINCHARGE/dcinch-date-wise-self-pmr/dcinch-date-wise-self-pmr.component';
 import { DcinchGroupWiseSelfPmrComponent } from './DCINCHARGE/dcinch-group-wise-self-pmr/dcinch-group-wise-self-pmr.component';
 import { DcinchDateBetweenSelfPmrComponent } from './DCINCHARGE/dcinch-date-between-self-pmr/dcinch-date-between-self-pmr.component';
+import { DcinchSmartMeterReportComponent } from './DCINCHARGE/dcinch-smart-meter-report/dcinch-smart-meter-report.component';
 
 
 @NgModule({
@@ -334,7 +335,8 @@ import { DcinchDateBetweenSelfPmrComponent } from './DCINCHARGE/dcinch-date-betw
     DeChangePasswordComponent,
     DcinchDateWiseSelfPmrComponent,
     DcinchGroupWiseSelfPmrComponent,
-    DcinchDateBetweenSelfPmrComponent
+    DcinchDateBetweenSelfPmrComponent,
+    DcinchSmartMeterReportComponent
   ],
   imports: [
     NgbModule,

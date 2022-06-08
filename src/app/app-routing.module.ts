@@ -140,6 +140,7 @@ import { DeChangePasswordComponent } from './DE/de-change-password/de-change-pas
 import { DcinchDateWiseSelfPmrComponent } from './DCINCHARGE/dcinch-date-wise-self-pmr/dcinch-date-wise-self-pmr.component';
 import { DcinchGroupWiseSelfPmrComponent } from './DCINCHARGE/dcinch-group-wise-self-pmr/dcinch-group-wise-self-pmr.component';
 import { DcinchDateBetweenSelfPmrComponent } from './DCINCHARGE/dcinch-date-between-self-pmr/dcinch-date-between-self-pmr.component';
+import { DcinchSmartMeterReportComponent } from './DCINCHARGE/dcinch-smart-meter-report/dcinch-smart-meter-report.component';
 
 
 const routes: Routes = [
@@ -231,6 +232,8 @@ const routes: Routes = [
 {path:'date-wise-self-pmr-by-consumer',component:DcinchDateWiseSelfPmrComponent},
 {path:'group-wise-self-pmr-by-consumer',component:DcinchGroupWiseSelfPmrComponent},
 {path:'date-between-self-pmr',component:DcinchDateBetweenSelfPmrComponent},
+{path:'smart-meter-report',component:DcinchSmartMeterReportComponent},
+
 // GrouIncharge
 
 {path:'gi-dashboard',component:GiDashboardComponent},

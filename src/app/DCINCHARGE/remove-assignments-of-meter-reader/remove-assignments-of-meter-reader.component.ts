@@ -7,6 +7,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 @Component({
   selector: 'app-remove-assignments-of-meter-reader',
   templateUrl: './remove-assignments-of-meter-reader.component.html',
@@ -17,6 +18,7 @@ export class RemoveAssignmentsOfMeterReaderComponent implements OnInit {
   dccode = this.session.get('userlocation');
   userid = this.session.get('loginid');
   billmon:string="Select Bill Month";
+billMonths = GlobalConstants.billMonths;
   meterreaderid:string="Select Meter Reader";
   resp:any;
   resp2:any;

@@ -6,6 +6,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-region-wise-dashboard',
@@ -15,6 +16,7 @@ import { EncreptiondecreptionService } from '../../Util-services/encreptiondecre
 export class RegionWiseDashboardComponent implements OnInit {
   baseurl:BaseUrl= new BaseUrl();
   loading=false;
+  billMonths = GlobalConstants.billMonths;
   billmonth:string="Select Bill Month";
   showData=false;
   region = this.session.get('username');

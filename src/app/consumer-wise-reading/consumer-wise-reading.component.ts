@@ -7,6 +7,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import { ExportExcelService } from '../Util-services/export-excel.service';
 import { TokengenratorService } from '../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from '../Util-services/global-constants';
 
 declare var jquery:any;
 declare var $ :any;
@@ -23,6 +24,7 @@ export class ConsumerWiseReadingComponent implements OnInit {
   resp4:any;
   error:any;
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   consumerno:string;
   downloader:FileList;
   loading=false;

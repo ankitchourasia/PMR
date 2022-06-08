@@ -7,6 +7,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 declare var $ :any;
 
@@ -19,6 +20,7 @@ export class ReadingAssesmentDataComponent implements OnInit {
   baseurl:BaseUrl= new BaseUrl();
   loccode = this.session.get('userlocation');
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   groupno:string="Select Group";
   resp:any;
   resp1:any;

@@ -7,6 +7,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import {formatDate } from '@angular/common';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 declare var jquery:any;
 declare var $ :any;
@@ -22,6 +23,7 @@ export class ScheduledAnRdToGroupComponent implements OnInit {
   startdate:string;
   enddate:string;
   billmon:string="Select Bill Month";
+billMonths = GlobalConstants.billMonths;
   operationtype:string="Select operation Type";
   loccode = this.session.get('userlocation');
   usertype=this.session.get('role');

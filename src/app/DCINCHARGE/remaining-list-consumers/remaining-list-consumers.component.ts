@@ -9,6 +9,7 @@ import { TokengenratorService } from '../../Util-services/tokengenerator-service
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
 
 import {formatDate } from '@angular/common';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 @Component({
   selector: 'app-remaining-list-consumers',
   templateUrl: './remaining-list-consumers.component.html',
@@ -21,6 +22,7 @@ export class RemainingListConsumersComponent implements OnInit {
   error:any;
   loccode = this.session.get('userlocation');
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   groupno:string="Select Group";
   loading=false;
   showData=false;

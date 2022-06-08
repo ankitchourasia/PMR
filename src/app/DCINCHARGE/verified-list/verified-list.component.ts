@@ -8,6 +8,7 @@ import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 // import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-verified-list',
@@ -22,6 +23,7 @@ export class VerifiedListComponent implements OnInit {
   error:any;
   loccode = this.session.get('userlocation');
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   groupno:string="Select Group";
   loading=false;
   showData=false;

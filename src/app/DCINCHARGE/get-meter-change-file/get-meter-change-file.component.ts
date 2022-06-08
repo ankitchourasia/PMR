@@ -14,6 +14,7 @@ import { DOCUMENT } from '@angular/common';
 declare var $ :any;
 import {formatDate } from '@angular/common';
 import { MeterChange } from 'src/app/Util-services/meter-change';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-get-meter-change-file',
@@ -30,6 +31,7 @@ baseurl:BaseUrl= new BaseUrl();
   error:any;
   loccode = this.session.get('userlocation');
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   groupno:string="Select Group";
   rd:string="Select RD No.";
   loading=false;

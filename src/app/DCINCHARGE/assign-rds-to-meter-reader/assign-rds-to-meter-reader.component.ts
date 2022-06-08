@@ -8,6 +8,7 @@ import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
 import { Arrayremove } from 'src/app/Util-Services/arrayremove';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-assign-rds-to-meter-reader',
@@ -18,6 +19,7 @@ export class AssignRdsToMeterReaderComponent implements OnInit {
   baseurl:BaseUrl= new BaseUrl();
   dccode = this.session.get('userlocation');
   billmon:string="Select Bill Month";
+billMonths = GlobalConstants.billMonths;
   groupno:string="Select Group";
   meterreaderid:string="Select Meter Reader";
   userid=this.session.get('loginid');

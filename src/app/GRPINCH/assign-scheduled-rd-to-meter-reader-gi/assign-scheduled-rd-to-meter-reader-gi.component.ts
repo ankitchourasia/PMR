@@ -6,6 +6,7 @@ import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { BaseUrl } from 'src/app/Util-services/base-url';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-assign-scheduled-rd-to-meter-reader-gi',
@@ -19,6 +20,7 @@ export class AssignScheduledRdToMeterReaderGiComponent implements OnInit {
   loginid=this.session.get('loginid');
   meterreaderid:string;
   billmon:string="";
+  billMonths = GlobalConstants.billMonths;
   allgroupsGI:string;
   resp:any;
   resp2:any;

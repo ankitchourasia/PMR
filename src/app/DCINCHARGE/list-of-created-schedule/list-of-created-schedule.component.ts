@@ -8,6 +8,7 @@ import {formatDate } from '@angular/common';
 import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-list-of-created-schedule',
@@ -21,6 +22,7 @@ export class ListOfCreatedScheduleComponent implements OnInit {
   loginid=this.session.get('loginid');
   meterreaderid:string;
   billmon:string="Select Bill Month";
+billMonths = GlobalConstants.billMonths;
   groupno:string="Select group no.";
   resp:any;
   resp1:any;

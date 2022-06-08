@@ -6,6 +6,7 @@ import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { BaseUrl } from 'src/app/Util-services/base-url';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-list-of-all-assignments-to-reader-gi',
@@ -16,6 +17,7 @@ export class ListOfAllAssignmentsToReaderGIComponent implements OnInit {
   baseurl:BaseUrl= new BaseUrl();
   loccode = this.session.get('userlocation');
   billmon:string;
+  billMonths = GlobalConstants.billMonths;
   resp:any;
   error:any;
   showData=false;

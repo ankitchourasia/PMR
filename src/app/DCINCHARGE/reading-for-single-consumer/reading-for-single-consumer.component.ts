@@ -6,6 +6,7 @@ import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { BaseUrl } from 'src/app/Util-services/base-url';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 declare var jquery:any;
 declare var $ :any;
@@ -22,6 +23,7 @@ export class ReadingForSingleConsumerComponent implements OnInit {
   error:any;
   loccode = this.session.get('userlocation');
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   consumerno:string;
   loading=false;
   showData=false;

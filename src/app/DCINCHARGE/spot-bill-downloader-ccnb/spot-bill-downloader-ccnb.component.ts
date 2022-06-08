@@ -8,6 +8,7 @@ import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 import { DOCUMENT } from '@angular/common';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-spot-bill-downloader-ccnb',
@@ -26,6 +27,7 @@ export class SpotBillDownloaderCcnbComponent implements OnInit {
   showbutton=false;
   loccode = this.session.get('userlocation');
   billmonth:string;
+  billMonths = GlobalConstants.billMonths;
   groupno:string="Select Group";
   constructor(private enc: EncreptiondecreptionService,private genrateToken:TokengenratorService,private exportService:ExportExcelService,public navCtrl: NgxNavigationWithDataComponent,private http: HttpClient,private session:SessionStorageService,  private router:Router,@Inject(DOCUMENT) private document: any) { }
 

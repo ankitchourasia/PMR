@@ -7,6 +7,7 @@ import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import * as CanvasJS from 'canvasjs/dist/canvasjs.min';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-ce-dashboard',
@@ -16,6 +17,7 @@ import { EncreptiondecreptionService } from '../../Util-services/encreptiondecre
 export class CeDashboardComponent implements OnInit {
   baseurl:BaseUrl= new BaseUrl();
   loading=false;
+  billMonths = GlobalConstants.billMonths;
   billmonth:string="Select Bill Month";
   showData=false;
   loccode = this.session.get('userlocation');

@@ -7,6 +7,7 @@ import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import * as CanvasJS from 'canvasjs/dist/canvasjs.min';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-md-dashboard',
@@ -17,6 +18,7 @@ export class MdDashboardComponent implements OnInit {
   baseurl:BaseUrl= new BaseUrl();
   loading=false;
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   showData=false;
   loccode = this.session.get('userlocation');
   today= new Date();

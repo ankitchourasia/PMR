@@ -7,6 +7,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import {formatDate } from '@angular/common';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 declare var jquery:any;
 declare var $ :any;
@@ -25,6 +26,7 @@ declare var $ :any;
     error:any;
     loccode = this.session.get('userlocation');
     billmonth:string="Select Bill Month";
+    billMonths = GlobalConstants.billMonths;
     groupno:string="Select Group";
     rd:string="Select RD No.";
     dateofreading:string;

@@ -6,6 +6,7 @@ import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { BaseUrl } from 'src/app/Util-services/base-url';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-readings-gor-single-consumer-gi',
@@ -18,6 +19,7 @@ export class ReadingsGorSingleConsumerGiComponent implements OnInit {
   error:any;
   loccode = this.session.get('userlocation');
   billmonth:string;
+  billMonths = GlobalConstants.billMonths;
   consumerno:string;
   showData=false;
   constructor(private enc: EncreptiondecreptionService,private genrateToken:TokengenratorService,public navCtrl: NgxNavigationWithDataComponent,private http: HttpClient,private session:SessionStorageService,  private router:Router) { }

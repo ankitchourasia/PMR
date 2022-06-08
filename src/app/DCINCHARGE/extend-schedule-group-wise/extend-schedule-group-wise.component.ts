@@ -6,6 +6,7 @@ import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { BaseUrl } from 'src/app/Util-services/base-url';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-extend-schedule-group-wise',
@@ -19,6 +20,7 @@ export class ExtendScheduleGroupWiseComponent implements OnInit {
   loginid=this.session.get('loginid');
   meterreaderid:string;
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   groupno:string="Select Group";
   resp:any;
   resp2:any;

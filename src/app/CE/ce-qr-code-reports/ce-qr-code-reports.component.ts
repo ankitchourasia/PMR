@@ -7,6 +7,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import {formatDate } from '@angular/common';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-ce-qr-code-reports',
@@ -17,6 +18,7 @@ export class CeQrCodeReportsComponent implements OnInit {
 
   baseurl:BaseUrl= new BaseUrl();
   region = this.session.get('userlocation');
+  billMonths = GlobalConstants.billMonths;
   billmon:string="Select Bill Month";
   resp:any;
   resp1:any;

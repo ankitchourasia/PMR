@@ -7,6 +7,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import {formatDate } from '@angular/common';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-de-qr-reports',
@@ -17,6 +18,7 @@ export class DeQrReportsComponent implements OnInit {
   baseurl:BaseUrl= new BaseUrl();
   division = this.session.get('userlocation');
   billmon:string="Select Bill Month";
+billMonths = GlobalConstants.billMonths;
   resp:any;
   resp1:any;
   error:any;

@@ -6,6 +6,7 @@ import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { BaseUrl } from 'src/app/Util-services/base-url';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 declare var jquery:any;
 declare var $ :any;
@@ -23,6 +24,7 @@ export class ReadingOfGroupRDDatewiseGiComponent implements OnInit {
   pipeseprte:string;
   loccode = this.session.get('userlocation');
   billmonth:string;
+  billMonths = GlobalConstants.billMonths;
   groupno:string="Select Group";
   rd:string="Select RD";
   dateofreading:string;

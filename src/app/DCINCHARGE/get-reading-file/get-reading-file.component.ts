@@ -13,6 +13,7 @@ import { DOCUMENT } from '@angular/common';
 
 
 import {formatDate } from '@angular/common';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 @Component({
   selector: 'app-get-reading-file',
   templateUrl: './get-reading-file.component.html',
@@ -28,6 +29,7 @@ export class GetReadingFileComponent implements OnInit {
   error:any;
   loccode = this.session.get('userlocation');
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   groupno:string="Select Group";
   rd:string="Select RD No.";
   loading=false;

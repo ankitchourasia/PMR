@@ -7,6 +7,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import {formatDate } from '@angular/common';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-extend-schedule-date',
@@ -20,6 +21,7 @@ export class ExtendScheduleDateComponent implements OnInit {
   loginid=this.session.get('loginid');
   meterreaderid:string;
   billmon:string="";
+  billMonths = GlobalConstants.billMonths;
   resp:any;
   resp2:any;
   error:any;

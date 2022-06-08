@@ -7,6 +7,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 @Component({
   selector: 'app-edit-normal-reading-type-to-other',
   templateUrl: './edit-normal-reading-type-to-other.component.html',
@@ -17,10 +18,10 @@ export class EditNormalReadingTypeToOtherComponent implements OnInit {
   resp:any;
   resp1:any;
   resp2:any;
- 
   error:any;
   loccode = this.session.get('userlocation');
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   groupno:string="Select Group";
   rd:string="Select RD No.";
   loading=false;

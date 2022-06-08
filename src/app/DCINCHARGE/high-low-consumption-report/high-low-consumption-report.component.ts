@@ -8,6 +8,7 @@ import {formatDate } from '@angular/common';
 import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 declare var $ :any;
 @Component({
@@ -21,6 +22,7 @@ export class HighLowConsumptionReportComponent implements OnInit {
   usertype=this.session.get('role');
   loginid=this.session.get('loginid');
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   grno:string="Select Group";
   consumptiontype:string="Select Conumption Type";
   resp:any;

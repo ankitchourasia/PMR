@@ -6,6 +6,7 @@ import { BaseUrl } from 'src/app/Util-services/base-url';
 import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { TokengenratorService } from '../../Util-services/tokengenerator-service';
 import { EncreptiondecreptionService } from '../../Util-services/encreptiondecreption.service';
+import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
   selector: 'app-company-wise-dashboard-billmonth',
@@ -16,6 +17,7 @@ export class CompanyWiseDashboardBillmonthComponent implements OnInit {
   baseurl:BaseUrl= new BaseUrl();
   loading=false;
   billmonth:string="Select Bill Month";
+  billMonths = GlobalConstants.billMonths;
   showData=false;
   region = this.session.get('username');
   circle:string;
