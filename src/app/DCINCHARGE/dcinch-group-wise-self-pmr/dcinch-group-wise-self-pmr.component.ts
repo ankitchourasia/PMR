@@ -188,4 +188,25 @@ export class DcinchGroupWiseSelfPmrComponent implements OnInit {
     });
   }
 
+  deleteButtonClicked(data, modalCloseButtonRef){
+    if(!this.remark){
+      alert("Please fill the Deletion Remark..");
+      return;
+    }
+    let formdata : FormData = new FormData();
+    formdata.append("consno",this.enc.encrypt(data.consno));
+    formdata.append("selfpmrappid",this.enc.encrypt(data.appid));
+    formdata.append("billmonth",this.enc.encrypt(data.billmonth));
+    formdata.append("deletereason",this.enc.encrypt(this.remark));
+    modalCloseButtonRef.click();
+    return this.http.post("api/dc-user-operations/delete-self-pmr-un-approved", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
+      console.log(success);
+      alert("Deleted Successfully");
+      this.getDateWisePMRByConsumer();  
+    }, error =>{
+      console.log(error);
+      alert("Some error occurred, unable to Delete.")
+    });
+  }
+
 }

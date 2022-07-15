@@ -1,0 +1,60 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Group Wise Spot Bill count
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box box-warning">
+        <div class="box-body">
+          <div class="form-group">
+            <div class="flex-sapce-around">
+              <div>
+              <label>Bill Month</label>
+              <div>
+                <select class="form-control" [(ngModel)]="billmon" name="billmon1" #billmon1Text="ngModel" required>
+                  <option value=undefined>Select</option>
+                  <option *ngFor="let month of billMonths" [ngValue]="month">{{month}}</option>
+                </select>
+              </div>
+              </div>
+              <div>
+                <button type="button" class="btn btn-primary" (click)="getGroupWiseSpotBill()" [disabled]="!billmon">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <table class="table table-bordered table-sm text-center custab">
+          <thead>
+          <tr>
+            <th>SNO</th>
+            <th>Bill Month</th>
+            <th>Group No</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of spotBills; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{d.billmonth}}</td>
+            <td>{{d.groupbo}}</td>
+            <td>{{d.count}}</td>
+          </tr>
+          <tr>
+            <td colspan="4" *ngIf="!spotBills || spotBills.length < 1">No Records</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>

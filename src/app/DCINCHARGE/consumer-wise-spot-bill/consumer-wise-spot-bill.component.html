@@ -1,0 +1,80 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Consumer Wise Spot Bill
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box box-warning">
+        <div class="box-body">
+          <div class="form-group">
+            <div class="flex-sapce-around">
+              <div>
+                <label class="control-label col-sm-4">Consumer No.</label>
+                <div class="col-sm-8">
+                  <input type="text" [(ngModel)]="consumerno"  name="consumerno" class="form-control" required >
+                </div>
+              </div>
+              <div>
+                <button type="button" class="btn btn-primary" (click)="getSpotBills()" [disabled]="!consumerno">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <table class="table table-bordered table-sm text-center custab">
+          <thead>
+          <tr>
+            <th>SNO</th>
+            <th>Consumer No</th>
+            <th>RD No</th>
+            <th>Reader Name</th>
+            <th>Read Type</th>
+            <th>Current Read</th>
+            <th>MD</th>
+            <th>PF</th>
+            <th>Assessment</th>
+            <th>Consumption</th>
+            <th>Bill Date</th>
+            <th>Due Date</th>
+            <th>Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of spotBills; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{d.consumerno}}</td>
+            <td>{{d.rd}}</td>
+            <td>{{d.meterreader}}</td>
+            <td>{{d.readingtypecd}} - {{d.stringreadtype}}</td>
+            <td>{{d.currentreading}}</td>
+            <td>{{d.md}}</td>
+            <td>{{d.pf}}</td>
+            <td>{{d.assconsmp}}</td>
+            <td>{{d.consumption}}</td>
+            <td>{{d.dateofbill}}</td>
+            <td>{{d.cashduedate}}</td>
+            <td>
+              <!-- <img height="100" width="80" (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal"  src='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{d.imagefilepath}}'/> -->
+              <div>
+                <a href="api/mtr-reader/get-meter-reader-image?path={{d.imagefilepath}}" data-lightbox="image-1" data-title="{{i+1}}">View</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="13" *ngIf="!spotBills || spotBills.length < 1">No Records</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>

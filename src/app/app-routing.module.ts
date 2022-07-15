@@ -141,6 +141,11 @@ import { DcinchDateWiseSelfPmrComponent } from './DCINCHARGE/dcinch-date-wise-se
 import { DcinchGroupWiseSelfPmrComponent } from './DCINCHARGE/dcinch-group-wise-self-pmr/dcinch-group-wise-self-pmr.component';
 import { DcinchDateBetweenSelfPmrComponent } from './DCINCHARGE/dcinch-date-between-self-pmr/dcinch-date-between-self-pmr.component';
 import { DcinchSmartMeterReportComponent } from './DCINCHARGE/dcinch-smart-meter-report/dcinch-smart-meter-report.component';
+import { GroupWiseSpotBillCountComponent } from './DCINCHARGE/group-wise-spot-bill-count/group-wise-spot-bill-count.component';
+import { GroupWiseSpotBillListComponent } from './DCINCHARGE/group-wise-spot-bill-list/group-wise-spot-bill-list.component';
+import { ConsumerWiseSpotBillComponent } from './DCINCHARGE/consumer-wise-spot-bill/consumer-wise-spot-bill.component';
+import { AllConsuptionReportComponent } from './DCINCHARGE/all-consuption-report/all-consuption-report.component';
+import { UpdateRestartReadingToNgbComponent } from './DCINCHARGE/update-restart-reading-to-ngb/update-restart-reading-to-ngb.component';
 
 
 const routes: Routes = [
@@ -233,6 +238,12 @@ const routes: Routes = [
 {path:'group-wise-self-pmr-by-consumer',component:DcinchGroupWiseSelfPmrComponent},
 {path:'date-between-self-pmr',component:DcinchDateBetweenSelfPmrComponent},
 {path:'smart-meter-report',component:DcinchSmartMeterReportComponent},
+
+{path:'group-wise-spot-bill-count',component:GroupWiseSpotBillCountComponent},
+{path:'group-wise-spot-bill-list',component:GroupWiseSpotBillListComponent},
+{path:'consumer-wise-spot-bill',component:ConsumerWiseSpotBillComponent},
+{path:'consumption-report',component:AllConsuptionReportComponent},
+{path:'update-restart-reading-to-ngb',component:UpdateRestartReadingToNgbComponent},
 
 // GrouIncharge
 

@@ -1,0 +1,92 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Group Wise Spot Bill List
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box box-warning">
+        <div class="box-body">
+          <div class="form-group">
+            <div class="flex-sapce-around">
+              <div>
+              <label>Bill Month</label>
+              <div>
+                <select class="form-control" [(ngModel)]="billmon" name="billmon1" #billmon1Text="ngModel" required>
+                  <option value=undefined>Select</option>
+                  <option *ngFor="let month of billMonths" [ngValue]="month">{{month}}</option>
+                </select>
+              </div>
+              </div>
+              <div>
+                <label>Select Group</label>
+                <div>
+                  <select class="form-control" [(ngModel)]="groupno" name="groupno1" #groupnoText="ngModel" required>
+                    <option value=undefined>Select</option>
+                    <option *ngFor="let group of groups" value="{{group.groupno}}">{{group.groupno}}</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <button type="button" class="btn btn-primary" (click)="getGroupWiseSpotBill()" [disabled]="!groupno || !billmon">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <table class="table table-bordered table-sm text-center custab">
+          <thead>
+          <tr>
+            <th>SNO</th>
+            <th>Consumer No</th>
+            <th>RD No</th>
+            <th>Reader Name</th>
+            <th>Read Type</th>
+            <th>Current Read</th>
+            <th>MD</th>
+            <th>PF</th>
+            <th>Assessment</th>
+            <th>Consumption</th>
+            <th>Bill Date</th>
+            <th>Due Date</th>
+            <th>Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of spotBillList; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{d.consumerno}}</td>
+            <td>{{d.rd}}</td>
+            <td>{{d.meterreader}}</td>
+            <td>{{d.readingtypecd}} - {{d.stringreadtype}}</td>
+            <td>{{d.currentreading}}</td>
+            <td>{{d.md}}</td>
+            <td>{{d.pf}}</td>
+            <td>{{d.assconsmp}}</td>
+            <td>{{d.consumption}}</td>
+            <td>{{d.dateofbill}}</td>
+            <td>{{d.cashduedate}}</td>
+            <td>
+              <!-- <img height="100" width="80" (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal"  src='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{d.imagefilepath}}'/> -->
+              <div>
+                <a href="api/mtr-reader/get-meter-reader-image?path={{d.imagefilepath}}" data-lightbox="image-1" data-title="{{i+1}}">View</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="13" *ngIf="!spotBillList || spotBillList.length < 1">No Records</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>

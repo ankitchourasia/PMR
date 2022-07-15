@@ -1,0 +1,91 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Upload Meter Restart Reading To NGB
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box box-warning">
+        <div class="box-body">
+          <div class="form-group row">
+            <div class="flex-sapce-around">
+              <div>
+              <label>Bill Month</label>
+              <div>
+                <select class="form-control" [(ngModel)]="billmon" name="billmon1" #billmon1Text="ngModel" required>
+                  <option value=undefined>Select</option>
+                  <option *ngFor="let month of billMonths" [ngValue]="month">{{month}}</option>
+                </select>
+              </div>
+              </div>
+              <div>
+                <label>Select Group</label>
+                <div>
+                  <select class="form-control" [(ngModel)]="groupno" name="groupno1" #groupnoText="ngModel" required>
+                    <option value=undefined>Select</option>
+                    <option *ngFor="let group of groups" value="{{group.groupno}}">{{group.groupno}}</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <button type="button" class="btn btn-primary" (click)="getGroupWiseSpotBill()" [disabled]="!groupno || !billmon">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <table class="table table-bordered table-sm text-center custab">
+          <thead>
+          <tr>
+            <th>SNO</th>
+            <th>Consumer No</th>
+            <th>RD No</th>
+            <th>Read Type</th>
+            <th>Current Read</th>
+            <th>MD</th>
+            <th>PF</th>
+            <th>Assessment</th>
+            <th>Read Date</th>
+            <th>Upload By</th>
+            <th>Image</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of readings; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{d.custid}}</td>
+            <td>{{d.rd}}</td>
+            <td>{{d.readingtype}}</td>
+            <td>{{d.reading}}</td>
+            <td>{{d.md}}</td>
+            <td>{{d.pf}}</td>
+            <td>{{d.assesment}}</td>
+            <td>{{d.datereading}}</td>
+            <td>{{d.uploadby}}</td>
+            <td>
+              <div>
+                <a href="api/mtr-reader/get-meter-reader-image?path={{d.imagepath}}" data-lightbox="image-1" data-title="{{i+1}}">View</a>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="btn btn-sm btn-primary" [disabled]="loading" (click)="pushToNGBButtonClicked(d)">Push To NGB</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="13" *ngIf="!readings || readings.length < 1">No Records</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
