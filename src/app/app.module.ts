@@ -178,6 +178,7 @@ import { ConsumerWiseSpotBillComponent } from './DCINCHARGE/consumer-wise-spot-b
 import { AllConsuptionReportComponent } from './DCINCHARGE/all-consuption-report/all-consuption-report.component';
 import { UpdateRestartReadingToNgbComponent } from './DCINCHARGE/update-restart-reading-to-ngb/update-restart-reading-to-ngb.component';
 import { Above120ReadingAssesmentComponent } from './DCINCHARGE/above120-reading-assesment/above120-reading-assesment.component';
+import { DeleteReadingComponent } from './DCINCHARGE/delete-reading/delete-reading.component';
 
 
 @NgModule({
@@ -346,7 +347,8 @@ import { Above120ReadingAssesmentComponent } from './DCINCHARGE/above120-reading
     GroupWiseSpotBillListComponent,
     ConsumerWiseSpotBillComponent,
     AllConsuptionReportComponent,
-    UpdateRestartReadingToNgbComponent
+    UpdateRestartReadingToNgbComponent,
+    DeleteReadingComponent
   ],
   imports: [
     NgbModule,

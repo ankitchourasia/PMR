@@ -168,6 +168,8 @@
                   <th>Sr. No.</th>
                   <th>Group No.</th>
                   <th>Uploaded Readings</th>
+                  <th>Uploaded Spotbill</th>
+                  <th>Total Readings Done</th>
                   <th>Remaining Readings</th>
                   <th>Total Consumers</th>
                   <th>Action</th>
@@ -178,6 +180,8 @@
                   <td>{{i+1}}</td>
                   <td>{{data.groupno}}</td>
                   <td>{{data.uploadedreadings}}</td>
+                  <td>{{data.uploadedspotbill}}</td>
+                  <td>{{data.totalreadings}}</td>
                   <td>{{data.remainingreadings}}</td>
                   <td>{{data.totalconsumers}}</td>
                   <td><button type="button" class="btn btn-warning btn-sm" (click)="viewList(data.groupno)">View List OF Remaining Consumer</button></td>

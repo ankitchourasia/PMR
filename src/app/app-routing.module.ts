@@ -146,6 +146,7 @@ import { GroupWiseSpotBillListComponent } from './DCINCHARGE/group-wise-spot-bil
 import { ConsumerWiseSpotBillComponent } from './DCINCHARGE/consumer-wise-spot-bill/consumer-wise-spot-bill.component';
 import { AllConsuptionReportComponent } from './DCINCHARGE/all-consuption-report/all-consuption-report.component';
 import { UpdateRestartReadingToNgbComponent } from './DCINCHARGE/update-restart-reading-to-ngb/update-restart-reading-to-ngb.component';
+import { DeleteReadingComponent } from './DCINCHARGE/delete-reading/delete-reading.component';
 
 
 const routes: Routes = [
@@ -244,6 +245,7 @@ const routes: Routes = [
 {path:'consumer-wise-spot-bill',component:ConsumerWiseSpotBillComponent},
 {path:'consumption-report',component:AllConsuptionReportComponent},
 {path:'update-restart-reading-to-ngb',component:UpdateRestartReadingToNgbComponent},
+{path:'delete-reading',component:DeleteReadingComponent},
 
 // GrouIncharge
 
