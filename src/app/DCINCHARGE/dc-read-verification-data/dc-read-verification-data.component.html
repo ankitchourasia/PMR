@@ -62,8 +62,8 @@
                 <td *ngIf="data.status === '2'">REJECTED</td>
                 <td>{{data.remark}}</td>
               </tr>
-              <tr *ngIf="loadingTable" class="text-center">
-                <td colspan="7">loading...</td>
+              <tr *ngIf="!dataToExport || dataToExport.length < 1" class="text-center">
+                <td colspan="7">No Records...</td>
               </tr>
             </table>
           </div>

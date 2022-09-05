@@ -1,9 +1,9 @@
 <div class="wrapper" appNoRightClick > 
   <app-md-header></app-md-header>
   <app-md-sidebar></app-md-sidebar>
-  <div class="loadr" *ngIf='loading'>
+  <!-- <div class="loadr" *ngIf='loading'>
     <img src="assets/imgs/loading.gif" class="loadimg">
-  </div>
+  </div> -->
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
@@ -28,7 +28,7 @@
                     <div>
                       <input type="text" class="form-control" [(ngModel)]="imeiNo"  name="imie" class="form-control" #imei="ngModel" [ngClass]="{'is-invalid': imei.invalid}" required >
                     </div>
-                    <button class="btn btn-primary" (click)="submitButtonClicked()" [disabled]="SubmitClicked || !locationCode || !imeiNo">Submit</button>
+                    <button class="btn btn-primary" (click)="submitButtonClicked()" [disabled]="submitClicked || !locationCode || !imeiNo">Submit</button>
                   </div>
           </form>
           </div>

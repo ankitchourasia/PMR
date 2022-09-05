@@ -134,13 +134,9 @@
                       </td>
                       <td>{{data.uploadby}}</td>
                     </tr>
-                  </tbody>
-                  <tbody *ngIf="resp?.length == ''">
-
-                    <tr>
-                      <td colspan="14" class="text-center"> <strong>No data Found.</strong></td>
+                    <tr *ngIf="!consumptionList || consumptionList.length < 1" class="text-center">
+                      <td colspan="14">No Records...</td>
                     </tr>
-
                   </tbody>
 
                 </table>

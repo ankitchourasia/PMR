@@ -213,7 +213,7 @@
                                       (click)="previousButtonClicked()">Previous</button>&nbsp;
                                     <button class="btn btn-primary"
                                       (click)="verifyReading(selectedData.custid, selectedData.imageid)" [disabled]="selectedData?.status !== '-1'">Verify</button>&nbsp;
-                                    <button class="btn btn-danger" (click)="deleteReading(selectedData.custid)" [disabled]="selectedData?.status !== '-1'">Delete</button>&nbsp;
+                                    <button class="btn btn-danger" (click)="deleteReading()" [disabled]="selectedData?.status !== '-1'">Delete</button>&nbsp;
                                     <button class="btn btn-primary" (click)="nextClicked()">Next</button>
                                   </div>
                                   <!-- </div> -->
