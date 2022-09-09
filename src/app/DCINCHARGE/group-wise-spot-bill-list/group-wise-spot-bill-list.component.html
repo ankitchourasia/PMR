@@ -27,9 +27,18 @@
               <div>
                 <label>Select Group</label>
                 <div>
-                  <select class="form-control" [(ngModel)]="groupno" name="groupno1" #groupnoText="ngModel" required>
+                  <select class="form-control" [(ngModel)]="groupno" name="groupno1" #groupnoText="ngModel" (change)="getRDByGroupNo()" required>
                     <option value=undefined>Select</option>
                     <option *ngFor="let group of groups" value="{{group.groupno}}">{{group.groupno}}</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label>Select RD</label>
+                <div>
+                  <select class="form-control" [(ngModel)]="rdNo" name="rdNo" required>
+                    <option value=undefined>Select</option>
+                    <option *ngFor="let rd of rdNumbers" value="{{rd.rdno}}">{{rd.rdno}}</option>
                   </select>
                 </div>
               </div>
@@ -42,6 +51,19 @@
       </div>
 
       <div class="box">
+        <div class="box-header flex-sapce-around">
+          <div>
+            <select class="form-control" [(ngModel)]="status" (change)="statusChanged()" name="status1" required>
+              <option>ALL</option>
+              <option>SUCCESS</option>
+              <option>ERROR</option>
+            </select>
+          </div>
+          <div>
+            <button type="button" class="btn btn-sm btn-primary" (click)="exportButtonClicked()" [disabled]="!listToShow || listToShow.length < 1">Export</button>
+          </div>
+        </div>
+        
         <table class="table table-bordered table-sm text-center custab">
           <thead>
           <tr>
@@ -63,7 +85,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let d of spotBillList; let i = index">
+          <tr *ngFor="let d of listToShow; let i = index">
             <td>{{i+1}}</td>
             <td>{{d.consumerno}}</td>
             <td>{{d.rd}}</td>
@@ -77,17 +99,21 @@
             <td>{{d.dateofbill}}</td>
             <td>{{d.cashduedate}}</td>
             <td>{{d.ngbuploadstatus}}</td>
-            <td><button  class="btn btn-warning btn-sm"  (click)="rePush(d.consumerno)">Re Push To NGB </button></td>
-            
             <td>
               <!-- <img height="100" width="80" (click)="imagePopup()" id="{{i+1}}" data-toggle="modal" data-target="#myModal"  src='{{baseurl.BaseUrlAll}}/mtr-reader/get-meter-reader-image?path={{d.imagefilepath}}'/> -->
               <div>
                 <a href="api/mtr-reader/get-meter-reader-image?path={{d.imagefilepath}}" data-lightbox="image-1" data-title="{{i+1}}">View</a>
               </div>
             </td>
+            <td>
+              <div class="form-group">
+              <button  class="btn btn-warning btn-sm"  (click)="rePush(d.consumerno)">Re Push To NGB </button>&nbsp;
+              <button  class="btn btn-danger btn-sm"  (click)="deleteReading(d)" *ngIf="d.ngbuploadstatus === 'ERRORINUPLOAD'">Delete</button>
+            </div>
+            </td>
           </tr>
           <tr>
-            <td colspan="13" *ngIf="!spotBillList || spotBillList.length < 1">No Records</td>
+            <td colspan="13" *ngIf="!listToShow || listToShow.length < 1">No Records</td>
           </tr>
         </tbody>
         </table>
