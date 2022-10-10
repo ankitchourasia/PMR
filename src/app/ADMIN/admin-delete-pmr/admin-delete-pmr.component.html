@@ -35,7 +35,7 @@
           <div class="form-group">
             <label class="control-label">Consumer No.</label>
             <div>
-              <input type="number" [(ngModel)]="consumerNo" name="consumerno" class="form-control"
+              <input type="text" [(ngModel)]="consumerNo" name="consumerno" class="form-control"
                 #consumernoText="ngModel" [ngClass]="{'is-invalid': f.submitted && consumernoText.invalid}" required>
               <div *ngIf="f.submitted && consumernoText.invalid" class="invalid-feedback">
                 <div *ngIf="consumernoText.errors.required" style="color:red;">Consumer No. is Required.</div>

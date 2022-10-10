@@ -42,7 +42,11 @@ export class AdminDeletePmrComponent implements OnInit {
       alert("Reading deleted successfully");
     },error => {
       this.loading = false;
-      alert('Server not responding');
+      if(error.msg){
+        alert(error.msg);
+      } else{
+        alert("Server not responding");
+      }
       console.log(error);
     });
   }
