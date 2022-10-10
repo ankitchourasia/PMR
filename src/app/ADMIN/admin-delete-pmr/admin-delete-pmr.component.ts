@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { SessionStorageService } from 'angular-web-storage';
@@ -11,6 +12,7 @@ import { GlobalConstants } from 'src/app/Util-services/global-constants';
 })
 export class AdminDeletePmrComponent implements OnInit {
 
+  selectedMonth;
   billMonth:string;
   billMonths = GlobalConstants.billMonths;
   consumerNo : string;
@@ -21,6 +23,10 @@ export class AdminDeletePmrComponent implements OnInit {
   constructor(private enc: EncreptiondecreptionService, private http: HttpClient, private session: SessionStorageService) { }
 
   ngOnInit() {
+  }
+
+  billMonthChanged(){
+    this.billMonth = formatDate(this.selectedMonth, "MMM-yyyy", "en-US");
   }
 
   deleteButtonClicked(){
