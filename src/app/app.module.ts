@@ -179,6 +179,12 @@ import { AllConsuptionReportComponent } from './DCINCHARGE/all-consuption-report
 import { UpdateRestartReadingToNgbComponent } from './DCINCHARGE/update-restart-reading-to-ngb/update-restart-reading-to-ngb.component';
 import { Above120ReadingAssesmentComponent } from './DCINCHARGE/above120-reading-assesment/above120-reading-assesment.component';
 import { DeleteReadingComponent } from './DCINCHARGE/delete-reading/delete-reading.component';
+import { AdminComponent } from './ADMIN/admin.component';
+import { AdminHomeComponent } from './ADMIN/admin-home/admin-home.component';
+import { AdminSidebarComponent } from './ADMIN/admin-sidebar/admin-sidebar.component';
+import { AdminHeaderComponent } from './ADMIN/admin-header/admin-header.component';
+import { AdminDeletePmrComponent } from './ADMIN/admin-delete-pmr/admin-delete-pmr.component';
+import { DcinchGroupWiseSpotBillComponent } from './DCINCHARGE/dcinch-group-wise-spot-bill/dcinch-group-wise-spot-bill.component';
 
 
 @NgModule({
@@ -348,7 +354,13 @@ import { DeleteReadingComponent } from './DCINCHARGE/delete-reading/delete-readi
     ConsumerWiseSpotBillComponent,
     AllConsuptionReportComponent,
     UpdateRestartReadingToNgbComponent,
-    DeleteReadingComponent
+    DeleteReadingComponent,
+    AdminComponent,
+    AdminHomeComponent,
+    AdminSidebarComponent,
+    AdminHeaderComponent,
+    AdminDeletePmrComponent,
+    DcinchGroupWiseSpotBillComponent
   ],
   imports: [
     NgbModule,

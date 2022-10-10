@@ -87,10 +87,14 @@ export class LoginAllComponent implements OnInit {
          this.router.navigate(['/company-wise-dashboard']);
       }
 
-        else{
+      else if(this.resp.flag==true && this.resp.role=="SWADMIN"){
+         this.router.navigate(['/admin']);
+      }
+
+      else{
          alert(this.msg=this.resp.msg);
          this.router.navigate(['/login']);
-       }
+      }
     
    },
     error=>{

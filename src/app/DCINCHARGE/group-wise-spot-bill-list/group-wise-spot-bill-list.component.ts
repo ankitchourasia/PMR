@@ -109,7 +109,7 @@ export class GroupWiseSpotBillListComponent implements OnInit {
     formdata.append("loccode",this.enc.encrypt(this.locationCode));
     formdata.append("billmonth",this.enc.encrypt(this.billmon));
     formdata.append("conumerno",this.enc.encrypt(consno));
-
+    this.loading = true;
     return this.http.post("api/spotbill-uploader/re-push-spot-bill", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
       this.loading = false;
       this.repushREes =success

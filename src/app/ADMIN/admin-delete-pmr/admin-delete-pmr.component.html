@@ -1,0 +1,65 @@
+<div class="wrapper">
+  <app-admin-header></app-admin-header>
+  <app-admin-sidebar></app-admin-sidebar>
+  <div class="content-wrapper">
+    <section class="content-header form-group">
+      <h1>
+        Delete PMR
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Delete PMR</a></li>
+      </ol>
+    </section>
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <h3 class="box-title">Delete PMR</h3>
+      </div>
+      <div class="box-body">
+        <form class="form-horizontal flex-sapce-around form-group" #f="ngForm">
+          <div>
+            <label>Bill Month</label>
+            <div>
+              <select class="form-control" [(ngModel)]="billMonth" name="billmon1" #billmon1Text="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" required>
+                <option value="undefined" disabled>Select</option>
+                <option *ngFor="let month of billMonths" [ngValue]="month">{{month}}</option>
+              </select>
+              <div *ngIf="f.submitted && billmon1Text.invalid" class="invalid-feedback">
+                <div *ngIf="billmon1Text.errors.required" style="color:red">Select Bill Month</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Consumer No.</label>
+            <div>
+              <input type="number" [(ngModel)]="consumerNo" name="consumerno" class="form-control"
+                #consumernoText="ngModel" [ngClass]="{'is-invalid': f.submitted && consumernoText.invalid}" required>
+              <div *ngIf="f.submitted && consumernoText.invalid" class="invalid-feedback">
+                <div *ngIf="consumernoText.errors.required" style="color:red;">Consumer No. is Required.</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Request By ID</label>
+            <div>
+              <input type="text" [(ngModel)]="id" name="id" class="form-control" #idText="ngModel"
+                [ngClass]="{'is-invalid': f.submitted && idText.invalid}" required>
+              <div *ngIf="f.submitted && idText.invalid" class="invalid-feedback">
+                <div *ngIf="idText.errors.required" style="color:red;">ID is Required.</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label class="control-label">Remark</label>
+            <textarea class="form-control form-control-sm" placeholder="Remark" id="remark" name="remark"
+              maxlength="100" rows="2" cols="20" [(ngModel)]="remark"></textarea>
+          </div>
+          <div>
+            <label class="text-white">*</label>
+            <button type="button" class="btn btn-sm btn-primary"
+              (click)="deleteButtonClicked()" [disabled]="loading || !f.form.valid">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

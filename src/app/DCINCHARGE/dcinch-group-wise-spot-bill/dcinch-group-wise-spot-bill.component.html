@@ -1,0 +1,136 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+       Smart Meter
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Smart Meter</a></li>
+        <li class="active">Smart Meter</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Smart Meter Report</h3>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <form class="form-horizontal" #f="ngForm" novalidate>
+                <div class="box-body flex-sapce-around">
+                  <!-- <div class="form-group">
+                    <label class="control-label">Group No.</label>
+                    <div>
+                      <input type="text" [(ngModel)]="groupno" name="groupnoText" value="{{groupno}}"
+                        class="form-control" readonly>
+                    </div>
+                  </div> -->
+
+                  <div class="form-group">
+                    <label class="control-label">Bill Month</label>
+                    <div>
+                      <select class="form-control" [(ngModel)]="billMonth" name="billMonth" #billmonthText="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && billmonthText.invalid }" required>
+                        <option value="">Select</option>
+                        <!-- <option value="Sep-2020">Sep-2020</option>
+                    <option value="Oct-2020">Oct-2020</option>
+                    <option value="Nov-2020">Nov-2020</option>
+                    <option value="Dec-2020">Dec-2020</option> -->
+                        <option *ngFor="let month of billMonths" [ngValue]="month">{{month}}</option>
+                      </select>
+                      <div *ngIf="f.submitted && billmonthText.invalid" class="invalid-feedback">
+                        <div *ngIf="billmonthText.errors.required" style="color:red">Select Bill Month</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- /.box-body -->
+                    <div class="row">
+                      <label class="control-lable text-white">*</label>
+                      <div class="col-sm-10 col-md-offset-2 ">
+                        <button type="button" class="btn btn-success" [disabled]="!f.form.valid"
+                          (click)="searchButtonClicked()">Search</button>
+                      </div>
+                    </div>
+                  <!-- /.box-footer -->
+                </div>
+                <div *ngIf="groups && groups.length > 0">
+                  <table class="table table-bordered text-center">
+                      <tr>
+                      <th>SNO</th>
+                      <th>BILL MONTH</th>
+                      <th>RD NO</th>
+                      <th>COUNT</th>
+                      <th></th>
+                    </tr>
+                    <tbody>
+                      <tr *ngFor="let group of groups; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{group.billmonth}}</td>
+                        <td>{{group.groupbo}}</td>
+                        <td>{{group.count}}</td>
+                        <td><button class="btn btn-sm btn-primary" (click)="getByGroupNoAndBillMonth(group.groupbo)" data-toggle="modal" data-target="#myModal">Show List</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell
+      of MPPKVVCL, under SE IT ERP.</strong>
+    reserved.
+  </footer>
+</div>
+
+<div id="myModal" class="modal fade moda-lg" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-center">Consumption Details</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <button class="btn btn-sm btn-primary"(click)="exportAsXsls()">Export</button>
+        </div>
+          <div class="modal-body">
+              <table class="table table-sm table-bordered">
+                <tr>
+                  <td>SNO</td>
+                  <td>consumer No</td>
+                  <td>Name</td>
+                  <td>Group-RD</td>
+                  <td>Curr Read</td>
+                  <td>Billed Units</td>
+                  <td>Amount</td>
+                </tr>
+                <tr *ngFor="let consumer of consumers; let i = index">
+                  <td>{{i + 1}}</td>
+                  <td>{{consumer.consumerno}}</td>
+                  <td>{{consumer.consumername}}</td>
+                  <td>{{consumer.gr}} - {{consumer.rd}}</td>
+                  <td>{{consumer.currentreading}}</td>
+                  <td>{{consumer.billedunit}}</td>
+                  <td>{{consumer.enchbilled}}</td>
+                </tr>
+              </table>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+      </div>  
+  </div>
+</div>

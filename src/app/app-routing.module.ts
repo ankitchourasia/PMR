@@ -147,6 +147,10 @@ import { ConsumerWiseSpotBillComponent } from './DCINCHARGE/consumer-wise-spot-b
 import { AllConsuptionReportComponent } from './DCINCHARGE/all-consuption-report/all-consuption-report.component';
 import { UpdateRestartReadingToNgbComponent } from './DCINCHARGE/update-restart-reading-to-ngb/update-restart-reading-to-ngb.component';
 import { DeleteReadingComponent } from './DCINCHARGE/delete-reading/delete-reading.component';
+import { AdminHomeComponent } from './ADMIN/admin-home/admin-home.component';
+import { AdminComponent } from './ADMIN/admin.component';
+import { AdminDeletePmrComponent } from './ADMIN/admin-delete-pmr/admin-delete-pmr.component';
+import { DcinchGroupWiseSpotBillComponent } from './DCINCHARGE/dcinch-group-wise-spot-bill/dcinch-group-wise-spot-bill.component';
 
 
 const routes: Routes = [
@@ -238,7 +242,7 @@ const routes: Routes = [
 {path:'date-wise-self-pmr-by-consumer',component:DcinchDateWiseSelfPmrComponent},
 {path:'group-wise-self-pmr-by-consumer',component:DcinchGroupWiseSelfPmrComponent},
 {path:'date-between-self-pmr',component:DcinchDateBetweenSelfPmrComponent},
-{path:'smart-meter-report',component:DcinchSmartMeterReportComponent},
+// {path:'smart-meter-report',component:DcinchSmartMeterReportComponent},
 
 {path:'group-wise-spot-bill-count',component:GroupWiseSpotBillCountComponent},
 {path:'group-wise-spot-bill-list',component:GroupWiseSpotBillListComponent},
@@ -246,6 +250,7 @@ const routes: Routes = [
 {path:'consumption-report',component:AllConsuptionReportComponent},
 {path:'update-restart-reading-to-ngb',component:UpdateRestartReadingToNgbComponent},
 {path:'delete-reading',component:DeleteReadingComponent},
+{path:'group-wise-spot-bill',component:DcinchGroupWiseSpotBillComponent},
 
 // GrouIncharge
 
@@ -316,6 +321,8 @@ const routes: Routes = [
 
 {path:'redirect/:uid/:pass', component:RedirectComponent},
 
+{path:'admin', component: AdminComponent},
+{path:'admin-delete-pmr', component: AdminDeletePmrComponent},
 
 ];
 

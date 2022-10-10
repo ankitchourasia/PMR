@@ -107,7 +107,7 @@
             </td>
             <td>
               <div class="form-group">
-              <button  class="btn btn-warning btn-sm"  (click)="rePush(d.consumerno)">Re Push To NGB </button>&nbsp;
+              <button  class="btn btn-warning btn-sm"  (click)="rePush(d.consumerno)" [disabled]="loading">Re Push To NGB </button>&nbsp;
               <button  class="btn btn-danger btn-sm"  (click)="deleteReading(d)" *ngIf="d.ngbuploadstatus === 'ERRORINUPLOAD'">Delete</button>
             </div>
             </td>
