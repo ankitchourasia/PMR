@@ -124,7 +124,7 @@ export class GroupWiseSpotBillListComponent implements OnInit {
 
   deleteReading(data){
     if(confirm("Are you sure, you want to delete Read ?")){
-      if(data.ngbuploadstatus !== "ERRORINUPLOAD"){
+      if(data.ngbuploadstatus === "UPLOADEDSUCCESSFULLY"){
         return;
       }
       let formdata = new FormData();
@@ -138,7 +138,7 @@ export class GroupWiseSpotBillListComponent implements OnInit {
       }, error=>{
         this.loading = false;
         console.log(error);
-        alert("Unable to delete");
+        alert(error.msg);
       });
     }
   }

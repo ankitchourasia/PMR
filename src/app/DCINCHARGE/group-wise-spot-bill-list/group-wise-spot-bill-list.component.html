@@ -105,11 +105,14 @@
                 <a href="api/mtr-reader/get-meter-reader-image?path={{d.imagefilepath}}" data-lightbox="image-1" data-title="{{i+1}}">View</a>
               </div>
             </td>
-            <td>
+            <td *ngIf="d.ngbuploadstatus !== 'UPLOADEDSUCCESSFULLY'">
               <div class="form-group">
-              <button  class="btn btn-warning btn-sm"  (click)="rePush(d.consumerno)" [disabled]="loading">Re Push To NGB </button>&nbsp;
-              <button  class="btn btn-danger btn-sm"  (click)="deleteReading(d)" *ngIf="d.ngbuploadstatus === 'ERRORINUPLOAD'">Delete</button>
+              <button  class="btn btn-warning btn-sm"  (click)="rePush(d.consumerno)" [disabled]="loading" *ngIf="d.ngbuploadstatus !== 'UPLOADEDSUCCESSFULLY'">Re Push To NGB </button>&nbsp;
+              <button  class="btn btn-danger btn-sm"  (click)="deleteReading(d)" *ngIf="d.ngbuploadstatus !== 'UPLOADEDSUCCESSFULLY'">Delete</button>
             </div>
+            </td>
+            <td *ngIf="d.ngbuploadstatus === 'UPLOADEDSUCCESSFULLY'">
+              NA
             </td>
           </tr>
           <tr>
