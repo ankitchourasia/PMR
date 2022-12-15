@@ -86,7 +86,7 @@ export class GroupWiseSpotBillListComponent implements OnInit {
     this.spotBillList.forEach(element => {
       if(element.ngbuploadstatus === "UPLOADEDSUCCESSFULLY"){ 
         this.successList.push(element);
-      } else if(element.ngbuploadstatus === "ERRORINUPLOAD"){
+      } else if(!element.ngbuploadstatus || element.ngbuploadstatus === "ERRORINUPLOAD"){
         this.errorList.push(element);
       }
     });
