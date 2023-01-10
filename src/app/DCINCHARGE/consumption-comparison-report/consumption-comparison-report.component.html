@@ -1,0 +1,103 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Consumption Percentage Report
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box box-warning">
+        <div class="box-body">
+          <div class="form-group">
+            <div class="flex-sapce-around">
+              <div>
+              <label>Bill Month</label>
+              <div>
+                <select class="form-control" [(ngModel)]="billmon" name="billmon1" #billmon1Text="ngModel" required>
+                  <option value=undefined>Select</option>
+                  <option *ngFor="let month of billMonths" [ngValue]="month">{{month}}</option>
+                </select>
+              </div>
+              </div>
+              <div>
+                <label>Select Group</label>
+                <div>
+                  <select class="form-control" [(ngModel)]="groupno" name="groupno1" #groupnoText="ngModel" required>
+                    <option value=undefined>Select</option>
+                    <option *ngFor="let group of groups" value="{{group.groupno}}">{{group.groupno}}</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label>Select</label>
+                <div>
+                  <select class="form-control" [(ngModel)]="consumption" name="consumption" required>
+                    <option value=undefined>Select</option>
+                    <option value="UNDERPERCENT">Below 90%</option>
+                    <option value="OUTOFPERCENT">Above 125%</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <button type="button" class="btn btn-primary" (click)="searchButtonClicked()" [disabled]="!groupno || !consumption || !billmon">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <table class="table table-bordered table-sm text-center custab">
+          <thead>
+          <tr>
+            <th>SNO</th>
+            <th>Group-RD No</th>
+            <th>Const ID</th>
+            <th>Consumer Name</th>
+            <th>Read Date</th>
+            <th>Upload Date</th>
+            <th>Reading Type</th>
+            <th>Current Read</th>
+            <th>MD</th>
+            <th>PF</th>
+            <th>Assessment</th>
+            <th>Consumption</th>
+            <th>Reader ID</th>
+            <th>Consumption Range</th>
+            <!-- <th>NGB STATUS</th>
+            <th>NGB ERROR</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of readings; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{d.gr}} - {{d.rd}}</td>
+            <td>{{d.custid}}</td>
+            <td>{{d.name}}</td>
+            <td>{{d.datereading | date:'dd-MM-yyyy'}}</td>
+            <td>{{d.dateupload | date:'dd-MM-yyyy'}}</td>
+            <td>{{d.readingtype}}</td>
+            <td>{{d.reading}}</td>
+            <td>{{d.md}}</td>
+            <td>{{d.pf}}</td>
+            <td>{{d.assesment}}</td>
+            <td>{{d.consumption}}</td>
+            <td>{{d.readerid}}</td>
+            <td>{{d.percentageflag}}</td>
+            <!-- <td>{{d.ngbuploadst}}</td>
+            <td>{{d.ngberror}}</td> -->
+          </tr>
+          <tr>
+            <td colspan="14" *ngIf="!readings || readings.length < 1">No Records</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>

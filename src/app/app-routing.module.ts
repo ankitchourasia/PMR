@@ -151,6 +151,12 @@ import { AdminHomeComponent } from './ADMIN/admin-home/admin-home.component';
 import { AdminComponent } from './ADMIN/admin.component';
 import { AdminDeletePmrComponent } from './ADMIN/admin-delete-pmr/admin-delete-pmr.component';
 import { DcinchGroupWiseSpotBillComponent } from './DCINCHARGE/dcinch-group-wise-spot-bill/dcinch-group-wise-spot-bill.component';
+import { GroupRdWiseReadingComponent } from './DCINCHARGE/group-rd-wise-reading/group-rd-wise-reading.component';
+import { ReaderWiseReadingComponent } from './DCINCHARGE/reader-wise-reading/reader-wise-reading.component';
+import { ConsumptionComparisonReportComponent } from './DCINCHARGE/consumption-comparison-report/consumption-comparison-report.component';
+import { UpdateAndVerifyReadingsComponent } from './DCINCHARGE/update-and-verify-readings/update-and-verify-readings.component';
+import { DEUpdateAndVerifyReadingsComponent } from './DE/de-update-and-verify-readings/de-update-and-verify-readings.component';
+import { DcinchInstantBillRepushComponent } from './DCINCHARGE/dcinch-instant-bill-repush/dcinch-instant-bill-repush.component';
 
 
 const routes: Routes = [
@@ -251,6 +257,11 @@ const routes: Routes = [
 {path:'update-restart-reading-to-ngb',component:UpdateRestartReadingToNgbComponent},
 {path:'delete-reading',component:DeleteReadingComponent},
 {path:'group-wise-spot-bill',component:DcinchGroupWiseSpotBillComponent},
+{path:'group-rd-wise-reading',component:GroupRdWiseReadingComponent},
+{path:'reader-wise-reading',component:ReaderWiseReadingComponent},
+{path:'consumption-comparison-report',component:ConsumptionComparisonReportComponent},
+{path:'update-and-verify-reading',component:UpdateAndVerifyReadingsComponent},
+{path:'instant-bill-repush',component:DcinchInstantBillRepushComponent},
 
 // GrouIncharge
 
@@ -289,6 +300,8 @@ const routes: Routes = [
 {path:'generate-qr-code',component:GenerateQrCodeComponent},
 {path:'de-read-image-verification',component:DeReadingImageVerificationComponent},
 {path:'de-read-verification-dashboard',component:DeReadingVerificationDashboardComponent},
+
+{path:'de-update-and-verify-reading',component:DEUpdateAndVerifyReadingsComponent},
 // circle USER
 
 {path:'circle_dashboard', component:CircleDashboardComponent},

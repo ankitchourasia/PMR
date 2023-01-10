@@ -185,6 +185,12 @@ import { AdminSidebarComponent } from './ADMIN/admin-sidebar/admin-sidebar.compo
 import { AdminHeaderComponent } from './ADMIN/admin-header/admin-header.component';
 import { AdminDeletePmrComponent } from './ADMIN/admin-delete-pmr/admin-delete-pmr.component';
 import { DcinchGroupWiseSpotBillComponent } from './DCINCHARGE/dcinch-group-wise-spot-bill/dcinch-group-wise-spot-bill.component';
+import { GroupRdWiseReadingComponent } from './DCINCHARGE/group-rd-wise-reading/group-rd-wise-reading.component';
+import { ReaderWiseReadingComponent } from './DCINCHARGE/reader-wise-reading/reader-wise-reading.component';
+import { ConsumptionComparisonReportComponent } from './DCINCHARGE/consumption-comparison-report/consumption-comparison-report.component';
+import { UpdateAndVerifyReadingsComponent } from './DCINCHARGE/update-and-verify-readings/update-and-verify-readings.component';
+import { DEUpdateAndVerifyReadingsComponent } from './DE/de-update-and-verify-readings/de-update-and-verify-readings.component';
+import { DcinchInstantBillRepushComponent } from './DCINCHARGE/dcinch-instant-bill-repush/dcinch-instant-bill-repush.component';
 
 
 @NgModule({
@@ -360,7 +366,13 @@ import { DcinchGroupWiseSpotBillComponent } from './DCINCHARGE/dcinch-group-wise
     AdminSidebarComponent,
     AdminHeaderComponent,
     AdminDeletePmrComponent,
-    DcinchGroupWiseSpotBillComponent
+    DcinchGroupWiseSpotBillComponent,
+    GroupRdWiseReadingComponent,
+    ReaderWiseReadingComponent,
+    ConsumptionComparisonReportComponent,
+    UpdateAndVerifyReadingsComponent,
+    DEUpdateAndVerifyReadingsComponent,
+    DcinchInstantBillRepushComponent
   ],
   imports: [
     NgbModule,

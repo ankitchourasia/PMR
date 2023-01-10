@@ -1,0 +1,95 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Reader wise Reading
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-list-alt"></i>Reading Data</a></li>
+        <li class="active">Reader wise Reading</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-warning">
+            <div class="box-body">
+              <div class="flex-sapce-around form-group">
+                <div>
+                  <label class="control-label">Start Date</label>
+                  <input type="date" class="form-control form-control-sm" [(ngModel)]="date1" id="date1" name="date1" required>
+                </div>
+                <div>
+                  <label class="control-label">End Date</label>
+                  <input type="date" class="form-control form-control-sm" max="{{currentDate | date:'yyyy-MM-dd'}}" [(ngModel)]="date2" id="date2" name="date2" required>
+                </div>
+                <div>
+                  <label class="control-label">Reader</label>
+                  <select class="form-control" [(ngModel)]="readerId" name="meterreaderid1" required>
+                    <option value="undefined">Select</option>
+                    <option>ALL</option>
+                    <option *ngFor="let reader of meterReaders" value="{{reader.mtrdrid}}">{{reader.mtrdrid}}--{{reader.name}}</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="text-white">*</label>
+                  <button class="btn btn-sm btn-primary" (click)="getDataClicked()" [disabled]="!readerId || !date1 || !date2">Get Data </button>
+                </div>
+              </div>
+              <table class="table table-sm table-bordered custab" *ngIf="data && !loading">
+                <thead>
+                  <tr>
+                    <th>SNO</th>
+                    <th>Group-RD No</th>
+                    <th>Const ID</th>
+                    <th>Consumer Name</th>
+                    <th>Read Date</th>
+                    <th>Upload Date</th>
+                    <th>Reading Type</th>
+                    <th>Current Read</th>
+                    <th>MD</th>
+                    <th>PF</th>
+                    <th>Assessment</th>
+                    <th>Consumption</th>
+                    <th>Reader ID</th>
+                    <th>Consumption Range</th>
+                    <!-- <th>NGB STATUS</th>
+                    <th>NGB ERROR</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let d of data; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{d.gr}} - {{d.rd}}</td>
+                    <td>{{d.custid}}</td>
+                    <td>{{d.name}}</td>
+                    <td>{{d.datereading | date:'dd-MM-yyyy'}}</td>
+                    <td>{{d.dateupload | date:'dd-MM-yyyy'}}</td>
+                    <td>{{d.readingtype}}</td>
+                    <td>{{d.reading}}</td>
+                    <td>{{d.md}}</td>
+                    <td>{{d.pf}}</td>
+                    <td>{{d.assesment}}</td>
+                    <td>{{d.consumption}}</td>
+                    <td>{{d.readerid}}</td>
+                    <td>{{d.percentageflag}}</td>
+                    <!-- <td>{{d.ngbuploadst}}</td>
+                    <td>{{d.ngberror}}</td> -->
+                  </tr>
+                  <tr>
+                    <td colspan="14" *ngIf="!data || data.length < 1">No Records</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
