@@ -19,13 +19,13 @@
           <div>
             <label>Bill Month</label>
             <div>
-              <!-- <select class="form-control" [(ngModel)]="billMonth" name="billmon1" #billmon1Text="ngModel"
+              <select class="form-control" [(ngModel)]="billMonth" name="billmon1" #billmon1Text="ngModel"
                 [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" required>
                 <option value="undefined" disabled>Select</option>
                 <option *ngFor="let month of billMonths" [ngValue]="month">{{month}}</option>
-              </select>-->
-              <input type="month" [(ngModel)]="selectedMonth" class="form-control" id="start" name="start" min="2015-01" name="billmon1" #billmon1Text="ngModel"
-              [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" (change)="billMonthChanged()" required>
+              </select>
+              <!-- <input type="month" [(ngModel)]="selectedMonth" class="form-control" id="start" name="start" min="2015-01" name="billmon1" #billmon1Text="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" (change)="billMonthChanged()" required> -->
 
               <div *ngIf="f.submitted && billmon1Text.invalid" class="invalid-feedback">
                 <div *ngIf="billmon1Text.errors.required" style="color:red">Select Bill Month</div>

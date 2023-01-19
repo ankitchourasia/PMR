@@ -15,29 +15,64 @@ export class DEUpdateAndVerifyReadingsComponent implements OnInit {
   user = this.session.get('username');
   loading : boolean;
   readings : any = [];
+  locations : any = [];
+  groups : any = [];
+  location : any;
+  group : any;
 
   constructor(private session : SessionStorageService, private http: HttpClient, 
     private enc: EncreptiondecreptionService) { }
 
   ngOnInit() {
-    this.getReadingsByLocationCode();
+    // this.getCountByDivisionCode(this.division);
+    this.getLocationsByDivisionCode(this.division);
   }
 
-  getReadingsByLocationCode(){
+  getLocationsByDivisionCode(division){
     this.loading = true;
     let formdata : FormData = new FormData();
-    formdata.append("division",this.enc.encrypt(this.division));
-    return this.http.post("api/de-verification/get-de-list-to-verify", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
+    formdata.append("division",this.enc.encrypt(division));
+    return this.http.post("api/office-master-ops/get-dc-in-division-single", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
       this.loading = false;
-      this.readings = this.filterReadings(success);
+      this.locations = success;
     }, error=>{
       this.loading = false;
       console.log(error);
     });
   }
 
-  filterReadings(readings){
-    return readings.filter(read => read.percentageflag );
+  locationChanged(){
+    this.group = undefined;
+    this.getGroupsByLocationCode();
+  }
+
+  getGroupsByLocationCode(){
+    this.groups = [];
+    this.loading = true;
+    let formdata : FormData = new FormData();
+    formdata.append("loccode",this.enc.encrypt(this.location));
+    return this.http.post("api/master-rec/get-list-of-groups-in-dc", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
+      this.loading = false;
+      this.groups = success;
+    }, error=>{
+      this.loading = false;
+      console.log(error);
+    });
+  }
+
+  getReadingsByGroupNo(){
+    this.loading = true;
+    let formdata : FormData = new FormData();
+    formdata.append("loccode",this.enc.encrypt(this.location));
+    formdata.append("gr",this.enc.encrypt(this.group));
+    return this.http.post("api/de-verification/get-de-list-to-verify-loc-wise", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
+      this.loading = false;
+      // this.readings = this.filterReadings(success);
+      this.readings = success;
+    }, error=>{
+      this.loading = false;
+      console.log(error);
+    });
   }
 
   readToEdit : any = {};
@@ -86,7 +121,7 @@ export class DEUpdateAndVerifyReadingsComponent implements OnInit {
       $("#myModal11").modal("hide");
       // alert("Reading updated successfully");
       alert(success.msg);
-      this.getReadingsByLocationCode();
+      this.getReadingsByGroupNo();
     }, error=>{
       this.loading = false;
       alert("Unable to update Reading, please try again later..");
@@ -109,7 +144,7 @@ export class DEUpdateAndVerifyReadingsComponent implements OnInit {
       $("#myModal11").modal("hide");
       // alert("Assessment updated successfully");
       alert(success.msg);
-      this.getReadingsByLocationCode();
+      this.getReadingsByGroupNo();
     }, error=>{
       this.loading = false;
       alert("Unable to update Assessment, please try again later..");
@@ -126,9 +161,8 @@ export class DEUpdateAndVerifyReadingsComponent implements OnInit {
 
     return this.http.post("api/de-verification/verify-from-de", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe((success : any)=>{
       this.loading = false;
-      // alert("verified successfully");
       alert(success.msg);
-      this.getReadingsByLocationCode();
+      this.getReadingsByGroupNo();
     }, error=>{
       this.loading = false;
       alert("unable to verify");
@@ -147,36 +181,16 @@ export class DEUpdateAndVerifyReadingsComponent implements OnInit {
       this.http.post("api/de-verification/verify-from-de", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
         if(i === readings.length -1){
           this.loading = false;
-          this.getReadingsByLocationCode();
+          this.getReadingsByGroupNo();
         }
       }, error=>{
         if(i === readings.length -1){
           this.loading = false;
-          this.getReadingsByLocationCode();
+          this.getReadingsByGroupNo();
         }
         console.log(error);
       });
     };
   }
-
-  // deleteClicked(reading){
-  //   this.loading = true;
-  //   let formdata : FormData = new FormData();
-  //   formdata.append("consno",this.enc.encrypt(reading.custid));
-  //   formdata.append("billmonth",this.enc.encrypt(reading.billmonth));
-  //   formdata.append("loccode",this.enc.encrypt(this.division));
-  //   formdata.append("userid",this.enc.encrypt(this.user));0
-  //   formdata.append("verifytype",this.enc.encrypt("Deleted"));
-  //   formdata.append("verifyremark",this.enc.encrypt("Deleted"));
-
-  //   return this.http.post("api/de-verification/update-to-Delete", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
-  //     this.loading = false;
-  //     alert("Deleted successfully");
-  //     this.getReadingsByLocationCode();
-  //   }, error=>{
-  //     this.loading = false;
-  //     console.log(error);
-  //   });
-  // }
 
 }

@@ -191,6 +191,8 @@ import { ConsumptionComparisonReportComponent } from './DCINCHARGE/consumption-c
 import { UpdateAndVerifyReadingsComponent } from './DCINCHARGE/update-and-verify-readings/update-and-verify-readings.component';
 import { DEUpdateAndVerifyReadingsComponent } from './DE/de-update-and-verify-readings/de-update-and-verify-readings.component';
 import { DcinchInstantBillRepushComponent } from './DCINCHARGE/dcinch-instant-bill-repush/dcinch-instant-bill-repush.component';
+import { DEReadingCountForVerificationComponent } from './DE/de-reading-count-for-verification/de-reading-count-for-verification.component';
+import { ReadingCountForVerificationComponent } from './DCINCHARGE/reading-count-for-verification/reading-count-for-verification.component';
 
 
 @NgModule({
@@ -372,7 +374,9 @@ import { DcinchInstantBillRepushComponent } from './DCINCHARGE/dcinch-instant-bi
     ConsumptionComparisonReportComponent,
     UpdateAndVerifyReadingsComponent,
     DEUpdateAndVerifyReadingsComponent,
-    DcinchInstantBillRepushComponent
+    DcinchInstantBillRepushComponent,
+    ReadingCountForVerificationComponent,
+    DEReadingCountForVerificationComponent
   ],
   imports: [
     NgbModule,

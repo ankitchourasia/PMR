@@ -11,7 +11,32 @@
       </h1>
     </section>
     <section class="content">
-      <!-- <div class="box"> -->
+      <div class="box box-warning">
+        <div class="box-body">
+          <div class="flex-sapce-around">
+            <div>
+              <label>Select Location</label>
+              <select class="form-control form-control-sm" name="locationCode" [(ngModel)]="location"
+                (change)="locationChanged()" required>
+                <option value=undefined>Select</option>
+                <option *ngFor="let loc of locations" value="{{loc.loccode}}">{{loc.loccode}}</option>
+              </select>
+            </div>
+            <div>
+              <label>Select Group</label>
+              <select class="form-control form-control-sm" [(ngModel)]="group" name="groupno1"
+                required>
+                <option value=undefined>Select</option>
+                <option *ngFor="let group of groups" value="{{group.groupno}}">{{group.groupno}}</option>
+              </select>
+            </div>
+            <div>
+              <button type="button" class="btn btn-primary" id="search" name="search" (click)="getReadingsByGroupNo()"
+                [disabled]="!group || loading">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
         <table class="table table-bordered table-sm text-center custab">
           <thead>
           <tr>
@@ -61,16 +86,14 @@
               <td><button class="button btn-sm btn-primary" (click)="editClicked(d)" data-toggle="modal" data-target="#myModal11">Edit</button></td>
               <td>
                 <button class="button btn-sm btn-info" (click)="verifyClicked(d)">Verify</button>&nbsp;
-                <!-- <button class="button btn-sm btn-danger" (click)="deleteClicked(d)">Delete</button> -->
               </td>
             </tr>
           </ng-container>
           <tr>
-            <td colspan="14" *ngIf="!readings || readings.length < 1">No Records</td>
+            <td colspan="17" *ngIf="!readings || readings.length < 1">No Records</td>
           </tr>
         </tbody>
-        </table>
-      <!-- </div> -->
+      </table>
     </section>
   </div>
 </div>

@@ -157,6 +157,8 @@ import { ConsumptionComparisonReportComponent } from './DCINCHARGE/consumption-c
 import { UpdateAndVerifyReadingsComponent } from './DCINCHARGE/update-and-verify-readings/update-and-verify-readings.component';
 import { DEUpdateAndVerifyReadingsComponent } from './DE/de-update-and-verify-readings/de-update-and-verify-readings.component';
 import { DcinchInstantBillRepushComponent } from './DCINCHARGE/dcinch-instant-bill-repush/dcinch-instant-bill-repush.component';
+import { ReadingCountForVerificationComponent } from './DCINCHARGE/reading-count-for-verification/reading-count-for-verification.component';
+import { DEReadingCountForVerificationComponent } from './DE/de-reading-count-for-verification/de-reading-count-for-verification.component';
 
 
 const routes: Routes = [
@@ -262,6 +264,7 @@ const routes: Routes = [
 {path:'consumption-comparison-report',component:ConsumptionComparisonReportComponent},
 {path:'update-and-verify-reading',component:UpdateAndVerifyReadingsComponent},
 {path:'instant-bill-repush',component:DcinchInstantBillRepushComponent},
+{path:'reading-count-for-verification',component:ReadingCountForVerificationComponent},
 
 // GrouIncharge
 
@@ -300,6 +303,7 @@ const routes: Routes = [
 {path:'generate-qr-code',component:GenerateQrCodeComponent},
 {path:'de-read-image-verification',component:DeReadingImageVerificationComponent},
 {path:'de-read-verification-dashboard',component:DeReadingVerificationDashboardComponent},
+{path:'de-reading-count-to-verify',component:DEReadingCountForVerificationComponent},
 
 {path:'de-update-and-verify-reading',component:DEUpdateAndVerifyReadingsComponent},
 // circle USER

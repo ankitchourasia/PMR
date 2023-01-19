@@ -1,0 +1,45 @@
+<div class="wrapper" appNoRightClick>
+  <app-dcinch-header></app-dcinch-header>
+  <app-dcinch-sidebar></app-dcinch-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Reading Count To Verify
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box">
+        <table class="table table-bordered table-sm text-center custab">
+          <thead>
+            <tr>
+              <th>SNO</th>
+              <th>LOCATION CODE</th>
+              <th>NAME</th>
+              <th>GROUP NO</th>
+              <th>COUNT</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let d of groups; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{d.loccode}}</td>
+              <td>{{d.locname}}</td>
+              <td>{{d.grno}}</td>
+              <td>{{d.count}}</td>
+              <td><a href="javascript:void(0);" (click)="getReadingsClicked(d)">VIEW</a></td>
+            </tr>
+            <tr *ngIf="!groups || groups.length < 1">
+              <td colspan="6">
+                NO RECORDS
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>

@@ -11,64 +11,85 @@
       </h1>
     </section>
     <section class="content">
+      <div class="box box-warning">
+        <div class="box-body">
+          <div class="flex-sapce-around">
+            <div>
+              <label>Select Group</label>
+              <select class="form-control form-control-sm" [(ngModel)]="group" name="groupno1"
+                #groupnoText="ngModel" required>
+                <option value=undefined>Select</option>
+                <option *ngFor="let group of groups" value="{{group.groupno}}">{{group.groupno}}</option>
+              </select>
+            </div>
+            <div>
+              <button type="button" class="btn btn-primary" id="search" name="search" (click)="getReadingsByGroupNo()"
+                [disabled]="!group || loading">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="box">
         <table class="table table-bordered table-sm text-center custab">
           <thead>
-          <tr>
-            <th>SNO</th>
-            <th>Group-RD No</th>
-            <th>Consumer No</th>
-            <th>Consumer Name</th>
-            <th>Read Date</th>
-            <th>Reading Type</th>
-            <th>Bill Type</th>
-            <th>Bill Month</th>
-            <th>Reading</th>
-            <th>MD</th>
-            <th>PF</th>
-            <th>Assessment</th>
-            <th>Consumption</th>
-            <th>Range</th>
-            <th>Image</th>
-            <th>Edit</th>
-            <th>ACTION &nbsp;
-              <button class="button btn-sm btn-warning" (click)="verifyAll(readings)" [disabled]="!readings || readings.length < 1">Verify All</button>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let d of readings; let i = index">
             <tr>
-              <td>{{i+1}}</td>
-              <td>{{d.gr}} - {{d.rd}}</td>
-              <td>{{d.custid}}</td>
-              <td>{{d.name}}</td>
-              <td>{{d.datereading | date:'dd-MM-yyyy'}}</td>
-              <td>{{d.readingtype}}</td>
-              <td>{{d.usetype}}</td>
-              <td>{{d.billmonth}}</td>
-              <td>{{d.reading}}</td>
-              <td>{{d.md}}</td>
-              <td>{{d.pf}}</td>
-              <td>{{d.assesment}}</td>
-              <td>{{d.consumption}}</td>
-              <td>{{d.percentageflag}}</td>
-              <td>
-                <div>
-                  <a href="api/mtr-reader/get-meter-reader-image?path={{d.imagepath}}" data-lightbox="image-1" data-title="{{i}}">View</a>
-                </div>
-              </td>
-              <td><button class="button btn-sm btn-primary" (click)="editClicked(d)" data-toggle="modal" data-target="#myModal11">Edit</button></td>
-              <td>
-                <button class="button btn-sm btn-info" (click)="verifyClicked(d)">Verify</button>&nbsp;
-                <button class="button btn-sm btn-danger" (click)="deleteClicked(d)">Delete</button>
-              </td>
+              <th>SNO</th>
+              <th>Group-RD No</th>
+              <th>Consumer No</th>
+              <th>Consumer Name</th>
+              <th>Read Date</th>
+              <th>Reading Type</th>
+              <th>Bill Type</th>
+              <th>Bill Month</th>
+              <th>Reading</th>
+              <th>MD</th>
+              <th>PF</th>
+              <th>Assessment</th>
+              <th>Consumption</th>
+              <th>Range</th>
+              <th>Image</th>
+              <th>Edit</th>
+              <th>ACTION &nbsp;
+                <button class="button btn-sm btn-warning" (click)="verifyAll(readings)"
+                  [disabled]="!readings || readings.length < 1">Verify All</button>
+              </th>
             </tr>
-          </ng-container>
-          <tr>
-            <td colspan="14" *ngIf="!readings || readings.length < 1">No Records</td>
-          </tr>
-        </tbody>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let d of readings; let i = index">
+              <tr>
+                <td>{{i+1}}</td>
+                <td>{{d.gr}} - {{d.rd}}</td>
+                <td>{{d.custid}}</td>
+                <td>{{d.name}}</td>
+                <td>{{d.datereading | date:'dd-MM-yyyy'}}</td>
+                <td>{{d.readingtype}}</td>
+                <td>{{d.usetype}}</td>
+                <td>{{d.billmonth}}</td>
+                <td>{{d.reading}}</td>
+                <td>{{d.md}}</td>
+                <td>{{d.pf}}</td>
+                <td>{{d.assesment}}</td>
+                <td>{{d.consumption}}</td>
+                <td>{{d.percentageflag}}</td>
+                <td>
+                  <div>
+                    <a href="api/mtr-reader/get-meter-reader-image?path={{d.imagepath}}" data-lightbox="image-1"
+                      data-title="{{i}}">View</a>
+                  </div>
+                </td>
+                <td><button class="button btn-sm btn-primary" (click)="editClicked(d)" data-toggle="modal"
+                    data-target="#myModal11">Edit</button></td>
+                <td>
+                  <button class="button btn-sm btn-info" (click)="verifyClicked(d)">Verify</button>&nbsp;
+                  <button class="button btn-sm btn-danger" (click)="deleteClicked(d)">Delete</button>
+                </td>
+              </tr>
+            </ng-container>
+            <tr>
+              <td colspan="17" *ngIf="!readings || readings.length < 1">No Records</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </section>
@@ -85,7 +106,8 @@
               <td><strong>Select to Edit</strong></td>
               <td colspan="2">
                 <div>
-                  <select class="form-control" [(ngModel)]="editValue" name="EditValue" (change)="editValueChanged()" required>
+                  <select class="form-control" [(ngModel)]="editValue" name="EditValue" (change)="editValueChanged()"
+                    required>
                     <option value=undefined>Select</option>
                     <option>READING</option>
                     <option>ASSESSMENT</option>
@@ -96,13 +118,15 @@
             <tr *ngIf="readingSelected">
               <td><strong>READING</strong></td>
               <td colspan="2">
-                <input class="form-control" type="text" [(ngModel)]="readToEdit.reading" name="reading" [disabled]="!readingSelected">
+                <input class="form-control" type="text" [(ngModel)]="readToEdit.reading" name="reading"
+                  [disabled]="!readingSelected">
               </td>
             </tr>
             <tr *ngIf="assessmentSelected">
               <td><strong>ASSESSMENT</strong></td>
               <td colspan="2">
-                <input class="form-control" type="text" [(ngModel)]="readToEdit.assesment" name="assesment" [disabled]="!assessmentSelected">
+                <input class="form-control" type="text" [(ngModel)]="readToEdit.assesment" name="assesment"
+                  [disabled]="!assessmentSelected">
               </td>
             </tr>
           </table><br>
