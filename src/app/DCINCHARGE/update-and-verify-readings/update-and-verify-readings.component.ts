@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { SessionStorageService } from 'angular-web-storage';
 import { EncreptiondecreptionService } from 'src/app/Util-services/encreptiondecreption.service';
+import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 
 declare var $: any;
 @Component({
@@ -19,7 +20,7 @@ export class UpdateAndVerifyReadingsComponent implements OnInit {
   group : any;
 
   constructor(private session : SessionStorageService, private http: HttpClient, 
-    private enc: EncreptiondecreptionService) { }
+    private enc: EncreptiondecreptionService, private exportService : ExportExcelService) { }
 
   ngOnInit() {
     this.getGroupsByLocationCode();
@@ -152,26 +153,28 @@ export class UpdateAndVerifyReadingsComponent implements OnInit {
 
 
   verifyAll(readings){
-    this.loading = true;
-    for(let i = 0; i < readings.length; i++){
-      let formdata : FormData = new FormData();
-      formdata.append("consno",this.enc.encrypt(readings[i].custid));
-      formdata.append("billmonth",this.enc.encrypt(readings[i].billmonth));
-      formdata.append("remark",this.enc.encrypt("Verified"));
-      console.log(i, formdata);
-      this.http.post("api/new-version-verification-ops/verify-from-dc", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
-        if(i === readings.length -1){
-          this.loading = false;
-          this.getReadingsByGroupNo();
-        }
-      }, error=>{
-        if(i === readings.length -1){
-          this.loading = false;
-          this.getReadingsByGroupNo();
-        }
-        console.log(error);
-      });
-    };
+    if (confirm("Do you really want to verify selected readings ?")) {
+      this.loading = true;
+      let readToVerify = readings.filter(read => read.checked);
+      for(let i = 0; i < readToVerify.length; i++){
+        let formdata : FormData = new FormData();
+        formdata.append("consno",this.enc.encrypt(readToVerify[i].custid));
+        formdata.append("billmonth",this.enc.encrypt(readToVerify[i].billmonth));
+        formdata.append("remark",this.enc.encrypt("Verified"));
+        this.http.post("api/new-version-verification-ops/verify-from-dc", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe(success=>{
+          if(i === readToVerify.length -1){
+            this.loading = false;
+            this.getReadingsByGroupNo();
+          }
+        }, error=>{
+          if(i === readToVerify.length -1){
+            this.loading = false;
+            this.getReadingsByGroupNo();
+          }
+          console.log(error);
+        });
+      };
+    }
   }
 
   deleteClicked(reading){
@@ -196,4 +199,31 @@ export class UpdateAndVerifyReadingsComponent implements OnInit {
     });
   }
 
+  exportClicked(){
+    this.exportService.exportAsExcelFile(this.readings, this.group + "_Readings");
+  }
+
+  allLocation : boolean;
+  // customReadChecked(read) {
+  //   console.log(read);
+  //   if (read && read.checked) {
+  //     this.selectedRead.push(read);
+  //   } else if(read && !read.checked) {
+  //     this.allLocation = false;
+  //     let index = this.selectedRead.indexOf(read);
+  //     if (index > -1) this.selectedRead.splice(index, 1)
+  //   }
+  // }
+
+  allReadChecked() {
+    if(this.allLocation){
+      this.readings.forEach(read => {
+        read.checked = true;
+      });
+    } else{
+      this.readings.forEach(read => {
+        read.checked = false;
+      });
+    }
+  }
 }

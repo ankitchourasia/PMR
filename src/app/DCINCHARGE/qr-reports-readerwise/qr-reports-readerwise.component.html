@@ -89,9 +89,9 @@
 <td>{{i+1}}</td>
 <td>{{data.officetype}}</td>
 <td>{{data.officename}}</td>
-<td>{{data.totalreadings}}</td>
-<td>{{data.withqr}}</td>
-<td>{{data.withourqr}}</td>
+<td><a href="javascript:void(0);" (click)="getReadingsClicked(data, 'TOTAL')">{{data.totalreadings}}</a></td>
+<td><a href="javascript:void(0);" (click)="getReadingsClicked(data, 'WITHQR')">{{data.withqr}}</a></td>
+<td><a href="javascript:void(0);" (click)="getReadingsClicked(data, 'WITHOUTQR')">{{data.withourqr}}</a></td>
 </tr>
 </tbody>
 <tbody *ngIf="resp?.length == ''" >

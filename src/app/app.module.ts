@@ -193,6 +193,7 @@ import { DEUpdateAndVerifyReadingsComponent } from './DE/de-update-and-verify-re
 import { DcinchInstantBillRepushComponent } from './DCINCHARGE/dcinch-instant-bill-repush/dcinch-instant-bill-repush.component';
 import { DEReadingCountForVerificationComponent } from './DE/de-reading-count-for-verification/de-reading-count-for-verification.component';
 import { ReadingCountForVerificationComponent } from './DCINCHARGE/reading-count-for-verification/reading-count-for-verification.component';
+import { DeReaderWiseReadingComponent } from './DE/de-reader-wise-reading/de-reader-wise-reading.component';
 
 
 @NgModule({
@@ -376,7 +377,8 @@ import { ReadingCountForVerificationComponent } from './DCINCHARGE/reading-count
     DEUpdateAndVerifyReadingsComponent,
     DcinchInstantBillRepushComponent,
     ReadingCountForVerificationComponent,
-    DEReadingCountForVerificationComponent
+    DEReadingCountForVerificationComponent,
+    DeReaderWiseReadingComponent
   ],
   imports: [
     NgbModule,

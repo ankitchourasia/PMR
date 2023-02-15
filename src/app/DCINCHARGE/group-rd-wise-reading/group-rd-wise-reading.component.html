@@ -52,6 +52,9 @@
       </div>
 
       <div class="box">
+        <div class="flex-end">
+          <button class="btn btn-sm btn-primary" (click)="exportClicked()" [disabled]="loading || !readings || readings.length < 1">Export</button>
+        </div>
         <table class="table table-bordered table-sm text-center custab">
           <thead>
           <tr>

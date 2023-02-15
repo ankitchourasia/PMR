@@ -37,6 +37,10 @@
           </div>
         </div>
       </div>
+      <div class="box" style="overflow : auto">
+        <div class="flex-end">
+          <button class="btn btn-sm btn-primary" (click)="exportClicked()" [disabled]="loading || !readings || readings.length < 1">Export</button>
+        </div>
         <table class="table table-bordered table-sm text-center custab">
           <thead>
           <tr>
@@ -44,10 +48,11 @@
             <th>GROUP-RD NO</th>
             <th>CONSUMER NO</th>
             <th>CONSUMER Name</th>
+            <th>Tariff</th>
             <th>READ DATE</th>
             <th>READ TYPE</th>
-            <th>BILL TYPE</th>
-            <th>BILL MONTH</th>
+            <!-- <th>BILL TYPE</th>
+            <th>BILL MONTH</th> -->
             <th>READING</th>
             <th>MD</th>
             <th>PF</th>
@@ -57,7 +62,11 @@
             <th>IMAGE</th>
             <th>EDIT</th>
             <th>
-              <button class="button btn-sm btn-warning" (click)="verifyAll(readings)" [disabled]="!readings || readings.length < 1">Verify All</button>
+              <div class="flex-sapce-around">
+                <input type="checkbox" id="selectAll" name="selectAll" (click)="allLocation = !allLocation; allReadChecked()" [disabled]="!readings?.length">
+                &nbsp;
+                <button class="button btn-sm btn-warning" (click)="verifyAll(readings)" [disabled]="!readings || readings.length < 1">Verify All</button>
+              </div>
             </th>
           </tr>
         </thead>
@@ -68,10 +77,11 @@
               <td>{{d.gr}} - {{d.rd}}</td>
               <td>{{d.custid}}</td>
               <td>{{d.name}}</td>
+              <td>{{d.trfcatg}}</td>
               <td>{{d.datereading | date:'dd-MM-yyyy'}}</td>
               <td>{{d.readingtype}}</td>
-              <td>{{d.usetype}}</td>
-              <td>{{d.billmonth}}</td>
+              <!-- <td>{{d.usetype}}</td>
+              <td>{{d.billmonth}}</td> -->
               <td>{{d.reading}}</td>
               <td>{{d.md}}</td>
               <td>{{d.pf}}</td>
@@ -85,7 +95,10 @@
               </td>
               <td><button class="button btn-sm btn-primary" (click)="editClicked(d)" data-toggle="modal" data-target="#myModal11">Edit</button></td>
               <td>
-                <button class="button btn-sm btn-info" (click)="verifyClicked(d)">Verify</button>&nbsp;
+                <div class="flex-sapce-around">
+                  <input type="checkbox" id="i" name="selectAll" [(ngModel)]="d.checked">&nbsp;
+                  <button class="button btn-sm btn-info" (click)="verifyClicked(d)">Verify</button>&nbsp;
+                </div>
               </td>
             </tr>
           </ng-container>
@@ -94,6 +107,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </section>
   </div>
 </div>

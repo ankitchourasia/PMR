@@ -1,0 +1,144 @@
+<div class="wrapper" appNoRightClick>
+  <app-de-header></app-de-header>
+  <app-de-sidebar></app-de-sidebar>
+  <div class="loadr" *ngIf='loading'>
+    <img src="assets/imgs/loading.gif" class="loadimg">
+  </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        ReaderWise Reading Reports
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-thumb-tack"></i> Reader Wise Reading Reports</a></li>
+        <li class="active">Reading reports </li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Reader Wise Reading</h3>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <form class="form-horizontal" #f="ngForm" novalidate>
+                <div class="box-body">
+                  <div class="flex-sapce-around">
+
+                    <div>
+                      <label>Select Location</label>
+                      <select class="form-control form-control-sm" name="location" [(ngModel)]="locationCode"
+                        (change)="locationChanged()" required>
+                        <option value=undefined>Select</option>
+                        <option *ngFor="let loc of locations">{{loc.loccode}}</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label>Bill Month</label>
+                      <select class="form-control" [(ngModel)]="billmon" name="billmon1" #billmon1Text="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && billmon1Text.invalid }" required>
+                        <option value="undefined">Select</option>
+                        <option *ngFor="let month of billMonths" [ngValue]="month">{{month}}</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label>Meter Reader</label>
+                      <select class="form-control" [(ngModel)]="meterReaderId" name="meterReaderId1" required>
+                        <option value="undefined">Select</option>
+                        <option *ngFor="let data1 of readers" value="{{data1.mtrdrid}}">
+                          {{data1.mtrdrid}}--{{data1.name}}</option>
+                      </select>
+                    </div>
+                    <div> <button type="button" class="btn btn-primary btn-sm"
+                      (click)="getReaderwiseReport()" [disabled]="!meterReaderId || !billmon">Submit</button>
+                    </div>
+                  </div>
+
+                  <!-- /.box-footer -->
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">ReaderWise Reading </h3>
+              <button class="btn btn-info btn-sm pull-right" (click)='exportAsXsls()' *ngIf="readings && readings.length > 0"><i class="fa fa-download"></i>
+                Export</button>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive" style="max-height:500px">
+
+                <table class="table table-bordered  custab text-center">
+                  <thead>
+                    <tr>
+                      <th>Sr. No.</th>
+                      <th>Customer ID</th>
+                      <th>Name</th>
+                      <th>Group / RD</th>
+                      <th>Date Of Reading</th>
+                      <th>Reading</th>
+                      <th>cmd</th>
+                      <th>md</th>
+                      <th>pf</th>
+                      <th>Reading Type</th>
+                      <th>Reading Image</th>
+                      <th>Lattitude</th>
+                      <th>Longitude</th>
+                      <th>Date of Upload</th>
+                      <th>Time of Upload</th>
+                      <th>Assesment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor='let data of readings; index as i'>
+                      <td>{{i+1}}</td>
+                      <td>{{data.custid}}</td>
+                      <td>{{data.name}}</td>
+                      <td>{{data.gr}} / {{data.rd}}</td>
+                      <td>{{data.datereading}}</td>
+                      <td>{{data.reading}}</td>
+                      <td>{{data.cmd}}</td>
+                      <td>{{data.md}}</td>
+                      <td>{{data.pf}}</td>
+                      <td>{{data.readingtype}}</td>
+                      <td>
+                        <div>
+                          <a href="api/mtr-reader/get-meter-reader-image?path={{data.imagepath}}"
+                            data-lightbox="image-1" data-title="{{data.custid}}">View</a>
+                        </div>
+                      </td>
+                      <td>{{data.lat}}</td>
+                      <td>{{data.lng}}</td>
+                      <td>{{data.dateupload}}</td>
+                      <td>{{data.timeupload}}</td>
+                      <td>{{data.assesment}}</td>
+                    </tr>
+                    <tr *ngIf="!readings && readings.length < 1">
+                      <td colspan="12" class="text-center"> <strong>No data Found.</strong></td>
+                    </tr>
+                  </tbody>
+                  </table>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+      </div>
+    </section>
+  </div>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a>NGBPMR</a>. Software developed and maintained by Central Software Development Cell
+      of MPPKVVCL, under SE IT ERP.</strong>
+    reserved.
+  </footer>
+</div>

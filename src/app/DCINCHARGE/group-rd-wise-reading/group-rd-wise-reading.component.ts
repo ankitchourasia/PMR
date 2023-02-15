@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { _MatChipListMixinBase } from '@angular/material';
 import { SessionStorageService } from 'angular-web-storage';
 import { EncreptiondecreptionService } from 'src/app/Util-services/encreptiondecreption.service';
+import { ExportExcelService } from 'src/app/Util-services/export-excel.service';
 import { GlobalConstants } from 'src/app/Util-services/global-constants';
 
 @Component({
@@ -19,7 +21,7 @@ export class GroupRdWiseReadingComponent implements OnInit {
   groupno;
   readings : any = [];
   constructor(private session : SessionStorageService, private http: HttpClient, 
-    private enc: EncreptiondecreptionService) { }
+    private enc: EncreptiondecreptionService, private exportService: ExportExcelService) { }
 
   ngOnInit() {
     this.getGroupsByLocationCode();
@@ -89,5 +91,9 @@ export class GroupRdWiseReadingComponent implements OnInit {
     error=>{
       console.log(error);
     });
+  }
+
+  exportClicked(){
+    this.exportService.exportAsExcelFile(this.readings, this.groupno + "_" + this.rdNo + "_" + this.billmon + "_Readings");
   }
 }
