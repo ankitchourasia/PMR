@@ -213,4 +213,25 @@ export class DEUpdateAndVerifyReadingsComponent implements OnInit {
     }
   }
 
+  deleteClicked(reading){
+    this.loading = true;
+    let formdata : FormData = new FormData();
+    formdata.append("consno",this.enc.encrypt(reading.custid));
+    formdata.append("billmon",this.enc.encrypt(reading.billmonth));
+    formdata.append("loccode",this.enc.encrypt(reading.loccode));
+    formdata.append("loginid",this.enc.encrypt(this.user));
+    formdata.append("verifytype",this.enc.encrypt("Deleted"));
+    formdata.append("verifyremark",this.enc.encrypt("Deleted"));
+
+    return this.http.post("api/delete-rec-new-version/update-to-Delete", formdata, {headers:new HttpHeaders().set('Authorization',this.session.get('token'))}).subscribe((success : any)=>{
+      this.loading = false;
+      // alert("Deleted successfully");
+      alert(success.msg);
+      this.getReadingsByGroupNo();
+    }, error=>{
+      this.loading = false;
+      alert("unable to delete");
+      console.log(error);
+    });
+  }7
 }

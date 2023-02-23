@@ -61,6 +61,7 @@
             <th>RANGE</th>
             <th>IMAGE</th>
             <th>EDIT</th>
+            <th>DELETE</th>
             <th>
               <div class="flex-sapce-around">
                 <input type="checkbox" id="selectAll" name="selectAll" (click)="allLocation = !allLocation; allReadChecked()" [disabled]="!readings?.length">
@@ -77,7 +78,14 @@
               <td>{{d.gr}} - {{d.rd}}</td>
               <td>{{d.custid}}</td>
               <td>{{d.name}}</td>
-              <td>{{d.trfcatg}}</td>
+              <td *ngIf= "d.trfcatg > 100 && d.trfcatg < 200">LV1 - {{d.trfcatg}}</td>
+              <td *ngIf= "d.trfcatg > 200 && d.trfcatg < 300">LV2 - {{d.trfcatg}}</td>
+              <td *ngIf= "d.trfcatg > 300 && d.trfcatg < 400">LV3 - {{d.trfcatg}}</td>
+              <td *ngIf= "d.trfcatg > 400 && d.trfcatg < 500">LV4 - {{d.trfcatg}}</td>
+              <td *ngIf= "d.trfcatg > 500 && d.trfcatg < 600">LV5 - {{d.trfcatg}}</td>
+              <td *ngIf= "d.trfcatg > 600 && d.trfcatg < 700">LV6 - {{d.trfcatg}}</td>
+              <td *ngIf= "d.trfcatg > 700">{{d.trfcatg}}</td>
+              <!-- <td>{{d.trfcatg}}</td> -->
               <td>{{d.datereading | date:'dd-MM-yyyy'}}</td>
               <td>{{d.readingtype}}</td>
               <!-- <td>{{d.usetype}}</td>
@@ -94,6 +102,7 @@
                 </div>
               </td>
               <td><button class="button btn-sm btn-primary" (click)="editClicked(d)" data-toggle="modal" data-target="#myModal11">Edit</button></td>
+              <td><button class="button btn-sm btn-danger" (click)="deleteClicked(d)">Delete</button></td>
               <td>
                 <div class="flex-sapce-around">
                   <input type="checkbox" id="i" name="selectAll" [(ngModel)]="d.checked">&nbsp;
