@@ -78,6 +78,7 @@
                 <td *ngIf= "d.trfcatg > 400 && d.trfcatg < 500">LV4 - {{d.trfcatg}}</td>
                 <td *ngIf= "d.trfcatg > 500 && d.trfcatg < 600">LV5 - {{d.trfcatg}}</td>
                 <td *ngIf= "d.trfcatg > 600 && d.trfcatg < 700">LV6 - {{d.trfcatg}}</td>
+                <td *ngIf= "!d.trfcatg || d.trfcatg=='null' || dtrfcatg < 100 || d.trfcatg > 700">NA</td>
                 <td *ngIf= "d.trfcatg > 700">{{d.trfcatg}}</td>
                 <!-- <td>{{d.trfcatg}}</td>
                 <td>{{d.trfcatg}}</td>
