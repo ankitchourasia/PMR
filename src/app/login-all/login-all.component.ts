@@ -26,9 +26,16 @@ export class LoginAllComponent implements OnInit {
 
 
   ngOnInit() {
-
-
-
+   let urlParams = new URLSearchParams(window.location.search);
+   console.log(urlParams)
+   if(urlParams.has('data')){
+      let resp = urlParams.get('data');
+      
+      console.log(resp)
+      this.resp = JSON.parse(resp);
+      console.log(this.resp);
+      this.routeDecisionByUser();
+   }
   }
 
   loginall()
@@ -37,14 +44,20 @@ export class LoginAllComponent implements OnInit {
 
    formdata.append("loginid",this.enc.encrypt(this.loginid));
    formdata.append("password",this.enc.encrypt(this.password));
-  
-  
 
  this.http.post("api/pmr-user/login", formdata).subscribe(
    response=>{
      this.resp=response;
+     this.routeDecisionByUser();
+   },
+    error=>{
+     this.error = error
+       alert('Something went wrong. Please try again letter.');
+    }
+  );  }
 
-     this.session.set("loginid",this.resp.loginid);
+  routeDecisionByUser(){
+   this.session.set("loginid",this.resp.loginid);
      this.session.set("role",this.resp.role);
      this.session.set("username",this.resp.username);
      this.session.set("userlocation",this.resp.userlocation);
@@ -95,12 +108,6 @@ export class LoginAllComponent implements OnInit {
          alert(this.msg=this.resp.msg);
          this.router.navigate(['/login']);
       }
-    
-   },
-    error=>{
-     this.error = error
-       alert('Something went wrong. Please try again letter.');
-    }
-  );  }
+  }
 
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { LoginAllComponent } from './login-all/login-all.component';
 import { DcinchDashboardComponent } from './DCINCHARGE/dcinch-dashboard/dcinch-dashboard.component';
 import { DcinchChangepassComponent } from './DCINCHARGE/dcinch-changepass/dcinch-changepass.component';
@@ -159,7 +159,7 @@ import { DEUpdateAndVerifyReadingsComponent } from './DE/de-update-and-verify-re
 import { DcinchInstantBillRepushComponent } from './DCINCHARGE/dcinch-instant-bill-repush/dcinch-instant-bill-repush.component';
 import { ReadingCountForVerificationComponent } from './DCINCHARGE/reading-count-for-verification/reading-count-for-verification.component';
 import { DEReadingCountForVerificationComponent } from './DE/de-reading-count-for-verification/de-reading-count-for-verification.component';
-import { DeReaderWiseReadingComponent } from './DE/de-reader-wise-reading/de-reader-wise-reading.component';
+import { DeReaderWiseReadingComponent } from './DE/de-reader-wise-reading/de-reader-wise-reading.component'
 
 
 const routes: Routes = [
